@@ -5,27 +5,26 @@ CREATE TABLE users
     first_name TEXT,
     last_name TEXT,
     email TEXT
-)
+);
 
 CREATE TABLE prompts_list
 (
     id SERIAL PRIMARY KEY,
     prompt TEXT NOT NULL
-)
+);
 
 CREATE TABLE emotions_list
 (
     id SERIAL PRIMARY KEY,
     emotion TEXT
-)
+);
 
 CREATE TABLE diary_entries
 (
     id SERIAL PRIMARY KEY,
     username TEXT NOT NULL REFERENCES users ON DELETE CASCADE,
     entry TEXT NOT NULL,
-    entered DATE DEFAULT current_date,
-    -- user_emotions
+    entered DATE,
     joy FLOAT,
     no_emotion FLOAT,
     saddness FLOAT,
@@ -34,8 +33,21 @@ CREATE TABLE diary_entries
     anger FLOAT,
     disgust FLOAT
 
+);
+
+CREATE TABLE entries_list_emotions
+(
+    emotion_id INTEGER NOT NULL REFERENCES emotions_list,
+    diary_entry_id INTEGER NOT NULL REFERENCES diary_entries,
+    PRIMARY KEY(emotion_id, diary_entry_id)
+
+);
+
+CREATE TABLE inspirations
+(
+    id SERIAL PRIMARY KEY,
+    inspiration TEXT NOT NULL,
+    flagged BOOLEAN DEFAULT FALSE
 )
 
-CREATE TABLE entry_emotions(
-    
-)
+-- do something with time and timezones
