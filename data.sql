@@ -4,7 +4,8 @@ CREATE TABLE users
     password TEXT NOT NULL,
     first_name TEXT,
     last_name TEXT,
-    email TEXT
+    email TEXT,
+    is_admin BOOLEAN NOT NULL default FALSE
 );
 
 CREATE TABLE prompts_list
