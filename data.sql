@@ -1,3 +1,13 @@
+-- \c
+-- emo-chron
+
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS prompts_list;
+DROP TABLE IF EXISTS emotions_list;
+DROP TABLE IF EXISTS diary_entries;
+DROP TABLE IF EXISTS entries_list_emotions;
+DROP TABLE IF EXISTS inspirations;
+
 CREATE TABLE users
 (
     username TEXT PRIMARY KEY,
