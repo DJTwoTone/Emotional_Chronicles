@@ -30,4 +30,22 @@ function authAdmin(req, res, next) {
     }
 }
 
-module.exports = { authUser, authAdmin }
+function checkCorrectUser(req, res, next) {
+    try {
+
+        const submittedToken = req.body._token;
+
+        let token = jwt.verify(successToken, SECRET_KEY);
+
+        if (token.username === req.params.username) {
+            return next();
+        };
+
+        throw new Error();
+        
+    } catch (e) {
+        return next(new ExpressError("It appears you shouldn't be here. Couldn't be authenticated", 401));
+    }
+}
+
+module.exports = { authUser, authAdmin, checkCorrectUser }
