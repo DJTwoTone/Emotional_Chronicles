@@ -13,7 +13,7 @@ router.get('/:username', async function (req, res, next) {
         const check = await User.userCheck(username);
 
         if (!check) {
-            throw new ExpressError(`It seemsthe username "${username}" does not exist`, 404)
+            throw new ExpressError(`It seems the username "${username}" does not exist`, 404)
         }
 
         const user = await User.getUserCheck(username);
@@ -28,7 +28,7 @@ router.post('/', async function (req, res, next) {
     try {
         const username = req.body.username
 
-        const check await User.userCheck(username);
+        const check = await User.userCheck(username);
         
         if (check) {
             throw new ExpressError(`Sorry, but "${username}" is already being used, PLease select a different username`, 400);
@@ -44,7 +44,7 @@ router.post('/', async function (req, res, next) {
     }
 })
 
-router.patch('/:username',, checkCorrectUser, async function (req, res, next) {
+router.patch('/:username', checkCorrectUser, async function (req, res, next) {
 
     try {
 
@@ -61,7 +61,7 @@ router.patch('/:username',, checkCorrectUser, async function (req, res, next) {
         const check = await User.userCheck(username);
 
         if (!check) {
-            throw new ExpressError(`It seemsthe username "${username}" does not exist`, 404);
+            throw new ExpressError(`It seems the username "${username}" does not exist`, 404);
         }
 
         const user = await User.update(username, req.body);
@@ -81,11 +81,23 @@ router.delete('/:username', checkCorrectUser, async function (req, res, next) {
         const check = await User.userCheck(username);
 
         if (!check) {
-            throw new ExpressError(`It seemsthe username "${username}" does not exist`, 404);
+            throw new ExpressError(`It seems the username "${username}" does not exist`, 404);
         }
 
         await User.delete(username);
         return res.json({ message: `You have successfully deleted your account for "${username}"` })
+    } catch (e) {
+        return next(e);
+    }
+})
+
+router.post('/inspiration', async function(req, res, next) {
+
+    try {
+        const inspiration = req.body.inspiration;
+        await User.addInspiration(inspiration);
+
+        return res.status(201).json({ message: "Thank you for your submission. It has been sent to an adminstrator for approval" })
     } catch (e) {
         return next(e);
     }

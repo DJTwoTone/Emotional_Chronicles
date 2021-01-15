@@ -35,7 +35,7 @@ CREATE TABLE diary_entries
     id SERIAL PRIMARY KEY,
     username TEXT NOT NULL REFERENCES users ON DELETE CASCADE,
     entry TEXT NOT NULL,
-    entered DATE,
+    date DATE,
     joy FLOAT,
     no_emotion FLOAT,
     saddness FLOAT,
@@ -58,7 +58,7 @@ CREATE TABLE inspirations
 (
     id SERIAL PRIMARY KEY,
     inspiration TEXT NOT NULL,
-    flagged BOOLEAN DEFAULT FALSE
+    flagged BOOLEAN DEFAULT TRUE
 )
 
 -- do something with time and timezones

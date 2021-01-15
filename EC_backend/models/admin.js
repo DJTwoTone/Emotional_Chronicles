@@ -18,8 +18,8 @@ class Admin {
 
     static async addInspiration(inspiration) {
         const res = await db.query(
-            `INSERT into inspirations (inspiration)
-            VALUES ($1)
+            `INSERT into inspirations (inspiration, flagged)
+            VALUES ($1, FALSE)
             RETURNING inspiration`, [inspiration]
         );
 

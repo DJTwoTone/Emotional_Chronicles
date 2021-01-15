@@ -92,6 +92,16 @@ class User {
         throw new ExpressError("Sorry. That password doesn't work", 401)
     }
 
+    static async addInspiration(inspiration) {
+        const res = await db.query(
+            `INSERT into inspirations (inspiration)
+            VALUES ($1)
+            RETURNING inspiration`, [inspiration]
+        );
+
+        return res.rows[0];
+    }
+
 }
 
 module.exports = User;
