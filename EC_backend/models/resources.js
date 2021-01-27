@@ -26,6 +26,16 @@ class Resources {
         return prompts;
     }
 
+    static async addPrompt(prompt) {
+        const res = await db.query(
+            `INSERT into prompts_list (prompt)
+            VALUES ($1)
+            RETURNING prompt`, [prompt]
+        ); 
+
+        return res.rows[0];
+    }
+
     static async getInspiration() {
         const res = await db.query(
             `SELECT inspiration
@@ -50,6 +60,16 @@ class Resources {
 
         const inspirations = res.rows.flat()
         return inspirations;
+    }
+
+    static async addInspiration(inspiration) {
+        const res = await db.query(
+            `INSERT into inspirations (inspiration, flagged)
+            VALUES ($1, FALSE)
+            RETURNING inspiration`, [inspiration]
+        );
+
+        return res.rows[0];
     }
 }
 

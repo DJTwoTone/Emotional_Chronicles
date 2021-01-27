@@ -6,10 +6,23 @@ const { json } = require('express');
 
 const router = express.Router();
 
-router.get('/flagged', authAdmin, async function(req, res, next) {
+router.get('/inspirations', authAdmin, async function(req, res, next) {
     try {
 
         const flagged = await Admin.getFlaggedInspiration();
+        router.post('/prompt', authAdmin, async function(req, res, next) {
+        
+            try {
+                const prompt = req.body.prompt;
+        
+                await Admin.addPrompt(prompt);
+        
+                return res.status(201).json({ message: "Prompt added"})
+            } catch (e) {
+                return next(e)
+            }
+        
+        })
 
         if(flagged.length = 0) {
             return res.json({ message: "No inspirations need approval" })
@@ -23,21 +36,8 @@ router.get('/flagged', authAdmin, async function(req, res, next) {
     }
 })
 
-router.post('/addPrompt', authAdmin, async function(req, res, next) {
 
-    try {
-        const prompt = req.body.prompt;
-
-        await Admin.addPrompt(prompt);
-
-        return res.status(201).json({ message: "Prompt added"})
-    } catch (e) {
-        return next(e)
-    }
-
-})
-
-router.post('/addInspiration', authAdmin, async function(req, res, next) {
+router.post('/inspiration', authAdmin, async function(req, res, next) {
 
     try {
         const inspiration = req.body.inspiration;
