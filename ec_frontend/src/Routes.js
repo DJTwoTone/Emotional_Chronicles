@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Home from './Home';
-import Calendar from './Calendar';
+import EmoCalendar from './EmoCalendar';
 import Entry from './Entry';
 import EntryForm from './EntryForm';
 import Admin from './Admin';
@@ -9,6 +9,7 @@ import Inspiration from './Inspiration';
 import Login from './Login';
 import Signup from './Signup'
 import Profile from './Profile';
+import EmoCloud from './EmotionCloud'
 
 function Routes () {
     return (
@@ -17,6 +18,9 @@ function Routes () {
         <Switch>
             <Route exact path='/inspiration'>
                 <Inspiration />
+            </Route>
+            <Route exact path='/emocloud'>
+                <EmoCloud />
             </Route>
 
             {/* needs to be a private route */}
@@ -36,7 +40,7 @@ function Routes () {
             </Route>
             {/* needs to be a private route */}
             <Route exact path='/calendar'>
-                <Calendar />
+                <EmoCalendar />
             </Route>
             {/* needs to be a private route */}
             <Route exact path='/entryform'>

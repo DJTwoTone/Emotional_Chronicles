@@ -83,6 +83,10 @@ function Header(props) {
         {
             menuItemName: "Write",
             url: '/entryform'
+        },
+        {
+            menuItemName: "EmoCloud",
+            url: '/emocloud'
         }
     ];
 
