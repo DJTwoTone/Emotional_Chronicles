@@ -6,6 +6,19 @@ const { json } = require('express');
 
 const router = express.Router();
 
+//does all this need to move to resources?
+//inspirations by bool?
+
+//get inspirations to be approved
+//add inspiration
+//approve inspiration
+//delete inspiration
+//get prompts to be approved
+//add prompt
+//approve prompt
+//delete prompt
+
+
 router.get('/inspirations', authAdmin, async function(req, res, next) {
     try {
 
@@ -79,3 +92,5 @@ router.delete('/inspiration/:id', authAdmin, async function(req, res, next) {
         return next(e);
     }
 })
+
+module.exports = router;

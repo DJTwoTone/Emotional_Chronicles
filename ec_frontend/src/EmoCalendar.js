@@ -9,11 +9,16 @@ function EmoCalendar () {
 
     const [value, onChange] = useState(new Date())
 
+    function showEntry(value, event) {
+        console.log(typeof(value), value.getDate());
+    }
+
     return (
         <div>
         <Calendar
             onChange={onChange}
             value={value}
+            onClickDay={showEntry}
         />    
         </div>
             )

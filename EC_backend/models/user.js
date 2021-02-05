@@ -38,7 +38,7 @@ class User {
 
     static async getUser(username) {
         const res = await db.query(
-            `SELECT username, first_name. last_name, email
+            `SELECT username, first_name, last_name, email
             FROM users
             WHERE username = $1`, [username]
         );
@@ -80,7 +80,7 @@ class User {
             WHERE username = $1`, [data.username]
         );
 
-        const user = result.rows[0];
+        const user = res.rows[0];
 
         if(user) {
             const isValid = await bcrypt.compare(data.password, user.password);
@@ -92,15 +92,6 @@ class User {
         throw new ExpressError("Sorry. That password doesn't work", 401)
     }
 
-    // static async addInspiration(inspiration) {
-    //     const res = await db.query(
-    //         `INSERT into inspirations (inspiration)
-    //         VALUES ($1)
-    //         RETURNING inspiration`, [inspiration]
-    //     );
-
-    //     return res.rows[0];
-    // }
 
 }
 

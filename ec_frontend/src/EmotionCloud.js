@@ -4,6 +4,7 @@
 import React, {useState, useEffect} from 'react';
 // import { render } from 'react-dom';
 import WordCloud from 'react-d3-cloud';
+import { TagCloud } from 'react-tagcloud';
 import formatCloudGroup from './helpers/formatCloudGroup';
 
 
@@ -38,32 +39,38 @@ import formatCloudGroup from './helpers/formatCloudGroup';
 // const screenHeight = window.height;
 
 function EmoCloud () {
-    const [emos, setEmos] = useState({});
+    const emos = formatCloudGroup()
 
     // const emoData = emos.map(emo => {
     //     const value = Math.floor(Math.random() * 1000) + 100;
     //     return { text: emo, value: value};
     // });
 
-    useEffect(() =>{
-        setEmos(formatCloudGroup())
-        console.log(emos)
-    }, [])
+    // useEffect(() =>{
+    //     setEmos(formatCloudGroup())
+    //     console.log(emos)
+    // }, [])
 
     const fontsizeMapper = word => Math.log2(word.value) * 5;
-    const rotate = word => word.value % 360;
-    const screenWidth = window.width;
-    const screenHeight = window.height;
+    const rotate = word => word.value % 45;
+    let screenWidth = Math.floor(window.innerWidth * 0.8);
+    let screenHeight = Math.floor(window.innerHeight * 0.8);
 
     return (
         <div>
             <p>{JSON.stringify(emos)}</p>
+            <p>{emos.length}</p>
+            <p>{screenHeight}</p>
+            <p>{screenWidth}</p>
 
             {/* {emoData.map(emo => (
                 <p>{JSON.stringify(emo)}</p>
             ))} */}
             
-            <WordCloud data={emos} fontsizeMapper={fontsizeMapper} rotate={rotate} width={screenWidth} height={screenHeight} />
+            {/* <WordCloud data={emos} fontsizeMapper={fontsizeMapper} width={screenWidth} height={screenHeight} /> */}
+            <WordCloud data={emos} width={screenWidth} height={screenHeight} />
+            {/* <TagCloud tags={emos} maxSize={75} minSize={50}/> */}
+        
         </div>
         )
 

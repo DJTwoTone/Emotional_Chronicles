@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -28,7 +28,39 @@ const useStyles = makeStyles((theme) => ({
 
 function Login () {
 
+    const [loginInfo, setLoginInfo] = useState({
+        username: "",
+        password: "",
+        errors: []
+    })
+
     const classes = useStyles();
+
+    function handleChange(evt) {
+        const { name, value } = evt.target;
+        setLoginInfo(info => ({
+            ...info,
+            [name]: value
+        }))
+    }
+
+    async function handleSubmit(evt) {
+        evt.preventDefault();
+        let data = {
+            username: loginInfo.username,
+            password: loginInfo.password
+        }
+
+        try {
+            
+            //do the login dance
+
+        } catch (errors) {
+            return setLoginInfo(l => ({...l, errors}))
+        }
+
+        //set a token and history push to home
+    }
 
     return (
         <Container component='main' maxWidth='xs'>
@@ -45,6 +77,8 @@ function Login () {
                         id='username'
                         label="USERNAME"
                         name='username'
+                        value={loginInfo.username}
+                        onChange={handleChange}
                         autofocus
                     />
                     <TextField
@@ -56,6 +90,8 @@ function Login () {
                         label="PASSWORD"
                         type='password'
                         id='password'
+                        value={loginInfo.password}
+                        onChange={handleChange}
                     />
                     <Button
                         type='submit'
@@ -63,6 +99,7 @@ function Login () {
                         variant='contained'
                         color='primary'
                         className={classes.submit}
+                        onSubmit={handleSubmit}
                     >
                         LOGIN
                     </Button>

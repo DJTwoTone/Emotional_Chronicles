@@ -6,6 +6,8 @@ const { authUser, checkCorrectUser } = require('../middleware/auth')
 
 const router = express.Router();
 
+
+//add an authuser check  
 router.get('/:username', async function (req, res, next) {
     try {
         const username = req.params.username;
@@ -16,7 +18,7 @@ router.get('/:username', async function (req, res, next) {
             throw new ExpressError(`It seems the username "${username}" does not exist`, 404)
         }
 
-        const user = await User.getUserCheck(username);
+        const user = await User.getUser(username);
         return res.json({user})
         
     } catch (e) {
@@ -24,14 +26,14 @@ router.get('/:username', async function (req, res, next) {
     }
 })
 
-router.post('/', async function (req, res, next) {
+router.post('/', authUser, async function (req, res, next) {
     try {
         const username = req.body.username
 
         const check = await User.userCheck(username);
         
         if (check) {
-            throw new ExpressError(`Sorry, but "${username}" is already being used, PLease select a different username`, 400);
+            throw new ExpressError(`Sorry, but "${username}" is already being used, Please select a different username`, 400);
         } 
 
         const user = await User.register(req.body);
@@ -91,16 +93,5 @@ router.delete('/:username', checkCorrectUser, async function (req, res, next) {
     }
 })
 
-router.post('/inspiration', async function(req, res, next) {
 
-    try {
-        const inspiration = req.body.inspiration;
-        await User.addInspiration(inspiration);
-
-        return res.status(201).json({ message: "Thank you for your submission. It has been sent to an adminstrator for approval" })
-    } catch (e) {
-        return next(e);
-    }
-})
-
-module.export = router;
+module.exports = router;

@@ -1,6 +1,12 @@
-//add prompt
+//get inspirations to be approved
 //add inspiration
-//check inspiration
+//approve inspiration
+//delete inspiration
+//get prompts to be approved
+//add prompt
+//approve prompt
+//delete prompt
+
 
 const db = require('../db');
 

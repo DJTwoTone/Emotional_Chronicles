@@ -1,16 +1,22 @@
--- DROP DATABASE IF EXISTS "emo-chron";
+DROP DATABASE IF EXISTS "emo-chron";
 
--- CREATE DATABASE "emo-chron";
+CREATE DATABASE "emo-chron";
 
 -- \c
 -- "emo-chron"
 
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS prompts_list;
-DROP TABLE IF EXISTS emotions_list;
-DROP TABLE IF EXISTS diary_entries;
-DROP TABLE IF EXISTS entries_list_emotions;
-DROP TABLE IF EXISTS inspirations;
+DROP TABLE prompts_list
+CASCADE ;
+DROP TABLE emotions_list
+CASCADE ;
+DROP TABLE users
+CASCADE ;
+DROP TABLE diary_entries
+CASCADE ;
+DROP TABLE entries_list_emotions
+CASCADE ;
+DROP TABLE inspirations
+CASCADE ;
 
 CREATE TABLE users
 (
@@ -25,7 +31,8 @@ CREATE TABLE users
 CREATE TABLE prompts_list
 (
     id SERIAL PRIMARY KEY,
-    prompt TEXT NOT NULL
+    prompt TEXT NOT NULL,
+    flagged BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE emotions_list
@@ -74,16 +81,16 @@ VALUES
 
 
 INSERT INTO prompts_list
-    (prompt)
+    (prompt, flagged)
 VALUES
-    ('What is your number one goal this year?'),
-    ('What are you most grateful for?'),
-    ('Are you content?'),
-    ('What is your best memory of last year?'),
-    ('What was the last major accomplishment you had?'),
-    ('What possession could you not live without?'),
-    ('Can people change?'),
-    ('What is the last “good” thing you ate?');
+    ('What is your number one goal this year?', FALSE),
+    ('What are you most grateful for?', FALSE),
+    ('Are you content?', FALSE),
+    ('What is your best memory of last year?', FALSE),
+    ('What was the last major accomplishment you had?', FALSE),
+    ('What possession could you not live without?', FALSE),
+    ('Can people change?', FALSE),
+    ('What is the last “good” thing you ate?', FALSE);
 
 
 INSERT INTO emotions_list
@@ -96,17 +103,11 @@ VALUES
     ('anxious');
 
 INSERT INTO inspirations
-    (inspiration)
+    (inspiration, flagged)
 VALUES
-    ('“All our dreams can come true, if we have the courage to pursue them.” – Walt Disney'),
-    ('“The secret of getting ahead is getting started.” – Mark Twain'),
-    ('“I’ve missed more than 9,000 shots in my career. I’ve lost almost 300 games. 26 times I’ve been trusted to take the game winning shot and missed. I’ve failed over and over and over again in my life and that is why I succeed.” – Michael Jordan')
+    ('“All our dreams can come true, if we have the courage to pursue them.” – Walt Disney', FALSE),
+    ('“The secret of getting ahead is getting started.” – Mark Twain', FALSE),
+    ('“I’ve missed more than 9,000 shots in my career. I’ve lost almost 300 games. 26 times I’ve been trusted to take the game winning shot and missed. I’ve failed over and over and over again in my life and that is why I succeed.” – Michael Jordan', FALSE)
 
 
 
-
-
-
-
-
--- do something with time and timezones

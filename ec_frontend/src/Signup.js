@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -28,6 +28,43 @@ const useStyles = makeStyles((theme) => ({
 function Signup () {
 
     const classes = useStyles();
+    const [signupInfo, setSignupInfo] = useState({
+        firstname: "",
+        lastname: "",
+        username: "",
+        email: "",
+        password: "",
+        errors: []
+    })
+
+    function handleChange(e) {
+        const {name, value} = e.target;
+        setSignupInfo(info => ({
+            ...info,
+            [name]: value
+        }))
+    }
+
+    async function handleSubmit(evt) {
+        evt.preventDefault();
+        let data = {
+            firstname: signupInfo.firstname,
+            lastname: signupInfo.lastname,
+            username: signupInfo.username,
+            email: signupInfo.email,
+            password: signupInfo.password
+        }
+
+        try {
+            
+            //do the signup dance
+
+        } catch (errors) {
+            return setSignupInfo(info => ({...info, errors}))
+        }
+
+        //set a token history push home
+    }
 
     return (
         <Container component='main' maxWidth='xs'>
@@ -39,12 +76,14 @@ function Signup () {
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
-                            name='firstName'
+                            name='firstname'
                             variant='outlined'
                             required
                             fullWidth
-                            id='firstName'
+                            id='firstname'
                             label="FIRST NAME"
+                            value={signupInfo.firstname}
+                            onChange={handleChange}
                             autoFocus
                             />
                         </Grid>
@@ -53,9 +92,23 @@ function Signup () {
                             variant='outlined'
                             required
                             fullWidth
-                            id='lastName'
+                            id='lastname'
                             label="LAST NAME"
-                            name='lastName'
+                            name='lastname'
+                            value={signupInfo.lastname}
+                            onChange={handleChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField 
+                            variant='outlined'
+                            required
+                            fullWidth
+                            id='username'
+                            label="USERNAME"
+                            name='username'
+                            value={signupInfo.username}
+                            onChange={handleChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -66,6 +119,8 @@ function Signup () {
                             id='email'
                             label="EMAIL"
                             name='email'
+                            value={signupInfo.email}
+                            onChange={handleChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -77,6 +132,9 @@ function Signup () {
                             label="PASSWORD"
                             type='password'
                             id='password'
+                            value={signupInfo.password}
+                            onChange={handleChange}
+
                             />
 
                         </Grid>
@@ -87,6 +145,7 @@ function Signup () {
                         variant='contained'
                         color='primary'
                         className={classes.submit}
+                        onSubmit={handleSubmit}
                     >
                         SIGN UP
                     </Button>

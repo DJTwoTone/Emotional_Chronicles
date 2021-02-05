@@ -10,14 +10,14 @@ class Diary {
 
         const {username, entry, joy, no_emotion, saddness, fear, surprise, anger, disgust, emotions} = data;
 
-        const EntryRes = await db.query(
+        const entryRes = await db.query(
             `INSERT into diary_entries (username, entry, date, joy, no_emotion, saddness, fear, surprise, anger, disgust)
             VALUES ($1, $2, CURRENT_DATE, $3, $4, $5, $6, $7, $8, $9, $10)
             RETURNING id, username, entry, date, joy, no_emotion, saddness, fear, surprise, anger, disgust`,
             [username, entry, joy, no_emotion, saddness, fear, surprise, anger, disgust]
         );
 
-        let entry = entryRes.rows[0];
+        let res = entryRes.rows[0];
 
         let emotionArr = emotions.map(async (emotion) => {
             await db.query(
@@ -28,7 +28,21 @@ class Diary {
 
 
         //gotta add the emotions
-        return {...entry, emotions: emotionArr };
+        return {...res, emotions: emotionArr };
+    }
+
+    static async getEnties(username) {
+        const res = await db.query(
+            `SELECT *
+            FROM diary_entries
+            WHERE username = $1`, [username]
+        )
+
+        //get the emotions
+
+        let entries = res.rows;
+
+        return entries;
     }
 
     static async getEntry(username, date) {
