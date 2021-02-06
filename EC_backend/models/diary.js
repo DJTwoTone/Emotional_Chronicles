@@ -8,26 +8,38 @@ class Diary {
 
     static async addEntry(data) {
 
-        const {username, entry, joy, no_emotion, saddness, fear, surprise, anger, disgust, emotions} = data;
+        const { username, diaryentry, joy, sadness, fear, surprise, anger, disgust, emotions } = data;
+        const no_emotion = data['no-emotion'];
+        console.log('before entry insert')
 
+        // you nee the date
         const entryRes = await db.query(
-            `INSERT into diary_entries (username, entry, date, joy, no_emotion, saddness, fear, surprise, anger, disgust)
-            VALUES ($1, $2, CURRENT_DATE, $3, $4, $5, $6, $7, $8, $9, $10)
-            RETURNING id, username, entry, date, joy, no_emotion, saddness, fear, surprise, anger, disgust`,
-            [username, entry, joy, no_emotion, saddness, fear, surprise, anger, disgust]
+            `INSERT into diary_entries (username, entry, date, joy, no_emotion, sadness, fear, surprise, anger, disgust)
+            VALUES ($1, $2, CURRENT_DATE, $3, $4, $5, $6, $7, $8, $9)
+            RETURNING id, username, entry, date, joy, no_emotion, sadness, fear, surprise, anger, disgust`,
+            [username, diaryentry, joy, no_emotion, sadness, fear, surprise, anger, disgust]
         );
 
         let res = entryRes.rows[0];
-
-        let emotionArr = emotions.map(async (emotion) => {
-            await db.query(
-                `INSERT into entries_list_emotions (emotion, diary_entry_id)
-                VALUES ($1, $2)
-                RETURNING emotion`, [emotion, entry.id]) 
-        } )
+        console.log('res', res);
+        console.log('before emotion insert');
 
 
-        //gotta add the emotions
+        const makeEmoArr = async (arr) => {
+            const promises = arr.map(async (emotion) => {
+                await db.query(
+                    `INSERT into entries_list_emotions (emotion, diary_entry_id)
+                    VALUES ($1, $2)
+                    RETURNING emotion`, [emotion, res.id]) 
+            })
+            return Promise.all(promises)
+        } 
+
+        const emotionArr = await makeEmoArr(emotions);
+        
+
+
+        console.log('emoArry', emotionArr)
         return {...res, emotions: emotionArr };
     }
 

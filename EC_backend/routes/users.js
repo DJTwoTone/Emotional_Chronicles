@@ -8,7 +8,8 @@ const router = express.Router();
 
 
 //add an authuser check  
-router.get('/:username', async function (req, res, next) {
+
+router.get('/:username', checkCorrectUser, async function (req, res, next) {
     try {
         const username = req.params.username;
 
@@ -26,7 +27,7 @@ router.get('/:username', async function (req, res, next) {
     }
 })
 
-router.post('/', authUser, async function (req, res, next) {
+router.post('/', async function (req, res, next) {
     try {
         const username = req.body.username
 
@@ -66,7 +67,7 @@ router.patch('/:username', checkCorrectUser, async function (req, res, next) {
             throw new ExpressError(`It seems the username "${username}" does not exist`, 404);
         }
 
-        const user = await User.update(username, req.body);
+        const user = await User.updateUser(username, req.body);
 
         return res.json({ user })
 
@@ -87,6 +88,9 @@ router.delete('/:username', checkCorrectUser, async function (req, res, next) {
         }
 
         await User.delete(username);
+
+        //need to delete diary here as well
+
         return res.json({ message: `You have successfully deleted your account for "${username}"` })
     } catch (e) {
         return next(e);

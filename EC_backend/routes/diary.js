@@ -7,7 +7,7 @@ const { authUser, checkCorrectUser } = require('../middleware/auth');
 const router = express.Router();
 
 //get single entry by id
-router.get('/:date', async function(req, res, next) {
+router.get('/:date', checkCorrectUser, async function(req, res, next) {
     try {
         const entryDate = req.params.date;
         const username = req.user.username;
@@ -45,20 +45,22 @@ router.get('/', async function (req, res, next) {
 
 //post entry 
 
-router.post('/', async function (req, res, next) {
+router.post('/', authUser, async function (req, res, next) {
     try {
         const { diaryentry, emotions } = req.body;
-        const username = req.user.username;
+        const username = req.body.username;
 
 
         const calldata = await symantoCall(diaryentry);
 
+        
         const emopredictions = calldata[0].predictions.reduce((acc, emo) => {
             let { prediction, probability } = emo;
             return {...acc, [prediction]: probability}
         }, {});
-
+        
         const data = {username, diaryentry, ...emopredictions, emotions}
+        // console.log(data)
 
         const entry = await Diary.addEntry(data)
 

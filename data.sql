@@ -1,22 +1,18 @@
-DROP DATABASE IF EXISTS "emo-chron";
+-- DROP DATABASE IF EXISTS "emo-chron"
+-- WITH
+-- (FORCE);
 
-CREATE DATABASE "emo-chron";
+-- CREATE DATABASE "emo-chron";
 
 -- \c
 -- "emo-chron"
 
-DROP TABLE prompts_list
-CASCADE ;
-DROP TABLE emotions_list
-CASCADE ;
-DROP TABLE users
-CASCADE ;
-DROP TABLE diary_entries
-CASCADE ;
-DROP TABLE entries_list_emotions
-CASCADE ;
-DROP TABLE inspirations
-CASCADE ;
+DROP TABLE prompts_list;
+DROP TABLE entries_list_emotions;
+DROP TABLE emotions_list;
+DROP TABLE diary_entries;
+DROP TABLE users;
+DROP TABLE inspirations;
 
 CREATE TABLE users
 (
@@ -48,7 +44,7 @@ CREATE TABLE diary_entries
     date DATE,
     joy FLOAT,
     no_emotion FLOAT,
-    saddness FLOAT,
+    sadness FLOAT,
     fear FLOAT,
     surprise FLOAT,
     anger FLOAT,
@@ -56,10 +52,11 @@ CREATE TABLE diary_entries
 
 );
 
+
 CREATE TABLE entries_list_emotions
 (
-    emotion TEXT NOT NULL REFERENCES emotions_list,
-    diary_entry_id INTEGER NOT NULL REFERENCES diary_entries,
+    emotion TEXT NOT NULL REFERENCES emotions_list ON DELETE CASCADE,
+    diary_entry_id INTEGER NOT NULL REFERENCES diary_entries ON DELETE CASCADE,
     PRIMARY KEY(emotion, diary_entry_id)
 
 );

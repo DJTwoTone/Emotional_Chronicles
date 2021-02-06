@@ -1,7 +1,7 @@
 const db = require('../db');
 const bcrypt = require('bcrypt');
 const ExpressError = require('../helpers/expressError');
-const { partialUpdateSQL } = require('../helpers/partialUpdate');
+const  partialUpdateSQL  = require('../helpers/partialUpdate');
 
 const BCRYPT_WORK_FACTOR = 12;
 
@@ -48,7 +48,7 @@ class User {
         return user;
     }
 
-    static async update(username, data) {
+    static async updateUser(username, data) {
 
         if (data.password) {
             data.password = await bcrypt.hash(data.password, BCRYPT_WORK_FACTOR);
