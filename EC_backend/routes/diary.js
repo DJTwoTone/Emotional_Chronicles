@@ -10,7 +10,7 @@ const router = express.Router();
 router.get('/:date', checkCorrectUser, async function(req, res, next) {
     try {
         const entryDate = req.params.date;
-        const username = req.user.username;
+        const username = req.body.username;
         const entry = await Diary.getEntry(username, entryDate);
 
         if (entry.username !== username) {
@@ -26,10 +26,10 @@ router.get('/:date', checkCorrectUser, async function(req, res, next) {
 
 //get all entries by user
 
-router.get('/', async function (req, res, next) {
+router.get('/', checkCorrectUser, async function (req, res, next) {
     try {
 
-        const username = req.user.username;
+        const username = req.body.username;
         const entries = await Diary.getEnties(username);
 
         if (entries[0].username !== username) {
@@ -72,7 +72,7 @@ router.post('/', authUser, async function (req, res, next) {
     }
 })
 
-//edit entry
+//edit entry - I don't want this
 
 //delete entry
 

@@ -10,9 +10,7 @@ class Diary {
 
         const { username, diaryentry, joy, sadness, fear, surprise, anger, disgust, emotions } = data;
         const no_emotion = data['no-emotion'];
-        console.log('before entry insert')
 
-        // you nee the date
         const entryRes = await db.query(
             `INSERT into diary_entries (username, entry, date, joy, no_emotion, sadness, fear, surprise, anger, disgust)
             VALUES ($1, $2, CURRENT_DATE, $3, $4, $5, $6, $7, $8, $9)
@@ -21,38 +19,54 @@ class Diary {
         );
 
         let res = entryRes.rows[0];
-        console.log('res', res);
-        console.log('before emotion insert');
 
 
-        const makeEmoArr = async (arr) => {
+        const makeEmoArr = async (arr, id) => {
             const promises = arr.map(async (emotion) => {
-                await db.query(
+                let emoRes = await db.query(
                     `INSERT into entries_list_emotions (emotion, diary_entry_id)
                     VALUES ($1, $2)
-                    RETURNING emotion`, [emotion, res.id]) 
+                    RETURNING emotion`, [emotion, id])
+                    return emoRes.rows[0]['emotion']
             })
-            return Promise.all(promises)
+
+            let res = await Promise.all(promises)
+            return res
         } 
 
-        const emotionArr = await makeEmoArr(emotions);
+        const emotionArr = await makeEmoArr(emotions, res.id);
         
-
-
-        console.log('emoArry', emotionArr)
         return {...res, emotions: emotionArr };
     }
 
     static async getEnties(username) {
-        const res = await db.query(
+        
+        const entriesRes = await db.query(
             `SELECT *
             FROM diary_entries
             WHERE username = $1`, [username]
         )
+        
+        const emoRes = await db.query(
+            `SELECT de.id, ele.emotion
+            FROM diary_entries AS de
+            LEFT JOIN entries_list_emotions AS ele
+            ON de.id = ele.diary_entry_id
+            WHERE username = $1`, [username]
+        )
+        
+        let entries = entriesRes.rows;
+        entries.forEach(entry => {
+            entry.emotions = [];
+        })
+        
+        let emos = emoRes.rows;
 
-        //get the emotions
-
-        let entries = res.rows;
+        emos.forEach(emo => {
+            if (emo.emotion) {
+                let idx = entries.findIndex(entry => entry.id === emo.id)
+                entries[idx].emotions.push(emo.emotion)
+        }})
 
         return entries;
     }
@@ -68,6 +82,17 @@ class Diary {
         //get the emotions
 
         let entry = res.rows[0];
+        entry.emotions = [];
+
+        const emoRes = await db.query(
+            `SELECT emotion
+            FROM entries_list_emotions
+            WHERE diary_entry_id = $1`, [entry.id]
+        )
+
+        emoRes.rows.forEach(emo => {
+            entry.emotions.push(emo)
+        })
 
         return entry;
     }
@@ -82,6 +107,8 @@ class Diary {
 
         return res.rows;
     }
+
+
 }
 
 module.exports = Diary;
