@@ -74,7 +74,7 @@ router.post('/', authUser, async function (req, res, next) {
 
 //edit entry - I don't want this
 
-//delete entry
+//delete entry - need to delete all for a user including the link table
 
 
 module.exports = router;

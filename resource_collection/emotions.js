@@ -4,8 +4,8 @@ const emoArr = emo.split(' ');
 
 let emotions = [];
 
-emo.split(' ').forEach(e => {
-    emotions.push(`\n${e}`)
+[...new Set(emoArr)].forEach(e => {
+    emotions.push(`\n('${e}')`)
 })
 
 const fs = require('fs');

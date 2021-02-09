@@ -18,7 +18,7 @@ const months = [jan, feb, mar, apr, may, june, july, aug, sept, oct, nov, dec];
 let prompts = []
 months.forEach(month => {
     month.forEach(p => {
-        prompts.push(`\n${p.split('. ')[1]}`)
+        prompts.push(`\n('${p.split('. ')[1]}', FALSE)`)
     })
 })
 

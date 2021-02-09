@@ -14,9 +14,9 @@ class Resources {
 
     static async getEmotions(num) {
         const res = await db.query(
-            `SELECT emotion
+            `SELECT *
             FROM emotions_list
-            ORDER BY RAND()
+            ORDER BY RANDOM()
             LIMIT $1`, [num]
         );
 
@@ -24,13 +24,38 @@ class Resources {
         return emotions;
     }
 
+    static async getPrompt() {
+        const res = await db.query(
+            `SELECT *
+            FROM prompts_list
+            WHERE flagged = FALSE
+            ORDER BY RANDOM()
+            LIMIT 1`
+        );
+
+        
+        const prompt = res.rows[0];
+        return prompt;
+    }
+
     static async getPrompts(num) {
         const res = await db.query(
-            `SELECT prompt
+            `SELECT *
             from prompts_list
             WHERE flagged = FALSE
-            ORDER BY RAND()
+            ORDER BY RANDOM()
             LIMIT $1`, [num]
+        );
+
+        const prompts = res.rows.flat();
+        return prompts;
+    }
+    static async getFlaggedPrompts() {
+        const res = await db.query(
+            `SELECT *
+            from prompts_list
+            WHERE flagged = TRUE
+            `
         );
 
         const prompts = res.rows.flat();
@@ -41,7 +66,7 @@ class Resources {
         const res = await db.query(
             `INSERT into prompts_list (prompt, flagged)
             VALUES ($1, $2)
-            RETURNING prompt`, [prompt, flagged]
+            RETURNING *`, [prompt, flagged]
         ); 
 
         return res.rows[0];
@@ -68,10 +93,10 @@ class Resources {
 
     static async getInspiration() {
         const res = await db.query(
-            `SELECT inspiration
+            `SELECT *
             FROM inspirations
             WHERE flagged = FALSE
-            ORDER BY RAND()
+            ORDER BY RANDOM()
             LIMIT 1`
         );
 
@@ -79,13 +104,25 @@ class Resources {
         return inspiration;
     }
 
-    static async getInspirations(num, flagged) {
+    static async getInspirations(num) {
         const res = await db.query(
-            `SELECT inspiration
+            `SELECT *
             FROM inspirations
-            WHERE flagged = $1
-            ORDER BY RAND()
-            LIMIT $2`, [flagged, num]
+            WHERE flagged = FALSE
+            ORDER BY RANDOM()
+            LIMIT $2`, [num]
+        );
+
+        const inspirations = res.rows.flat()
+        return inspirations;
+    }
+
+    static async getFlaggedInspirations() {
+        const res = await db.query(
+            `SELECT *
+            FROM inspirations
+            WHERE flagged = TRUE
+            `
         );
 
         const inspirations = res.rows.flat()
@@ -117,7 +154,7 @@ class Resources {
         const res = await db.query(
             `DELETE FROM inspirations
             WHERE id = $1
-            RETURNING inspiration`, [id]`
+            RETURNING inspiration`, [id]
         )
     }
 
