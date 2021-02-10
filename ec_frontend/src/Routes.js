@@ -11,6 +11,8 @@ import Signup from './Signup'
 import Profile from './Profile';
 import EmoCloud from './EmotionCloud'
 
+
+//this is going to need to be paired down
 function Routes () {
     return (
         <div>

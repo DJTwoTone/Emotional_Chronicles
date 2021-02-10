@@ -24,13 +24,15 @@ class User {
     static async register(data) {
         const { username, password, first_name, last_name, email } = data;
 
+        const is_admin = data.isAdmin == true ? true : false
+
         const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
         const res = await db.query(
-            `INSERT into users (username, password, first_name, last_name, email)
+            `INSERT into users (username, password, first_name, last_name, email, is_admin)
             VALUES ($1, $2, $3, $4, $5)
-            RETURNING username, password, first_name, last_name, email`,
-            [username, hashedPassword, first_name, last_name, email]
+            RETURNING username, password, first_name, last_name, email, is_admin`,
+            [username, hashedPassword, first_name, last_name, email, is_admin]
         );
 
         return res.rows[0];
@@ -38,7 +40,7 @@ class User {
 
     static async getUser(username) {
         const res = await db.query(
-            `SELECT username, first_name, last_name, email
+            `SELECT username, first_name, last_name, email, is_admin
             FROM users
             WHERE username = $1`, [username]
         );
@@ -75,7 +77,7 @@ class User {
 
     static async authenticate(data) {
         const res = await db.query(
-            `SELECT username, password, first_name, last_name, email
+            `SELECT username, password, first_name, last_name, email, is_admin
             FROM users
             WHERE username = $1`, [data.username]
         );

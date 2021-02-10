@@ -1,5 +1,5 @@
 // import logo from './logo.svg';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Routes from './Routes';
 import useLocalStorage from './hooks/useLocalStorage'
@@ -21,11 +21,13 @@ function App() {
 
   const [token, setToken] = useLocalStorage(TOKEN_ID);
 
+
+  //finish the login dance
   useEffect(() => {
     async function getCurrentUser() {
       try {
         let { username } = decode(token);
-        let currentUser = await ECA
+        // let currentUser = await ECA
 
 
 

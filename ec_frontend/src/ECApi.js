@@ -3,6 +3,9 @@ import { TOKEN_ID } from './App';
 
 const BASE_URL = +process.env.BASE_URL || "http://localhost:3001"
 
+//this needs to be finished
+//see backend for what you need to put here
+
 class ECApi {
     static async request(endpoint, params = {}, verb = "get") {
         let _token = localStorage.getItem(TOKEN_ID);

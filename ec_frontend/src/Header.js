@@ -33,6 +33,10 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
+
+//need to change of logged in or not
+//if admin give access to the admin dashboard
+//should show the number of things that need approved if an admin
 function Header(props) {
 
     const { history } = props;
