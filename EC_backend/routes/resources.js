@@ -39,7 +39,7 @@ router.get('/prompt', async function (req, res, next){
 })
 
 
-router.get('/prompts/flagged', async function (req, res, next) {
+router.get('/prompts/flagged', authAdmin, async function (req, res, next) {
     try {
 
         const prompts = await Resources.getFlaggedPrompts();

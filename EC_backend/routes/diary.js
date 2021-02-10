@@ -24,6 +24,8 @@ router.get('/:date', checkCorrectUser, async function(req, res, next) {
     }
 })
 
+//need to get a month of entries
+
 //get all entries by user
 
 router.get('/', checkCorrectUser, async function (req, res, next) {

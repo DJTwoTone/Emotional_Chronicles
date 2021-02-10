@@ -9,12 +9,13 @@ function EmoCalendar () {
 
 
     //can i change this to [date, setDate] ?
-    const [value, onChange] = useState(new Date())
+    const [calDate, setCalDate] = useState(new Date())
 
     function showEntry(value, event) {
         console.log(typeof(value), value.getDate());
         //
     }
+    console.log(calDate.getMonth())
 
     //make a useEffect to redirect to a day
 
@@ -23,10 +24,11 @@ function EmoCalendar () {
     return (
         <div>
         <Calendar
-            onChange={onChange}
-            value={value}
+            onChange={setCalDate}
+            value={calDate}
             onClickDay={showEntry}
-        />    
+        />
+        {/* <p>{{calDate}}</p> */}
         </div>
             )
 }
