@@ -21,25 +21,40 @@ class Diary {
         let res = entryRes.rows[0];
 
 
-        const makeEmoArr = async (arr, id) => {
-            const promises = arr.map(async (emotion) => {
-                let emoRes = await db.query(
+        // const makeEmoArr = async (arr, id) => {
+        //     const promises = arr.map(async (emotion) => {
+        //         let emoRes = await db.query(
+        //             `INSERT into entries_list_emotions (emotion, diary_entry_id)
+        //             VALUES ($1, $2)
+        //             RETURNING emotion`, [emotion, id])
+        //             return emoRes.rows[0]['emotion']
+        //     })
+
+        //     let res = await Promise.all(promises)
+        //     return res
+        // } 
+
+
+        const makeEmoArr = (arr, id) => {
+            const promises = arr.map((emotion) => {
+                let emoRes = db.query(
                     `INSERT into entries_list_emotions (emotion, diary_entry_id)
                     VALUES ($1, $2)
                     RETURNING emotion`, [emotion, id])
                     return emoRes.rows[0]['emotion']
             })
 
-            let res = await Promise.all(promises)
+            let res = Promise.all(promises)
             return res
         } 
 
-        const emotionArr = await makeEmoArr(emotions, res.id);
+        // const emotionArr = await makeEmoArr(emotions, res.id);
+        const emotionArr = makeEmoArr(emotions, res.id);
         
         return {...res, emotions: emotionArr };
     }
 
-    static async getEnties(username) {
+    static async getEntries(username) {
         
         const entriesRes = await db.query(
             `SELECT *

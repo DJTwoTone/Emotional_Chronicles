@@ -13,9 +13,9 @@ router.get('/:date', checkCorrectUser, async function(req, res, next) {
         const username = req.body.username;
         const entry = await Diary.getEntry(username, entryDate);
 
-        if (entry.username !== username) {
-            throw new ExpressError("Access to diary entry denied", 401);
-        }
+        // if (entry.username !== username) {
+        //     throw new ExpressError("Access to diary entry denied", 401);
+        // }
 
         return  res.json({ entry })
         
@@ -32,11 +32,11 @@ router.get('/', checkCorrectUser, async function (req, res, next) {
     try {
 
         const username = req.body.username;
-        const entries = await Diary.getEnties(username);
+        const entries = await Diary.getEntries(username);
 
-        if (entries[0].username !== username) {
-            throw new ExpressError("Access to diary denied", 401);
-        }
+        // if (entries[0].username !== username) {
+        //     throw new ExpressError("Access to diary denied", 401);
+        // }
         
         return res.json({ ...entries });
 

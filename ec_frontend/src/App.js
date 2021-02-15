@@ -4,15 +4,36 @@ import Header from './Header';
 import Routes from './Routes';
 import useLocalStorage from './hooks/useLocalStorage'
 import { decode } from 'jsonwebtoken';
-import { ECApi } from './ECApi';
+import ECApi from './ECApi';
 
 import { makeStyles } from '@material-ui/core/styles'
-
 import './App.css';
 
-const useStyles = makeStyles({});
-
 export const TOKEN_ID = 'usertoken';
+
+let emoArr = (async () => {
+   await ECApi.getEmotions(100);
+})()
+
+console.log(emoArr)
+
+// let emoStrForBG = emoArr.reduce((str, el) => `${str} ${el}`, '');
+
+const useStyles = makeStyles({
+  // basebg: {
+  //   position: 'relative',
+  //   backgroundColor: '#E5E5FF',
+  //   '&::before': {
+  //     content: `${emoStrForBG}`,
+  //     position: 'absolute',
+  //     color: '#00004C',
+  //     fontSize: '3em',
+  //     top: 0,
+  //     left: 0,
+  //     zIndex: -1
+  //   }
+  // }
+});
 
 function App() {
 
@@ -39,7 +60,7 @@ function App() {
   })
 
   return (
-    <div className={classes.container}>
+    <div className={classes.container, classes.basebg}>
       <Header />
       <Routes />
     </div>

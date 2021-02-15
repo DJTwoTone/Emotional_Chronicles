@@ -36,6 +36,8 @@ class ECApi {
             )
         }
 
+        console.log(req)
+
         try {
 
             return await req.data
@@ -90,8 +92,13 @@ class ECApi {
     }
 
     static async getEmotions(num) {
-        let res = await this.request(`resources/emotions${num ? `/${num}` : ''}`);
-        return res.emotions
+        console.log(`resources/emotions${num ? `/${num}` : ''}`)
+        console.log('before request')
+        // let res = await this.request(`resources/emotions${num ? `/${num}` : ''}`);
+        let res = await this.request(`resources/emotions/20`);
+        console.log('after request')
+        console.log('this is the res', res)
+        return res
     }
 
     static async getPrompt() {
