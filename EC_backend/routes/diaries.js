@@ -1,7 +1,7 @@
 const express = require('express');
 const ExpressError = require('../helpers/expressError');
 const symantoCall = require('../helpers/symantoCall');
-const Diary = require('../models/diary');
+const Diaries = require('../models/diaries');
 const { authUser, checkCorrectUser } = require('../middleware/auth');
 
 const router = express.Router();
@@ -11,7 +11,7 @@ router.get('/:date', checkCorrectUser, async function(req, res, next) {
     try {
         const entryDate = req.params.date;
         const username = req.body.username;
-        const entry = await Diary.getEntry(username, entryDate);
+        const entry = await Diaries.getEntry(username, entryDate);
 
         // if (entry.username !== username) {
         //     throw new ExpressError("Access to diary entry denied", 401);
@@ -26,13 +26,27 @@ router.get('/:date', checkCorrectUser, async function(req, res, next) {
 
 //need to get a month of entries
 
+router.get('/month/:date', checkCorrectUser, async function(req, res, next) {
+    try {
+
+        const dateInMonth = req.params.date;
+        const username = req.body.username;
+        const month = await Diaries.getMonth(username, dateInMonth)
+
+        return res.json({ month })
+        
+    } catch (e) {
+        return next(e);
+    }
+})
+
 //get all entries by user
 
 router.get('/', checkCorrectUser, async function (req, res, next) {
     try {
-
         const username = req.body.username;
-        const entries = await Diary.getEntries(username);
+
+        const entries = await Diaries.getEntries(username);
 
         // if (entries[0].username !== username) {
         //     throw new ExpressError("Access to diary denied", 401);
@@ -52,6 +66,15 @@ router.post('/', authUser, async function (req, res, next) {
         const { diaryentry, emotions } = req.body;
         const username = req.body.username;
 
+     
+        const today = new Date().toISOString().split('T')[0];
+
+        const check = await Diaries.checkToday(username, today);
+
+        if (!check) {
+            throw new ExpressError("You've already made an entry for today.")
+        }
+
 
         const calldata = await symantoCall(diaryentry);
 
@@ -64,7 +87,7 @@ router.post('/', authUser, async function (req, res, next) {
         const data = {username, diaryentry, ...emopredictions, emotions}
         // console.log(data)
 
-        const entry = await Diary.addEntry(data)
+        const entry = await Diaries.addEntry(data)
 
         return res.json({ entry })
 

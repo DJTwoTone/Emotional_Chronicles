@@ -1,20 +1,22 @@
 const express = require('express');
 const ExpressError = require('./helpers/expressError');
 
+const cors = require('cors');
+const app = express();
 
 const userRoutes = require('./routes/users');
-const diaryRoutes = require('./routes/diary');
+const diariesRoutes = require('./routes/diaries');
 // const resourcesRoutes = require('./routes/resources')
 const emotionsRoutes = require('./routes/emotions')
 const promptsRoutes = require('./routes/prompts')
 const inspirationsRoutes = require('./routes/inspirations')
 const loginRoute = require('./routes/login');
 
-const app = express();
+app.use(cors());
 app.use(express.json());
 
 app.use("/users", userRoutes);
-app.use("/diaries", diaryRoutes);
+app.use("/diaries", diariesRoutes);
 // app.use("/resources", resourcesRoutes);
 app.use("/emotions", emotionsRoutes);
 app.use("/prompts", promptsRoutes);

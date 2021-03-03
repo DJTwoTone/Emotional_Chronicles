@@ -76,6 +76,15 @@ VALUES
     ('testuser', '$2b$12$AZH7virni5jlTTiGgEg4zu3lSvAw68qVEfSIOjJ3RqtbJbdW/Oi5q', 'Bob', 'Testface', 'test@test.com', FALSE),
     ('testadmin', '$2b$12$AZH7virni5jlTTiGgEg4zu3lSvAw68qVEfSIOjJ3RqtbJbdW/Oi5q', 'Big Bob', 'Adminface', 'admin@test.com', TRUE);
 
+INSERT INTO diary_entries
+    ( username, entry, date, joy, no_emotion, sadness, fear, surprise, anger, disgust)
+VALUES
+    ('testuser', 'Kiicking ass and taking names', '2020-09-14T15:00:00.000Z', 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789),
+    ('testuser', 'Kiicking ass and taking names', '2020-10-14T15:00:00.000Z', 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789),
+    ('testuser', 'Kiicking ass and taking names', '2020-11-14T15:00:00.000Z', 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789),
+    ('testuser', 'Kiicking ass and taking names', '2020-12-14T15:00:00.000Z', 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789),
+    ('testuser', 'Kiicking ass and taking names', '2021-01-14T15:00:00.000Z', 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789);
+
 INSERT INTO emotions_list
     (emotion)
 VALUES
@@ -562,7 +571,30 @@ VALUES
     ('selfish'),
     ('smug');
 
-
+INSERT INTO entries_list_emotions
+    (emotion, diary_entry_id)
+VALUES
+    ('calm', 1),
+    ('centered', 1),
+    ('collected', 1),
+    ('comforted', 1),
+    ('composed', 2),
+    ('content', 2),
+    ('ease', 2),
+    ('mellow', 2),
+    ('mollified', 3),
+    ('open', 3),
+    ('pacified', 3),
+    ('patient', 3),
+    ('phlegmatic', 4),
+    ('receptive', 4),
+    ('relaxed', 4),
+    ('secure', 4),
+    ('settled', 4),
+    ('sure', 5),
+    ('tranquil', 5),
+    ('sadness', 5),
+    ('aching', 5);
 
 INSERT INTO prompts_list
     (prompt, flagged)

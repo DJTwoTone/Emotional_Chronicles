@@ -8,6 +8,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import ECApi from './ECApi';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -46,14 +47,19 @@ function Login () {
 
     async function handleSubmit(evt) {
         evt.preventDefault();
+        console.log('submitted')
         let data = {
             username: loginInfo.username,
             password: loginInfo.password
         }
+        console.log('data', data)
 
         try {
             
-            //do the login dance
+
+            let token = await ECApi.login(data);
+
+            console.log('returned token', token)
 
         } catch (errors) {
             return setLoginInfo(l => ({...l, errors}))

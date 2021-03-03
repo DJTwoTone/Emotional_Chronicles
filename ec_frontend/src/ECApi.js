@@ -3,6 +3,7 @@ import { TOKEN_ID } from './App';
 
 const BASE_URL = +process.env.BASE_URL || "http://localhost:3001"
 
+
 //this needs to be finished
 //see backend for what you need to put here
 
@@ -15,32 +16,34 @@ class ECApi {
         let req;
 
         if (verb === 'get') {
-            req = axios.get(
+            req = await axios.get(
                 `${BASE_URL}/${endpoint}`, { _token, ...params}
             );
         } else if (endpoint === 'login') {
-            req = axios.post(
+            req = await axios.post(
                 `${BASE_URL}/${endpoint}`, { ...params }
             );
         } else if (verb === 'post') {
-            req = axios.post(
+            req = await axios.post(
                 `${BASE_URL}/${endpoint}`, {_token, ...params}
             );
         } else if (verb === 'patch') {
-            req = axios.patch(
+            req = await axios.patch(
                 `${BASE_URL}/${endpoint}`, {_token, ...params}
             );
         } else if (verb === 'delete') {
-            req = axios.delete(
+            req = await axios.delete(
                 `${BASE_URL}/${endpoint}`, {_token }    
             )
         }
 
-        console.log(req)
-
+        
         try {
-
-            return await req.data
+            
+            
+            const data = req.data
+            
+            return data
             
         } catch (e) {
             console.error("API Error:", e.response);
@@ -92,27 +95,23 @@ class ECApi {
     }
 
     static async getEmotions(num) {
-        console.log(`resources/emotions${num ? `/${num}` : ''}`)
-        console.log('before request')
-        // let res = await this.request(`resources/emotions${num ? `/${num}` : ''}`);
-        let res = await this.request(`resources/emotions/20`);
-        console.log('after request')
-        console.log('this is the res', res)
+        let res = await this.request(`emotions${num ? `/${num}` : ''}`);
+        // let res = await this.request(`emotions/20`);
         return res
     }
 
     static async getPrompt() {
-        let res = await this.request('resources/prompt');
+        let res = await this.request('prompts');
         return res.prompt;
     }
 
     static async getFlaggedPrompts() {
-        let res = await this.request('resourecs/prompts/flagged')
+        let res = await this.request('prompts/flagged')
         return res.prompts;
     }
 
     static async getPrompts(num) {
-        let res = await this.request(`resources/prompts${num ? `/${num}` : ''}`)
+        let res = await this.request(`prompts${num ? `/${num}` : ''}`)
         return res.prompts;
     }
 
@@ -122,27 +121,27 @@ class ECApi {
     }
 
     static async changePromptFlag(id) {
-        let res = await this.request(`resources/prompts/${id}`, {}, 'patch');
+        let res = await this.request(`prompts/${id}`, {}, 'patch');
         return res.prompt;
     }
 
     static async deletePrompt(id) {
-        let res = await this.request(`resources/prompts${id}`, {}, 'delete');
+        let res = await this.request(`prompts${id}`, {}, 'delete');
         return res;
     }
 
     static async getInspiration() {
-        let res = await this.request('resources/inspiration');
+        let res = await this.request('inspirations');
         return res.inspiration;
     }
 
     static async getFlaggedInspirations() {
-        let res = await this.request('resourecs/inspirations/flagged')
+        let res = await this.request('inspirations/flagged')
         return res.inspirations;
     }
 
     static async getInspirations(num) {
-        let res = await this.request(`resources/inspirations${num ? `/${num}` : ''}`)
+        let res = await this.request(`inspirations${num ? `/${num}` : ''}`)
         return res.inspirations;
     }
 
@@ -152,12 +151,12 @@ class ECApi {
     }
 
     static async changeInspirationFlag(id) {
-        let res = await this.request(`resources/inspirations/${id}`, {}, 'patch');
+        let res = await this.request(`inspirations/${id}`, {}, 'patch');
         return res.inspiration;
     }
 
     static async deleteInspiration(id) {
-        let res = await this.request(`resources/inspirations${id}`, {}, 'delete');
+        let res = await this.request(`inspirations${id}`, {}, 'delete');
         return res;
     }
 }

@@ -9,12 +9,14 @@ const router = express.Router();
 
 //emotions routes
 
-router.get('/emotions/:num?', async function (req, res, next) {
+router.get('/:num?', async function (req, res, next) {
     try {
-        const num = req.params.num || 20;
+        const num = req.params.num || 1;
 
+        
         const emotions = await Emotions.getEmotions(num);
-
+        
+        console.log('in the get request', emotions)
         return res.json({emotions});
         
     } catch (e) {

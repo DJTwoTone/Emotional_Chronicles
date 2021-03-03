@@ -4,7 +4,28 @@
 
 const db = require('../db');
 
-class Diary {
+class Diaries {
+
+
+    //check if today's entry exists
+    static async checkToday(username, today) {
+        console.log('username', username);
+        console.log('today', today);
+        const res = await db.query(
+            `SELECT *
+            FROM diary_entries
+            WHERE username = $1 AND date = $2`, [username, today]
+        )
+
+        console.log(res.rows)
+
+
+        if (res.rows.length) {
+            return true;
+        };
+
+        return false;
+    }
 
     static async addEntry(data) {
 
@@ -36,8 +57,8 @@ class Diary {
 
 
         const makeEmoArr = (arr, id) => {
-            const promises = arr.map((emotion) => {
-                let emoRes = db.query(
+            const promises = arr.map(async (emotion) => {
+                let emoRes = await db.query(
                     `INSERT into entries_list_emotions (emotion, diary_entry_id)
                     VALUES ($1, $2)
                     RETURNING emotion`, [emotion, id])
@@ -48,8 +69,8 @@ class Diary {
             return res
         } 
 
-        // const emotionArr = await makeEmoArr(emotions, res.id);
-        const emotionArr = makeEmoArr(emotions, res.id);
+        const emotionArr = await makeEmoArr(emotions, res.id);
+        // const emotionArr = makeEmoArr(emotions, res.id);
         
         return {...res, emotions: emotionArr };
     }
@@ -95,8 +116,10 @@ class Diary {
         );
 
         //get the emotions
+        console.log(res)
 
         let entry = res.rows[0];
+        console.log(entry)
         entry.emotions = [];
 
         const emoRes = await db.query(
@@ -112,12 +135,15 @@ class Diary {
         return entry;
     }
 
-    static async getMonth(username, date) {
+    static async getMonth(username, dateInMonth) {
+        const dateObj = new Date(dateInMonth)
+        const year = dateObj.getFullYear()
+        const month = dateObj.getMonth()
         const res = await db.query(
             `SELECT *
             FROM diary_entries
-            WHERE username = $1 AND MONTH(date) = MONTH($2) AND YEAR(date) = YEAR($2)`, 
-            [username, date]
+            WHERE "username" = $1 AND date_part('month', date) = $2 AND date_part('year', date) = $3`, 
+            [username, month, year]
         );
 
         return res.rows;
@@ -128,4 +154,4 @@ class Diary {
 
 }
 
-module.exports = Diary;
+module.exports = Diaries;

@@ -9,8 +9,19 @@ const router = express.Router();
 
 
 //inspirations routes
+router.get('/flagged', async function(req, res, next) {
+    try {
 
-router.get('/inspirations/:num?', async function (req, res, next) {
+        const inspirations = await Inspirations.getFlaggedInspirations();
+
+        return res.json({ inspirations })
+        
+    } catch (e) {
+        return next(e);
+    }
+})
+
+router.get('/:num?', async function (req, res, next) {
     try {
         
         const num = req.params.num || 1;
@@ -24,21 +35,10 @@ router.get('/inspirations/:num?', async function (req, res, next) {
     }
 })
 
-router.get('/inspirations/flagged', async function(req, res, next) {
-    try {
-
-        const inspirations = await Inspirations.getFlaggedInspirations();
-
-        return res.json({ inspirations })
-        
-    } catch (e) {
-        return next(e);
-    }
-})
 
 
 
-router.post('/inspirations', authUser, async function (req, res, next) {
+router.post('/', authUser, async function (req, res, next) {
     try {
         const inspiration = req.body.inspiration;
 
@@ -53,7 +53,7 @@ router.post('/inspirations', authUser, async function (req, res, next) {
     }
 })
 
-router.patch('/inspirations/:id', authUser, async function (req, res, next) {
+router.patch('/:id', authUser, async function (req, res, next) {
     try {
         
         const id = req.params.id;
@@ -69,7 +69,7 @@ router.patch('/inspirations/:id', authUser, async function (req, res, next) {
     }
 })
 
-router.delete('/inspirations/:id', authAdmin, async function (req, res, next) {
+router.delete('/:id', authAdmin, async function (req, res, next) {
     try {
 
         const id = req.params.id;

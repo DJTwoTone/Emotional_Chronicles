@@ -4,9 +4,9 @@ const createToken = require('../helpers/authToken');
 
 const router = new express.Router();
 
-router.post('/login', async function(req, res, next) {
+router.get('/login', async function(req, res, next) {
     try {
-
+        console.log('logging in')
         const user = await User.authenticate(req.body);
         const token = createToken(user);
         return res.json({ token })

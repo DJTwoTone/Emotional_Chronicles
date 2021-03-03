@@ -9,8 +9,19 @@ const router = express.Router();
 
 
 //prompts routes
+router.get('/flagged', authAdmin, async function (req, res, next) {
+    try {
 
-router.get('/prompts/:num?', async function (req, res, next) {
+        const prompts = await Resources.getFlaggedPrompts();
+
+        return res.json({prompts})
+
+    } catch (e) {
+        return next(e);
+    }
+})
+
+router.get('/:num?', async function (req, res, next) {
     try {
         
         const num = req.params.num || 1;
@@ -24,21 +35,10 @@ router.get('/prompts/:num?', async function (req, res, next) {
     }
 })
 
-router.get('/prompts/flagged', authAdmin, async function (req, res, next) {
-    try {
-
-        const prompts = await Resources.getFlaggedPrompts();
-
-        return res.json({prompts})
-
-    } catch (e) {
-        return next(e);
-    }
-})
 
 
 
-router.post('/prompts', authUser, async function (req, res, next) {
+router.post('/', authUser, async function (req, res, next) {
     try {
         const prompt = req.body.prompt;
 
@@ -53,7 +53,7 @@ router.post('/prompts', authUser, async function (req, res, next) {
     }
 })
 
-router.patch('/prompts/:id', authUser, async function (req, res, next) {
+router.patch('/:id', authUser, async function (req, res, next) {
     try {
 
         const id = req.params.id;
@@ -69,7 +69,7 @@ router.patch('/prompts/:id', authUser, async function (req, res, next) {
     }
 })
 
-router.delete('/prompts/:id', authAdmin, async function (req, res, next) {
+router.delete('/:id', authAdmin, async function (req, res, next) {
     try {
 
         const id = req.params.id;

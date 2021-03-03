@@ -6,6 +6,7 @@ const db = new Client({
     connectionString: DB_URI
 });
 
+
 db.connect();
 
 module.exports = db;

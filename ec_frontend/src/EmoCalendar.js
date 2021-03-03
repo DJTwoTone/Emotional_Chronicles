@@ -12,9 +12,10 @@ function EmoCalendar () {
     const [calDate, setCalDate] = useState(new Date())
 
     function showEntry(value, event) {
-        console.log(typeof(value), value.getDate());
+        console.log(typeof(value), value.getDate(), value);
         //
     }
+    console.log(calDate)
     console.log(calDate.getMonth())
 
     //make a useEffect to redirect to a day

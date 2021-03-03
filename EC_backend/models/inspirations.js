@@ -10,7 +10,7 @@ class Inspirations {
             FROM inspirations
             WHERE flagged = FALSE
             ORDER BY RANDOM()
-            LIMIT $2`, [num]
+            LIMIT $1`, [num]
         );
 
         const inspirations = res.rows.flat()
