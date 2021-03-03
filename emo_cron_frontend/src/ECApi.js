@@ -22,13 +22,15 @@ class ECApi {
         try {
             return (await axios({ url, method, data, params, headers })).data;
         } catch (err) {
-            console.error("API ERROR:", err)
+            console.error("API ERROR:", err.responce)
+            console.log(err)
             let message = err.response.data.error.message;
             throw Array.isArray(message) ? message : [message];
         }
     }
 
     static async login(data) {
+
         let res = await this.request('login', data, 'post');
         return res.token
     }
@@ -44,7 +46,11 @@ class ECApi {
     }
 
     static async getUser(username) {
-        let res = this.request(`users/${username}`);
+
+        console.log('in the get user function')
+        let res = await this.request(`users/${username}`);
+
+        console.log(res)
         return res.user;
     }
 

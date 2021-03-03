@@ -19,4 +19,4 @@ function useLocalStorage(key, value = null) {
 
 }
 
-export default useLocalStorage;
+export default useLocalStorage

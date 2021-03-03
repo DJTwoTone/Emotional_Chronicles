@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, useHistory } from 'react-router-dom';
 import { decode } from 'jsonwebtoken';
 
 import UserContext from './UserContext';
@@ -17,16 +17,18 @@ export const LOCAL_STORAGE_TOKEN_ID = 'ec_token'
 
 function App() {
 
-  const [loggedinUser, setLoggedInUser] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   const [token, setToken] = useLocalStorage(LOCAL_STORAGE_TOKEN_ID)
+  const history = useHistory();
 
   useEffect(() => {
     async function getLoggedInUser() {
       try {
-
+        
         let { username } = decode(token);
         let fetchedUser = await ECApi.getUser(username);
+        console.log(fetchedUser)
         setLoggedInUser(fetchedUser)
 
 
@@ -40,13 +42,15 @@ function App() {
   function handleLogout() {
     setLoggedInUser(null);
     setToken(null);
+    history.push('/');
+
   }
 
 
   return (
     <div className="App">
       <BrowserRouter>
-        <UserContext.Provider value={{loggedinUser, setLoggedInUser}}>
+        <UserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
           <Navigation logout={handleLogout} />
           <Routes setToken={setToken}/>
         </UserContext.Provider>

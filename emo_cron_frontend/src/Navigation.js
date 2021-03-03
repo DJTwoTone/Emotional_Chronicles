@@ -7,7 +7,7 @@ import Nav from 'react-bootstrap/Nav'
 
 function Navigation({ logout }) {
 
-    const { user } = useContext(UserContext);
+    const { loggedInUser } = useContext(UserContext);
 
     function loggedOutNav() {
         return (
@@ -42,7 +42,7 @@ function Navigation({ logout }) {
             {/* think about adding a profile option here */}
             {/* need a link ot the admin page if user is admin */}
             <Nav.Item>
-                <Nav.Link onSelect={logout}>Logout</Nav.Link>
+                <Nav.Link onClick={logout}>Logout</Nav.Link>
             </Nav.Item>
         </Nav>
 
@@ -52,7 +52,7 @@ function Navigation({ logout }) {
     return (
         <NavBar bg='primary' variant='dark'>
             <NavBar.Brand href='/' >EMOTIONAL CHRONICLES</NavBar.Brand>
-            {user ? loggedInNav() : loggedOutNav()}
+            {loggedInUser ? loggedInNav() : loggedOutNav()}
         </NavBar>
 
         )

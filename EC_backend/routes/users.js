@@ -9,7 +9,8 @@ const router = express.Router();
 
 //add an authuser check  
 
-router.get('/:username', checkCorrectUser, async function (req, res, next) {
+router.get('/:username', authUser, async function (req, res, next) {
+    
     try {
         const username = req.params.username;
 
@@ -20,6 +21,8 @@ router.get('/:username', checkCorrectUser, async function (req, res, next) {
         }
 
         const user = await User.getUser(username);
+
+
         return res.json({user})
         
     } catch (e) {
