@@ -9,7 +9,7 @@ import Login from './Login';
 import Signup from './Signup';
 
 
-function Routes () {
+function Routes ({setToken}) {
     return (
         <div>
             <Switch>
@@ -23,11 +23,11 @@ function Routes () {
                 </Route>
 
                 <Route exact path='/login'>
-                    <Login />
+                    <Login setToken={setToken}/>
                 </Route>
 
                 <Route exact path='/signup'>
-                    <Signup />
+                    <Signup setToken={setToken} />
                 </Route>
 
                 {/* these need to be made private */}

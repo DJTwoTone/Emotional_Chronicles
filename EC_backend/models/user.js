@@ -22,8 +22,9 @@ class User {
     }
 
     static async register(data) {
-        const { username, password, first_name, last_name, email } = data;
-
+        const { username, password, email } = data;
+        const first_name = data.firstName;
+        const last_name = data.lastName;
         const is_admin = data.isAdmin == true ? true : false
 
         const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
