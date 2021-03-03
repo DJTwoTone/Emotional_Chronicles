@@ -3,14 +3,14 @@ import { BrowserRouter } from 'react-router-dom';
 import { decode } from 'jsonwebtoken';
 
 import UserContext from './UserContext';
-import useLocalStorage from '../hooks/useLocalStorage';
+import useLocalStorage from './hooks/useLocalStorage';
 import ECApi from './ECApi';
 
 
 import './App.css';
 
-import Nav from './Nav';
-import Routes from './Routes';
+import Navigation from './Navigation';
+// import Routes from './Routes';
 
 
 export const LOCAL_STORAGE_TOKEN_ID = 'ec_token'
@@ -47,8 +47,8 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <UserContext.Provider value={{loggedinUser, setLoggedInUser}}>
-          <Nav logout={handleLogout} />
-          <Routes setToken={setToken}/>
+          <Navigation logout={handleLogout} />
+          {/* <Routes setToken={setToken}/> */}
         </UserContext.Provider>
       </BrowserRouter>
     </div>

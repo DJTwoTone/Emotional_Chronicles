@@ -1,0 +1,62 @@
+import React, { useContext } from 'react';
+
+import UserContext from './UserContext';
+
+import NavBar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+
+function Navigation({ logout }) {
+
+    const { user } = useContext(UserContext);
+
+    function loggedOutNav() {
+        return (
+            
+            <Nav className='ml-auto'>
+            <Nav.Item>
+                <Nav.Link href="/inspiration">Get Some Inspiration</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link href="/login">Login</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link href="/signup">Signup</Nav.Link>
+            </Nav.Item>
+        </Nav>
+
+        )
+    }
+
+    function loggedInNav() {
+        return (
+            <Nav className='ml-auto'>
+            <Nav.Item>
+                <Nav.Link href="/inspiration">Get Some Inspiration</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link href="/today">Today</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link href="/signup">Calendar</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link onSelect={logout}>Logout</Nav.Link>
+            </Nav.Item>
+        </Nav>
+
+        )
+    }
+
+    return (
+        <NavBar bg='primary' variant='dark'>
+            <NavBar.Brand href='/' >EMOTIONAL CHRONICLES</NavBar.Brand>
+            {user ? loggedInNav() : loggedOutNav()}
+        </NavBar>
+
+        )
+
+
+
+}
+
+export default Navigation;
