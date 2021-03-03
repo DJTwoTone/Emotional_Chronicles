@@ -3,8 +3,9 @@ import React from 'react';
 function Today () {
 
 
-    //this need deigned
-    //possibly an emotion cloud as the background
+    // check today's date in database
+    // if if entry has alreadt been made go to the entry report
+    // else go to the form
     
     return (
         <div>

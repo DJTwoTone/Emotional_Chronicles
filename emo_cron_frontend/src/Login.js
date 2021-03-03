@@ -28,6 +28,7 @@ function Login ({ setToken }) {
 
     async function handleSubmit(evt) {
         evt.preventDefault();
+        console.log('submitted')
         let data = {
             username: loginInfo.username,
             password: loginInfo.password
@@ -48,6 +49,7 @@ function Login ({ setToken }) {
     }
     
     //possibly an emotion cloud as the background
+    //add error handling
     
     return (
         <Container className='justify-content-center'>
@@ -57,7 +59,7 @@ function Login ({ setToken }) {
                 <Card.Header bg='primary' text='white'>LOGIN</Card.Header>
 
                 <Card.Body>
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                         <Form.Group controlId='username'>
                             <Form.Label>USERNAME</Form.Label>
                             <Form.Control 
@@ -81,7 +83,6 @@ function Login ({ setToken }) {
                         <Button 
                             variant='primary'
                             type='submit'
-                            onSubmit={handleSubmit}
                         >
                             SUBMIT
                         </Button>

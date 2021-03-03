@@ -48,6 +48,11 @@ class ECApi {
         return res.user;
     }
 
+    static async getEmotions(num) {
+        let res = await this.request(`emotions${num ? `/${num}` : ''}`)
+        return res
+    }
+
 
 
 
