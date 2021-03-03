@@ -39,6 +39,8 @@ function Navigation({ logout }) {
             <Nav.Item>
                 <Nav.Link href="/signup">Calendar</Nav.Link>
             </Nav.Item>
+            {/* think about adding a profile option here */}
+            {/* need a link ot the admin page if user is admin */}
             <Nav.Item>
                 <Nav.Link onSelect={logout}>Logout</Nav.Link>
             </Nav.Item>

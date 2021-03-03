@@ -10,7 +10,7 @@ import ECApi from './ECApi';
 import './App.css';
 
 import Navigation from './Navigation';
-// import Routes from './Routes';
+import Routes from './Routes';
 
 
 export const LOCAL_STORAGE_TOKEN_ID = 'ec_token'
@@ -48,7 +48,7 @@ function App() {
       <BrowserRouter>
         <UserContext.Provider value={{loggedinUser, setLoggedInUser}}>
           <Navigation logout={handleLogout} />
-          {/* <Routes setToken={setToken}/> */}
+          <Routes setToken={setToken}/>
         </UserContext.Provider>
       </BrowserRouter>
     </div>
