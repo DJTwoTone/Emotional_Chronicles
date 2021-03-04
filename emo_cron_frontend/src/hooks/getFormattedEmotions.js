@@ -9,9 +9,12 @@ async function getFormattedEmotions(num) {
     }
 
     function formatEmotions(arr) {
-        let formatted = arr.map(obj => ({
+        let formatted = arr.map((obj, idx) => ({
+            id: idx,
             value: obj.emotion,
-            count: Math.floor(Math.random() * 10) + 10
+            count: Math.floor(Math.random() * 10) + 10,
+            angle: Math.floor(Math.random() * 90) - 45,
+            isSelected: false
         }));
 
         return formatted;

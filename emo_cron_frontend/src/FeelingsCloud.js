@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { TagCloud } from 'react-tagcloud'
 
+import './FeelingsCloud.css';
+
 import getFormattedEmotions from './hooks/getFormattedEmotions'
 // import ECApi from './ECApi';
 
@@ -22,12 +24,14 @@ function FeelingsCloud ({ feelings, setFeelings }) {
     const customRender = (tag, size, color) => (
         <span
         key={tag.value}
+        className={tag.isSelected ? 'selectedEmo' : ''}
         style={{
             margin: '4px',
             display: 'inline-block',
-            transform: `rotate(${Math.floor(Math.random() * 90) - 45}deg)`,
+            transform: `rotate(${tag.angle}deg)`,
             fontSize: `${tag.count + size}px`,
             color: `${color}`
+            //decide how to add the cirlce
         }}  
         >
             {tag.value}
@@ -43,6 +47,7 @@ function FeelingsCloud ({ feelings, setFeelings }) {
         }   else {
             setFeelings(feelings.filter(f => f !== feeling));
         }
+        emotions[tag.id].isSelected = !emotions[tag.id].isSelected; 
         console.log(feelings)
     }
 

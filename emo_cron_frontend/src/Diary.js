@@ -46,6 +46,7 @@ function Diary () {
                           name='diaryEntry'
                           value={entry}
                           onChange={handleChange}
+                          rows={20}
                     />
 
                 </Form.Group>
