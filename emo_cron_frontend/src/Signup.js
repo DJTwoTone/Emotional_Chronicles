@@ -21,7 +21,7 @@ function Signup ({setToken}) {
     })
 
     function handleChange(evt) {
-        const { name, value } =evt.target;
+        const { name, value } = evt.target;
 
         setSignupInfo(info => ({
             ...info,

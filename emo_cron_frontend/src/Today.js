@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Diary from './Diary';
+
 function Today () {
 
 
@@ -8,10 +10,8 @@ function Today () {
     // else go to the form
     
     return (
-        <div>
-        Today goes here.    
-        </div>
-            )
+        <Diary />
+    )
 }
 
 export default Today;

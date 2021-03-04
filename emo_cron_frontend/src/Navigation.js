@@ -9,6 +9,8 @@ function Navigation({ logout }) {
 
     const { loggedInUser } = useContext(UserContext);
 
+
+
     function loggedOutNav() {
         return (
             
@@ -37,7 +39,7 @@ function Navigation({ logout }) {
                 <Nav.Link href="/today">Today</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link href="/signup">Calendar</Nav.Link>
+                <Nav.Link href="/calendar">Calendar</Nav.Link>
             </Nav.Item>
             {/* think about adding a profile option here */}
             {/* need a link ot the admin page if user is admin */}

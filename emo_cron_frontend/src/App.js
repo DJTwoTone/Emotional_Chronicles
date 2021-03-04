@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, useHistory } from 'react-router-dom';
+import { BrowserRouter, Redirect } from 'react-router-dom';
 import { decode } from 'jsonwebtoken';
 
 import UserContext from './UserContext';
@@ -20,7 +20,7 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);
 
   const [token, setToken] = useLocalStorage(LOCAL_STORAGE_TOKEN_ID)
-  const history = useHistory();
+
 
   useEffect(() => {
     async function getLoggedInUser() {
@@ -42,7 +42,10 @@ function App() {
   function handleLogout() {
     setLoggedInUser(null);
     setToken(null);
-    history.push('/');
+    return (
+      <Redirect to='/' />
+
+    )
 
   }
 
