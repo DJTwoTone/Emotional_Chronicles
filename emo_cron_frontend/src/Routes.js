@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Home from './Home';
 import Inspiration from './Inspiration';
 import Today from './Today';
-import Calendar from './Calendar';
+import EmoCalendar from './EmoCalendar';
 import Login from './Login';
 import Signup from './Signup';
 
@@ -37,7 +37,7 @@ function Routes ({setToken}) {
                 </Route>
 
                 <Route exact path='/calendar'>
-                    <Calendar />
+                    <EmoCalendar />
                 </Route>
 
                 {/* think about adding a profile route */}

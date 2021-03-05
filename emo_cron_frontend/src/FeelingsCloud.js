@@ -30,8 +30,8 @@ function FeelingsCloud ({ feelings, setFeelings }) {
             display: 'inline-block',
             transform: `rotate(${tag.angle}deg)`,
             fontSize: `${tag.count + size}px`,
-            color: `${color}`
-            //decide how to add the cirlce
+            color: `${color}`,
+            cursor: 'pointer'
         }}  
         >
             {tag.value}

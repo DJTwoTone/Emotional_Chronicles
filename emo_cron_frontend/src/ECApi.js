@@ -47,7 +47,7 @@ class ECApi {
 
     static async getUser(username) {
 
-        let res = await this.request(`users/${username}`);)
+        let res = await this.request(`users/${username}`);
         return res.user;
     }
 
