@@ -39,6 +39,7 @@ router.get('/:num?', async function (req, res, next) {
 
 
 router.post('/', authUser, async function (req, res, next) {
+    
     try {
         const inspiration = req.body.inspiration;
 
@@ -46,7 +47,7 @@ router.post('/', authUser, async function (req, res, next) {
 
         const addedInspiration = await Inspirations.addInspiration(inspiration, flagged);
 
-        return res.json({ addedInspiration });
+        return res.json({ ...addedInspiration });
 
     } catch (e) {
         return next(e);

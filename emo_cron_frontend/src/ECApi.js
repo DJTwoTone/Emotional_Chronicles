@@ -47,16 +47,28 @@ class ECApi {
 
     static async getUser(username) {
 
-        console.log('in the get user function')
-        let res = await this.request(`users/${username}`);
-
-        console.log(res)
+        let res = await this.request(`users/${username}`);)
         return res.user;
     }
 
     static async getEmotions(num) {
         let res = await this.request(`emotions${num ? `/${num}` : ''}`)
         return res
+    }
+
+    static async getPrompt() {
+        let res = await this.request('prompts');
+        return res.prompts;
+    }
+
+    static async getInspiration() {
+        let res = await this.request('inspirations');
+        return res.inspirations;
+    }
+
+    static async addInspiration(data) {
+        let res = await this.request('inspirations', data, 'post')
+        return res.inspiration;
     }
 
 

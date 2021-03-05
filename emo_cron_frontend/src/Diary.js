@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import FeelingsCloud from './FeelingsCloud';
+import WritingPrompt from './WritingPrompt';
+import WritingInspiration from './WritingInspiration'
 
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -11,6 +13,8 @@ function Diary () {
 
     const history = useHistory()
     const [entry, setEntry] = useState("");
+    const [prompt, setPrompt] = useState({});
+    const [inspiration, setInspiration] = useState("");
 
     const [feelings, setFeelings] = useState([]);
     // const [prompt, setPrompt] = useState('');
@@ -38,7 +42,8 @@ function Diary () {
     return (
         <Container className='justify-content-center m-5'>
             <FeelingsCloud className='m-5' feelings={feelings} setFeelings={setFeelings} />
-            <Form className='m-5'>
+            <WritingPrompt className='m-5' prompt={prompt} setPrompt={setPrompt} />
+            <Form className='m-4'>
                 <Form.Group controlId='diaryEntry'>
                     <Form.Control 
                           as='textarea'
@@ -51,6 +56,10 @@ function Diary () {
 
                 </Form.Group>
             </Form>
+            <WritingInspiration 
+                className='m5' 
+                inspiration={inspiration}
+                 setInspiration={setInspiration} />
         </Container>
 
     )

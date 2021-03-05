@@ -7,12 +7,12 @@
 -- \c
 -- "emo-chron"
 
-DROP TABLE prompts_list;
 DROP TABLE entries_list_emotions;
-DROP TABLE emotions_list;
 DROP TABLE diary_entries;
 DROP TABLE users;
 DROP TABLE inspirations;
+DROP TABLE prompts_list;
+DROP TABLE emotions_list;
 
 CREATE TABLE users
 (
@@ -36,19 +36,30 @@ CREATE TABLE emotions_list
     emotion TEXT PRIMARY KEY
 );
 
+CREATE TABLE inspirations
+(
+    id SERIAL PRIMARY KEY,
+    inspiration TEXT NOT NULL,
+    flagged BOOLEAN DEFAULT TRUE
+);
+
 CREATE TABLE diary_entries
 (
     id SERIAL PRIMARY KEY,
     username TEXT NOT NULL REFERENCES users ON DELETE CASCADE,
     entry TEXT NOT NULL,
     date DATE,
+    prompt_id INTEGER NOT NULL REFERENCES prompts_list,
+    inspiration_id INTEGER NOT NULL REFERENCES inspirations,
     joy FLOAT,
     no_emotion FLOAT,
     sadness FLOAT,
     fear FLOAT,
     surprise FLOAT,
     anger FLOAT,
-    disgust FLOAT
+    disgust FLOAT,
+    anticipation FLOAT,
+    trust FLOAT
 
 );
 
@@ -61,13 +72,6 @@ CREATE TABLE entries_list_emotions
 
 );
 
-CREATE TABLE inspirations
-(
-    id SERIAL PRIMARY KEY,
-    inspiration TEXT NOT NULL,
-    flagged BOOLEAN DEFAULT TRUE
-);
-
 -- password should be 'password'
 
 INSERT INTO users
@@ -75,15 +79,6 @@ INSERT INTO users
 VALUES
     ('testuser', '$2b$12$AZH7virni5jlTTiGgEg4zu3lSvAw68qVEfSIOjJ3RqtbJbdW/Oi5q', 'Bob', 'Testface', 'test@test.com', FALSE),
     ('testadmin', '$2b$12$AZH7virni5jlTTiGgEg4zu3lSvAw68qVEfSIOjJ3RqtbJbdW/Oi5q', 'Big Bob', 'Adminface', 'admin@test.com', TRUE);
-
-INSERT INTO diary_entries
-    ( username, entry, date, joy, no_emotion, sadness, fear, surprise, anger, disgust)
-VALUES
-    ('testuser', 'Kiicking ass and taking names', '2020-09-14T15:00:00.000Z', 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789),
-    ('testuser', 'Kiicking ass and taking names', '2020-10-14T15:00:00.000Z', 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789),
-    ('testuser', 'Kiicking ass and taking names', '2020-11-14T15:00:00.000Z', 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789),
-    ('testuser', 'Kiicking ass and taking names', '2020-12-14T15:00:00.000Z', 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789),
-    ('testuser', 'Kiicking ass and taking names', '2021-01-14T15:00:00.000Z', 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789);
 
 INSERT INTO emotions_list
     (emotion)
@@ -570,31 +565,6 @@ VALUES
     ('petty'),
     ('selfish'),
     ('smug');
-
-INSERT INTO entries_list_emotions
-    (emotion, diary_entry_id)
-VALUES
-    ('calm', 1),
-    ('centered', 1),
-    ('collected', 1),
-    ('comforted', 1),
-    ('composed', 2),
-    ('content', 2),
-    ('ease', 2),
-    ('mellow', 2),
-    ('mollified', 3),
-    ('open', 3),
-    ('pacified', 3),
-    ('patient', 3),
-    ('phlegmatic', 4),
-    ('receptive', 4),
-    ('relaxed', 4),
-    ('secure', 4),
-    ('settled', 4),
-    ('sure', 5),
-    ('tranquil', 5),
-    ('sadness', 5),
-    ('aching', 5);
 
 INSERT INTO prompts_list
     (prompt, flagged)
@@ -1398,9 +1368,39 @@ VALUES
     ('“You will never always be motivated, so you must learn to be disciplined.” –Unknown', TRUE),
     ('“I’m not a product of my circumstances. I am a product of my decisions.” – Stephen Covey', TRUE);
 
+INSERT INTO diary_entries
+    ( username, entry, date, prompt_id, inspiration_id, joy, no_emotion, sadness, fear, surprise, anger, disgust, anticipation, trust)
+VALUES
+    ('testuser', 'Kiicking ass and taking names', '2020-09-14T15:00:00.000Z', 2, 5, 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789, 0.258, 0.369),
+    ('testuser', 'Kiicking ass and taking names', '2020-10-14T15:00:00.000Z', 7, 12, 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789, 0.258, 0.369),
+    ('testuser', 'Kiicking ass and taking names', '2020-11-14T15:00:00.000Z', 14, 19, 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789, 0.258, 0.369),
+    ('testuser', 'Kiicking ass and taking names', '2020-12-14T15:00:00.000Z', 21, 26, 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789, 0.258, 0.369),
+    ('testuser', 'Kiicking ass and taking names', '2021-01-14T15:00:00.000Z', 28, 33, 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789, 0.258, 0.369);
 
-
-
+INSERT INTO entries_list_emotions
+    (emotion, diary_entry_id)
+VALUES
+    ('calm', 1),
+    ('centered', 1),
+    ('collected', 1),
+    ('comforted', 1),
+    ('composed', 2),
+    ('content', 2),
+    ('ease', 2),
+    ('mellow', 2),
+    ('mollified', 3),
+    ('open', 3),
+    ('pacified', 3),
+    ('patient', 3),
+    ('phlegmatic', 4),
+    ('receptive', 4),
+    ('relaxed', 4),
+    ('secure', 4),
+    ('settled', 4),
+    ('sure', 5),
+    ('tranquil', 5),
+    ('sadness', 5),
+    ('aching', 5);
 
 
 

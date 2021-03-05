@@ -30,6 +30,7 @@ class Inspirations {
     }
 
     static async addInspiration(inspiration, flagged) {
+        
         const res = await db.query(
             `INSERT into inspirations (inspiration, flagged)
             VALUES ($1, $2)
