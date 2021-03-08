@@ -138,7 +138,10 @@ class Diaries {
     static async getMonth(username, dateInMonth) {
         const dateObj = new Date(dateInMonth)
         const year = dateObj.getFullYear()
-        const month = dateObj.getMonth()
+        //Warning Off by 1 error likely here
+        const month = dateObj.getMonth() + 1
+
+        console.log('getmonth', dateObj, year, month)
         const res = await db.query(
             `SELECT *
             FROM diary_entries

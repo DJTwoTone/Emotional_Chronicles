@@ -1375,7 +1375,17 @@ VALUES
     ('testuser', 'Kiicking ass and taking names', '2020-10-14T15:00:00.000Z', 7, 12, 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789, 0.258, 0.369),
     ('testuser', 'Kiicking ass and taking names', '2020-11-14T15:00:00.000Z', 14, 19, 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789, 0.258, 0.369),
     ('testuser', 'Kiicking ass and taking names', '2020-12-14T15:00:00.000Z', 21, 26, 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789, 0.258, 0.369),
-    ('testuser', 'Kiicking ass and taking names', '2021-01-14T15:00:00.000Z', 28, 33, 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789, 0.258, 0.369);
+    ('testuser', 'Kiicking ass and taking names', '2021-01-14T15:00:00.000Z', 28, 33, 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789, 0.258, 0.369),
+    ('testuser', 'Kiicking ass and taking names', '2021-02-14T15:00:00.000Z', 28, 33, 0.369, 0.1234, 0.258, 0.3456, 0.2345, 0.346, 0.4567, 0.2345, 0.3456),
+    ('testuser', 'Kiicking ass and taking names', '2021-03-01T15:00:00.000Z', 28, 33, 0.679, 0.3258, 0.467, 0.5678, 0.6789, 0.235, 0.3456, 0.5678, 0.278),
+    ('testuser', 'Kiicking ass and taking names', '2021-03-02T15:00:00.000Z', 28, 33, 0.134, 0.3969, 0.534, 0.7389, 0.2758, 0.369, 0.1234, 0.2345, 0.2345),
+    ('testuser', 'Kiicking ass and taking names', '2021-03-03T15:00:00.000Z', 28, 33, 0.1234, 0.2345, 0.3456, 0.4567, 0.5678, 0.6789, 0.789, 0.258, 0.369),
+    ('testuser', 'Kiicking ass and taking names', '2021-03-04T15:00:00.000Z', 28, 33, 0.568, 0.6789, 0.789, 0.4567, 0.5678, 0.789, 0.7891, 0.2586, 0.3691),
+    ('testuser', 'Kiicking ass and taking names', '2021-03-05T15:00:00.000Z', 28, 33, 0.456, 0.2585, 0.369, 0.5678, 0.6789, 0.789, 0.3456, 0.4567, 0.1234),
+    ('testuser', 'Kiicking ass and taking names', '2021-03-06T15:00:00.000Z', 28, 33, 0.789, 0.7289, 0.456, 0.7452, 0.1145, 0.032, 0.3365, 0.4474, 0.2211),
+    ('testuser', 'Kiicking ass and taking names', '2021-03-07T15:00:00.000Z', 28, 33, 0.789, 0.7289, 0.456, 0.7452, 0.1145, 0.032, 0.3365, 0.4474, 0.2211),
+    ('testuser', 'Kiicking ass and taking names', '2021-03-08T15:00:00.000Z', 28, 33, 0.789, 0.7289, 0.456, 0.7452, 0.1145, 0.032, 0.3365, 0.4474, 0.2211);
+
 
 INSERT INTO entries_list_emotions
     (emotion, diary_entry_id)
@@ -1400,8 +1410,38 @@ VALUES
     ('sure', 5),
     ('tranquil', 5),
     ('sadness', 5),
-    ('aching', 5);
-
-
-
-
+    ('aching', 5),
+    ('shy', 6),
+    ('woozy', 6),
+    ('introspective', 6),
+    ('absorbed', 6),
+    ('brooding', 6),
+    ('contemplative', 7),
+    ('engrossed', 7),
+    ('enlightened', 7),
+    ('inspired', 7),
+    ('interested', 7),
+    ('meditative', 8),
+    ('nostalgic', 8),
+    ('pensive', 8),
+    ('reflective', 8),
+    ('solemn', 8),
+    ('stirred', 9),
+    ('wonder', 9),
+    ('joyful', 9),
+    ('amused', 9),
+    ('awed', 9),
+    ('bemused', 10),
+    ('bliss', 10),
+    ('blithe', 10),
+    ('bonhomie', 10),
+    ('bubbly', 10),
+    ('buoyant', 10),
+    ('carefree', 11),
+    ('cheerful', 11),
+    ('delectation', 11),
+    ('delighted', 12),
+    ('delirious', 12),
+    ('ebullient', 12),
+    ('ecstatic', 12),
+    ('elated', 12);

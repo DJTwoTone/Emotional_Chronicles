@@ -21,10 +21,12 @@ router.get('/flagged', async function(req, res, next) {
     }
 })
 
-router.get('/:num?', async function (req, res, next) {
+
+//this should be a query apram
+router.get('/', async function (req, res, next) {
     try {
         
-        const num = req.params.num || 1;
+        const num = req.query.num || 1;
 
         const inspirations = await Inspirations.getInspirations(num);
 

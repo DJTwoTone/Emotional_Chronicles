@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { BrowserRouter, Redirect } from 'react-router-dom';
 import { decode } from 'jsonwebtoken';
 
@@ -22,21 +22,25 @@ function App() {
   const [token, setToken] = useLocalStorage(LOCAL_STORAGE_TOKEN_ID)
 
 
+  
   useEffect(() => {
     async function getLoggedInUser() {
       try {
         
         let { username } = decode(token);
         let fetchedUser = await ECApi.getUser(username);
-        console.log(fetchedUser)
         setLoggedInUser(fetchedUser)
-
-
+        console.log('in the app user fetched', fetchedUser)
+        // console.log('in the app user', loggedInUser)
+        
+        
+        
       } catch (err) {
         setLoggedInUser(null)
       }
     }
     getLoggedInUser();
+    console.log('in the app user', loggedInUser)
   }, [token]);
 
   function handleLogout() {

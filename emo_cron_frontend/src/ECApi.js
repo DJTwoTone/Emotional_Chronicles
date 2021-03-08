@@ -52,23 +52,29 @@ class ECApi {
     }
 
     static async getEmotions(num) {
-        let res = await this.request(`emotions${num ? `/${num}` : ''}`)
+        let res = await this.request('emotions', {num})
         return res
     }
 
-    static async getPrompt() {
-        let res = await this.request('prompts');
+    static async getPrompt(num) {
+        let res = await this.request('prompts', {num});
         return res.prompts;
     }
 
-    static async getInspiration() {
-        let res = await this.request('inspirations');
+    static async getInspiration(num) {
+        let res = await this.request('inspirations', {num});
         return res.inspirations;
     }
 
     static async addInspiration(data) {
         let res = await this.request('inspirations', data, 'post')
         return res.inspiration;
+    }
+
+    static async getMonthOfEntries(username, date) {
+
+        let res = await this.request(`diaries/${username}/month/${date}`)
+        return res.month
     }
 
 

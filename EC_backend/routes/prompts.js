@@ -21,10 +21,10 @@ router.get('/flagged', authAdmin, async function (req, res, next) {
     }
 })
 
-router.get('/:num?', async function (req, res, next) {
+router.get('/', async function (req, res, next) {
     try {
         
-        const num = req.params.num || 1;
+        const num = req.query.num || 1;
 
         const prompts = await Prompts.getPrompts(num);
 

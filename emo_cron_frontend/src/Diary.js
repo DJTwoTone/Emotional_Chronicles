@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import FeelingsCloud from './FeelingsCloud';
@@ -9,12 +9,16 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+import UserContext from './UserContext';
+
 function Diary () {
 
     const history = useHistory()
     const [entry, setEntry] = useState("");
     const [prompt, setPrompt] = useState({});
     const [inspiration, setInspiration] = useState("");
+
+    const { loggedInUser } = useContext(UserContext);
 
     const [feelings, setFeelings] = useState([]);
     // const [prompt, setPrompt] = useState('');
@@ -37,6 +41,8 @@ function Diary () {
         evt.preventDefault();
         console.log('entry:', entry, 'feelings:', feelings)
     }
+
+    console.log('in the diary', loggedInUser);
 
 
     return (
