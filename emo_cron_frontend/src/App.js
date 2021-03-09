@@ -40,16 +40,16 @@ function App() {
       }
     }
     getLoggedInUser();
-    console.log('in the app user', loggedInUser)
+    
   }, [token]);
 
   function handleLogout() {
     setLoggedInUser(null);
     setToken(null);
-    return (
-      <Redirect to='/' />
 
-    )
+    // return (
+    //   <Redirect to='/' />
+    // );
 
   }
 

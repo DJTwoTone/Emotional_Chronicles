@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import { DateTime } from 'luxon'
 
 // import 'react-calendar/dist/Calendar.css';
 import './Calendar.css';
@@ -13,15 +14,38 @@ import UserContext from './UserContext';
 function EmoCalendar () {
 
     const { loggedInUser } = useContext(UserContext);
+
+    const [calDate, setCalDate] = useState(new Date());
+    const [firstOfTheMonth, setFirstOfTheMonth] =useState(calDate)
+
+    function onChange(value, evt) {
+        console.log('nextvalue', value, evt)
+        setCalDate(value);
+    }
+
+    function onActiveStartDateChange({activeStartDate}) {
+        
+        setFirstOfTheMonth(activeStartDate)
+    }
     //this need deigned
     //possibly an emotion cloud as the background
     
-    console.log('in the calendar', loggedInUser)
+    console.log('calDAte', calDate, typeof(calDate))
+
+    //use onDayClick (value, event) to go to diary entry
+    //tileContent
 
     return (
         <Container className='m-4'>
-        <Calendar />
-        <MonthGraph />
+        <Calendar 
+            onChange={onChange}
+            onActiveStartDateChange={onActiveStartDateChange}
+            value={calDate}
+            maxDetail='month'
+            minDetail='month'
+
+        />
+        <MonthGraph date={DateTime.fromJSDate(firstOfTheMonth)}/>
         </Container>
             )
 }
