@@ -18,8 +18,7 @@ function EmoCalendar () {
     const [calDate, setCalDate] = useState(new Date());
     const [firstOfTheMonth, setFirstOfTheMonth] =useState(calDate)
 
-    function onChange(value, evt) {
-        console.log('nextvalue', value, evt)
+    function onChange(value) {
         setCalDate(value);
     }
 
@@ -27,10 +26,13 @@ function EmoCalendar () {
         
         setFirstOfTheMonth(activeStartDate)
     }
+
+    function onClickDay(value) {
+        console.log('day clicked value', value)
+    }
     //this need deigned
     //possibly an emotion cloud as the background
     
-    console.log('calDAte', calDate, typeof(calDate))
 
     //use onDayClick (value, event) to go to diary entry
     //tileContent
@@ -40,6 +42,7 @@ function EmoCalendar () {
         <Calendar 
             onChange={onChange}
             onActiveStartDateChange={onActiveStartDateChange}
+            onClickDay={onClickDay}
             value={calDate}
             maxDetail='month'
             minDetail='month'
