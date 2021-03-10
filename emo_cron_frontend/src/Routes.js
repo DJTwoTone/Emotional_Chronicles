@@ -7,6 +7,7 @@ import Today from './Today';
 import EmoCalendar from './EmoCalendar';
 import Login from './Login';
 import Signup from './Signup';
+import Admin from './Admin';
 
 
 function Routes ({setToken}) {
@@ -43,6 +44,10 @@ function Routes ({setToken}) {
                 {/* think about adding a profile route */}
 
                 {/* add admin route */}
+
+                <Route exact path='/admin'>
+                    <Admin />
+                </Route>
 
 
             </Switch>

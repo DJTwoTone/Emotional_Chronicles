@@ -43,6 +43,11 @@ function Navigation({ logout }) {
             </Nav.Item>
             {/* think about adding a profile option here */}
             {/* need a link ot the admin page if user is admin */}
+            {loggedInUser.is_admin 
+            ?   <Nav.Item>
+                    <Nav.Link href="/admin">Admin</Nav.Link>
+                </Nav.Item>
+            : null}
             <Nav.Item>
                 <Nav.Link onClick={logout}>Logout</Nav.Link>
             </Nav.Item>

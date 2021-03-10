@@ -77,6 +77,12 @@ class ECApi {
         return res.month
     }
 
+    static async getFlaggedInspiration() {
+        let res = await this.request('admin/inspirations')
+        console.log('the res', res)
+        return res
+    }
+
 
 
 
