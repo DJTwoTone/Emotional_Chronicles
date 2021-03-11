@@ -10,7 +10,7 @@ const router = express.Router();
 router.get('/:username/:date', checkCorrectUser, async function(req, res, next) {
     try {
         const entryDate = req.params.date;
-        const username = req.body.username;
+        const username = req.params.username;
         const entry = await Diaries.getEntry(username, entryDate);
 
         // if (entry.username !== username) {

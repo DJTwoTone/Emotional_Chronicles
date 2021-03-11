@@ -10,13 +10,17 @@ import Container from 'react-bootstrap/Container';
 
 import MonthGraph from './MonthGraph';
 import UserContext from './UserContext';
+import { useHistory } from 'react-router';
 
 function EmoCalendar () {
 
     const { loggedInUser } = useContext(UserContext);
 
+    const history = useHistory();
+
     const [calDate, setCalDate] = useState(new Date());
-    const [firstOfTheMonth, setFirstOfTheMonth] =useState(calDate)
+    const [firstOfTheMonth, setFirstOfTheMonth] =useState(calDate);
+
 
     function onChange(value) {
         setCalDate(value);
@@ -28,7 +32,18 @@ function EmoCalendar () {
     }
 
     function onClickDay(value) {
+        let date = DateTime(value).toSQLDate()
+        console.log('day clicked date', date)
+
+        console.log('______________________')
+        console.log('______________________')
+        console.log('______________________')
+        console.log('______________________')
         console.log('day clicked value', value)
+        // let username = loggedInUser.username;
+
+        // history.push(`/entry/${username}/${date}`)
+
     }
     //this need deigned
     //possibly an emotion cloud as the background

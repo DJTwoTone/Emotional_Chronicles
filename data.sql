@@ -1384,7 +1384,8 @@ VALUES
     ('testuser', 'Kiicking ass and taking names', '2021-03-05T15:00:00.000Z', 28, 33, 0.456, 0.2585, 0.369, 0.5678, 0.6789, 0.789, 0.3456, 0.4567, 0.1234),
     ('testuser', 'Kiicking ass and taking names', '2021-03-06T15:00:00.000Z', 28, 33, 0.789, 0.7289, 0.456, 0.7452, 0.1145, 0.032, 0.3365, 0.4474, 0.2211),
     ('testuser', 'Kiicking ass and taking names', '2021-03-07T15:00:00.000Z', 28, 33, 0.789, 0.7289, 0.456, 0.7452, 0.1145, 0.032, 0.3365, 0.4474, 0.2211),
-    ('testuser', 'Kiicking ass and taking names', '2021-03-08T15:00:00.000Z', 28, 33, 0.789, 0.7289, 0.456, 0.7452, 0.1145, 0.032, 0.3365, 0.4474, 0.2211);
+    ('testuser', 'Kiicking ass and taking names', '2021-03-08T15:00:00.000Z', 28, 33, 0.789, 0.7289, 0.456, 0.7452, 0.1145, 0.032, 0.3365, 0.4474, 0.2211),
+    ('testuser', 'Kiicking ass and taking names', '2021-03-11T15:00:00.000Z', 28, 33, 0.789, 0.7289, 0.456, 0.7452, 0.1145, 0.032, 0.3365, 0.4474, 0.2211);
 
 
 INSERT INTO entries_list_emotions
@@ -1444,4 +1445,9 @@ VALUES
     ('delirious', 12),
     ('ebullient', 12),
     ('ecstatic', 12),
-    ('elated', 12);
+    ('elated', 12),
+    ('awed', 15),
+    ('bemused', 15),
+    ('bliss', 15),
+    ('blithe', 15),
+    ('bonhomie', 15);

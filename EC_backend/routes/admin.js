@@ -22,27 +22,15 @@ const router = express.Router();
 router.get('/inspirations', authAdmin, async function(req, res, next) {
     try {
 
-        const flagged = await Admin.getFlaggedInspiration();
-        router.post('/prompt', authAdmin, async function(req, res, next) {
+        const returnedFlagged = await Admin.getFlaggedInspiration();
         
-            try {
-                const prompt = req.body.prompt;
-        
-                await Admin.addPrompt(prompt);
-        
-                return res.status(201).json({ message: "Prompt added"})
-            } catch (e) {
-                return next(e)
-            }
-        
-        })
+        if (returnedFlagged.length) {
+            return res.json({ message: "Please look at these submitted inspirations", flagged: returnedFlagged})
 
-        if(flagged.length = 0) {
+        } else {
             return res.json({ message: "No inspirations need approval" })
         }
-
-        return res.json({ message: "Please look at these submitted inspirations", flagged})
-
+    
 
     } catch (e) {
         return next(e);
@@ -50,7 +38,7 @@ router.get('/inspirations', authAdmin, async function(req, res, next) {
 })
 
 
-router.post('/inspiration', authAdmin, async function(req, res, next) {
+router.post('/inspirations', authAdmin, async function(req, res, next) {
 
     try {
         const inspiration = req.body.inspiration;
@@ -64,7 +52,7 @@ router.post('/inspiration', authAdmin, async function(req, res, next) {
 
 })
 
-router.patch('/inspiration/:id', authAdmin, async function(req, res, next) {
+router.patch('/inspirations/:id', authAdmin, async function(req, res, next) {
 
     try {
         const id = req.params.id;
@@ -77,7 +65,7 @@ router.patch('/inspiration/:id', authAdmin, async function(req, res, next) {
     }
 })
 
-router.delete('/inspiration/:id', authAdmin, async function(req, res, next) {
+router.delete('/inspirations/:id', authAdmin, async function(req, res, next) {
 
     try {
 

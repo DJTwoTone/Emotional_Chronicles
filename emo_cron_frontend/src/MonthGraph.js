@@ -15,14 +15,14 @@ function MonthGraph({ date }) {
 
     // console.log(loggedInUser)
     
-    console.log('loggedinuser in the monthgraph', loggedInUser)
+    // console.log('loggedinuser in the monthgraph', loggedInUser)
 
     useEffect(() => {
         async function fetchData() {
             
             try {
                 let data = await formatAnalysedMonth(loggedInUser.username, date);
-                console.log('in the effect', data)
+                // console.log('in the effect', data)
                 setFormattedData(data);
 
             } catch (err) {

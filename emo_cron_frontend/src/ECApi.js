@@ -71,16 +71,30 @@ class ECApi {
         return res.inspiration;
     }
 
+    static async getEntry(username, date) {
+        let res = await this.request(`diaries/${username}/${date}`)
+        return res.entry
+    }
+
     static async getMonthOfEntries(username, date) {
 
-        let res = await this.request(`diaries/${username}/month/${date}`)
-        return res.month
+        let res = await this.request(`diaries/${username}/month/${date}`);
+        return res.month;
     }
 
     static async getFlaggedInspiration() {
-        let res = await this.request('admin/inspirations')
-        console.log('the res', res)
-        return res
+        let res = await this.request('admin/inspirations');
+        return res;
+    }
+
+    static async approveFlaggedInspiration(id) {
+        let res = await this.request(`admin/inspirations/${id}`, {}, 'patch');
+        return res;
+    }
+
+    static async deleteFlaggedInspiration(id) {
+        let res = await this.request(`admin/inspirations/${id}`, {}, 'delete');
+        return res;
     }
 
 

@@ -128,9 +128,13 @@ class Diaries {
             WHERE diary_entry_id = $1`, [entry.id]
         )
 
-        emoRes.rows.forEach(emo => {
-            entry.emotions.push(emo)
-        })
+        if (emoRes.rows) {
+            emoRes.rows.forEach(emo => {
+                entry.emotions.push(emo)
+            })
+
+        }
+
 
         return entry;
     }

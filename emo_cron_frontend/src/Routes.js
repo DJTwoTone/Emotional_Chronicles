@@ -8,6 +8,7 @@ import EmoCalendar from './EmoCalendar';
 import Login from './Login';
 import Signup from './Signup';
 import Admin from './Admin';
+import Entry from './Entry';
 
 
 function Routes ({setToken}) {
@@ -39,6 +40,10 @@ function Routes ({setToken}) {
 
                 <Route exact path='/calendar'>
                     <EmoCalendar />
+                </Route>
+
+                <Route exact path='/entry/:username/:date'>
+                    <Entry  />
                 </Route>
 
                 {/* think about adding a profile route */}

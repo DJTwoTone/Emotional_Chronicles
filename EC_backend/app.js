@@ -8,6 +8,7 @@ const userRoutes = require('./routes/users');
 const diariesRoutes = require('./routes/diaries');
 // const resourcesRoutes = require('./routes/resources')
 const emotionsRoutes = require('./routes/emotions')
+const adminRoutes = require('./routes/admin')
 const promptsRoutes = require('./routes/prompts')
 const inspirationsRoutes = require('./routes/inspirations')
 const loginRoute = require('./routes/login');
@@ -19,6 +20,7 @@ app.use("/users", userRoutes);
 app.use("/diaries", diariesRoutes);
 // app.use("/resources", resourcesRoutes);
 app.use("/emotions", emotionsRoutes);
+app.use("/admin", adminRoutes);
 app.use("/prompts", promptsRoutes);
 app.use("/inspirations", inspirationsRoutes)
 app.use("/", loginRoute);
