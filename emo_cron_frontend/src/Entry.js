@@ -10,14 +10,16 @@ function Entry() {
 
     let { username, date } = useParams();
 
+    console.log('checking the params', username, date)
+
     const [displayedEntry, setDisplayedEntry] = useState({})
 
     useEffect(() => {
         async function fetchDiaryEntry() {
             try {
-                let convertedDate = new DateTime(date).toSQLDate();
-                let entryData = await ECApi.getEntry(username, convertedDate);
-                console.log('entryDate', entryData)
+                // let convertedDate = DateTime.fromJSDate(date).toSQLDate();
+                let entryData = await ECApi.getEntry(username, date);
+                console.log('entryData', entryData)
                 setDisplayedEntry(entryData)
             }  catch (err) {
                 console.log(err)

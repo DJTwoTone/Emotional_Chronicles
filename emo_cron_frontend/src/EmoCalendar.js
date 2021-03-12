@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DateTime } from 'luxon'
 
 // import 'react-calendar/dist/Calendar.css';
@@ -19,7 +19,8 @@ function EmoCalendar () {
     const history = useHistory();
 
     const [calDate, setCalDate] = useState(new Date());
-    const [firstOfTheMonth, setFirstOfTheMonth] =useState(calDate);
+    const [firstOfTheMonth, setFirstOfTheMonth] = useState(calDate);
+    const [clickedDay, setClickedDay] = useState('')
 
 
     function onChange(value) {
@@ -31,20 +32,20 @@ function EmoCalendar () {
         setFirstOfTheMonth(activeStartDate)
     }
 
+    
+
     function onClickDay(value) {
-        let date = DateTime(value).toSQLDate()
-        console.log('day clicked date', date)
 
-        console.log('______________________')
-        console.log('______________________')
-        console.log('______________________')
-        console.log('______________________')
-        console.log('day clicked value', value)
-        // let username = loggedInUser.username;
+        
+        let date = DateTime.fromJSDate(value).toSQLDate()
 
-        // history.push(`/entry/${username}/${date}`)
+        let username = loggedInUser.username;
+
+        history.push(`/entry/${username}/${date}`)
 
     }
+
+
     //this need deigned
     //possibly an emotion cloud as the background
     
