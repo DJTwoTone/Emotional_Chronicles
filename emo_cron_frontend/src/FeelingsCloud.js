@@ -19,7 +19,7 @@ function FeelingsCloud ({ feelings, setFeelings }) {
     }, []);
 
 
-    console.log(emotions)
+    // console.log(emotions)
 
     const customRender = (tag, size, color) => (
         <span

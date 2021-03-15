@@ -3,6 +3,9 @@ import { useParams } from 'react-router';
 import { DateTime } from 'luxon'
 
 import ECApi from './ECApi';
+import emotionalMath from './hooks/emotionalMath';
+
+import EntryChart from './EntryChart'
 
 import UserContext from './UserContext';
 
@@ -13,6 +16,7 @@ function Entry() {
     console.log('checking the params', username, date)
 
     const [displayedEntry, setDisplayedEntry] = useState({})
+    const [entryEmotions, setEntryEmotions] = useState({});
 
     useEffect(() => {
         async function fetchDiaryEntry() {
@@ -29,12 +33,18 @@ function Entry() {
     }, [date, username])
 
 
+    
+
+
 
 
     return (
 
         <div>
             {JSON.stringify(displayedEntry)}
+            {JSON.stringify(emotionalMath(displayedEntry))}
+            
+            <EntryChart data={displayedEntry} />
         </div>
 
 

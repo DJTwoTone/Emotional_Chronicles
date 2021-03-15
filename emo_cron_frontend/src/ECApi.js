@@ -97,6 +97,10 @@ class ECApi {
         return res;
     }
 
+    static async addEntry(data) {
+        console.log(data);
+    }
+
 
 
 

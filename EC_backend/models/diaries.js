@@ -29,14 +29,14 @@ class Diaries {
 
     static async addEntry(data) {
 
-        const { username, diaryentry, joy, sadness, fear, surprise, anger, disgust, emotions } = data;
+        const { username, diaryentry, joy, sadness, fear, surprise, anger, disgust, emotions, prompt_id, inspiration_id } = data;
         const no_emotion = data['no-emotion'];
 
         const entryRes = await db.query(
-            `INSERT into diary_entries (username, entry, date, joy, no_emotion, sadness, fear, surprise, anger, disgust)
-            VALUES ($1, $2, CURRENT_DATE, $3, $4, $5, $6, $7, $8, $9)
-            RETURNING id, username, entry, date, joy, no_emotion, sadness, fear, surprise, anger, disgust`,
-            [username, diaryentry, joy, no_emotion, sadness, fear, surprise, anger, disgust]
+            `INSERT into diary_entries (username, entry, date, joy, no_emotion, sadness, fear, surprise, anger, disgust, prompt_id, inspiration_id)
+            VALUES ($1, $2, CURRENT_DATE, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+            RETURNING id, username, entry, date, joy, no_emotion, sadness, fear, surprise, anger, disgust, `,
+            [username, diaryentry, joy, no_emotion, sadness, fear, surprise, anger, disgust, prompt_id, inspiration_id]
         );
 
         let res = entryRes.rows[0];
@@ -68,6 +68,10 @@ class Diaries {
             let res = Promise.all(promises)
             return res
         } 
+
+        //the prompt
+
+        //the inspiration
 
         const emotionArr = await makeEmoArr(emotions, res.id);
         // const emotionArr = makeEmoArr(emotions, res.id);
@@ -106,6 +110,8 @@ class Diaries {
                 })
 
         }
+
+        console.log('entries in trhe model',entries)
 
         return entries;
     }
@@ -176,12 +182,16 @@ class Diaries {
         //Warning Off by 1 error likely here
         const month = dateObj.getMonth() + 1
 
+        console.log('date', dateObj, 'year', year, 'month', month, username)
+
         const res = await db.query(
             `SELECT *
             FROM diary_entries
             WHERE "username" = $1 AND date_part('month', date) = $2 AND date_part('year', date) = $3`, 
             [username, month, year]
         );
+
+        // console.log('res in the model',res)
 
         return res.rows;
     }

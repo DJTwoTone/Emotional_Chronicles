@@ -9,6 +9,7 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+import ECApi from './ECApi';
 import UserContext from './UserContext';
 
 function Diary () {
@@ -21,8 +22,7 @@ function Diary () {
     const { loggedInUser } = useContext(UserContext);
 
     const [feelings, setFeelings] = useState([]);
-    // const [prompt, setPrompt] = useState('');
-    // const [inspiration, setInspiration] = ('');
+
 
 
     //word cloud
@@ -39,7 +39,23 @@ function Diary () {
 
     async function handleSubmit(evt) {
         evt.preventDefault();
-        console.log('entry:', entry, 'feelings:', feelings)
+        console.log('entry:', entry, 'feelings:', feelings, 'prompt_id:', prompt.id, 'inspiration:', inspiration.id)
+        let data = {
+            entry: entry,
+            feelings: feelings,
+            'prompt_id': prompt.id,
+            'inspiration_id': inspiration.id
+
+        }
+
+        try {
+
+            let entry = await ECApi.addEntry(data);
+            console.log('returned entry', entry);
+
+        } catch (err) {
+            console.error(err);
+        }
     }
 
     console.log('in the diary', loggedInUser);
@@ -61,6 +77,13 @@ function Diary () {
                     />
 
                 </Form.Group>
+                <Button
+                    variant='primary'
+                    type='submit'
+                    onClick={handleSubmit}
+                >
+                    RECORD
+                </Button>
             </Form>
             <WritingInspiration 
                 className='m5' 

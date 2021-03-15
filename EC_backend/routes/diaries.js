@@ -32,7 +32,7 @@ router.get('/:username/month/:date', checkCorrectUser, async function(req, res, 
         const dateInMonth = req.params.date;
         const username = req.params.username;
         const month = await Diaries.getMonth(username, dateInMonth)
-
+        console.log('month in the route', month)
         return res.json({ month })
         
     } catch (e) {
@@ -63,7 +63,7 @@ router.get('/:username', checkCorrectUser, async function (req, res, next) {
 
 router.post('/:username', authUser, async function (req, res, next) {
     try {
-        const { diaryentry, emotions } = req.body;
+        const { diaryentry, emotions, prompt_id, inspiration_id } = req.body;
         const username = req.body.username;
 
      
@@ -84,7 +84,7 @@ router.post('/:username', authUser, async function (req, res, next) {
             return {...acc, [prediction]: probability}
         }, {});
         
-        const data = {username, diaryentry, ...emopredictions, emotions}
+        const data = {username, diaryentry, ...emopredictions, emotions, prompt_id, inspiration_id}
         // console.log(data)
 
         const entry = await Diaries.addEntry(data)
