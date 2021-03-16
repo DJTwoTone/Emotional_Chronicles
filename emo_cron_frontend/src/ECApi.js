@@ -97,8 +97,12 @@ class ECApi {
         return res;
     }
 
-    static async addEntry(data) {
-        console.log(data);
+    static async addEntry(username, data) {
+        
+
+        let res = await this.request(`diaries/${username}`, data, 'post')
+        
+        return res;
     }
 
 

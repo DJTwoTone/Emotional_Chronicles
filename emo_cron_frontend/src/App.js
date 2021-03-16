@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { BrowserRouter, Redirect } from 'react-router-dom';
+import { BrowserRouter, Redirect, useHistory } from 'react-router-dom';
 import { decode } from 'jsonwebtoken';
 
 import UserContext from './UserContext';
@@ -17,6 +17,8 @@ export const LOCAL_STORAGE_TOKEN_ID = 'ec_token'
 
 function App() {
 
+  const history = useHistory();
+
   const [loggedInUser, setLoggedInUser] = useState(null);
 
   const [token, setToken] = useLocalStorage(LOCAL_STORAGE_TOKEN_ID)
@@ -30,11 +32,7 @@ function App() {
         let { username } = decode(token);
         let fetchedUser = await ECApi.getUser(username);
         setLoggedInUser(fetchedUser)
-        console.log('in the app user fetched', fetchedUser)
-        // console.log('in the app user', loggedInUser)
-        
-        
-        
+       
       } catch (err) {
         setLoggedInUser(null)
       }
@@ -46,23 +44,22 @@ function App() {
   function handleLogout() {
     setLoggedInUser(null);
     setToken(null);
+    // history.push('/');
 
-    // return (
-    //   <Redirect to='/' />
-    // );
+    return <Redirect to='/' />;
 
   }
 
 
   return (
-    <div className="App">
-      <BrowserRouter>
-        <UserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
+    <BrowserRouter>
+      <UserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
+        <div className="App">
           <Navigation logout={handleLogout} />
           <Routes setToken={setToken}/>
-        </UserContext.Provider>
-      </BrowserRouter>
-    </div>
+        </div>
+      </UserContext.Provider>
+    </BrowserRouter>
   );
 }
 

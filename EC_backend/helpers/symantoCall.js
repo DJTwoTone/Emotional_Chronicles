@@ -9,6 +9,8 @@ async function symantoCall(entry) {
         "language":"en"
     }])
 
+
+    
     const API_KEY = process.env.API_KEY;
 
     const config = {
@@ -21,8 +23,10 @@ async function symantoCall(entry) {
         data
     }
 
-    let res = await axios(config)
+    
 
+    let res = await axios(config)
+    
     return res.data
 
 }

@@ -39,18 +39,19 @@ function Diary () {
 
     async function handleSubmit(evt) {
         evt.preventDefault();
-        console.log('entry:', entry, 'feelings:', feelings, 'prompt_id:', prompt.id, 'inspiration:', inspiration.id)
+        
         let data = {
-            entry: entry,
-            feelings: feelings,
+            diaryentry: entry,
+            emotions: feelings,
             'prompt_id': prompt.id,
             'inspiration_id': inspiration.id
 
         }
+        const username = loggedInUser.username
 
         try {
-
-            let entry = await ECApi.addEntry(data);
+            console.log('before the api help call', username, data)
+            let entry = await ECApi.addEntry(username, data);
             console.log('returned entry', entry);
 
         } catch (err) {
@@ -65,7 +66,7 @@ function Diary () {
         <Container className='justify-content-center m-5'>
             <FeelingsCloud className='m-5' feelings={feelings} setFeelings={setFeelings} />
             <WritingPrompt className='m-5' prompt={prompt} setPrompt={setPrompt} />
-            <Form className='m-4'>
+            <Form className='m-4' onSubmit={handleSubmit}>
                 <Form.Group controlId='diaryEntry'>
                     <Form.Control 
                           as='textarea'

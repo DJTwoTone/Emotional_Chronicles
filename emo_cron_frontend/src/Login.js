@@ -54,7 +54,7 @@ function Login ({ setToken }) {
     return (
         <Container className='justify-content-center'>
 
-            <Card className='m-5'>
+            <Card className='m-5 shadow'>
 
                 <Card.Header bg='primary' text='white'>LOGIN</Card.Header>
 
@@ -63,6 +63,7 @@ function Login ({ setToken }) {
                         <Form.Group controlId='username'>
                             <Form.Label>USERNAME</Form.Label>
                             <Form.Control 
+                                className='shadow'
                                 type='text'
                                 name='username'
                                 placeholder='Your Username' 
@@ -72,7 +73,8 @@ function Login ({ setToken }) {
                         </Form.Group>
                         <Form.Group controlId='password'>
                             <Form.Label>PASSWORD</Form.Label>
-                            <Form.Control 
+                            <Form.Control
+                                className='shadow' 
                                 type='password'
                                 name='password'
                                 placeholder='Your Password'
@@ -81,6 +83,7 @@ function Login ({ setToken }) {
                             />
                         </Form.Group>
                         <Button 
+                            className='shadow'
                             variant='primary'
                             type='submit'
                         >

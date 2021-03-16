@@ -9,6 +9,7 @@ import Login from './Login';
 import Signup from './Signup';
 import Admin from './Admin';
 import Entry from './Entry';
+import PrivateRoute from'./PrivateRoutes';
 
 
 function Routes ({setToken}) {
@@ -34,25 +35,25 @@ function Routes ({setToken}) {
 
                 {/* these need to be made private */}
 
-                <Route exact path='/today'>
+                <PrivateRoute exact path='/today'>
                     <Today />
-                </Route>
+                </PrivateRoute>
 
-                <Route exact path='/calendar'>
+                <PrivateRoute exact path='/calendar'>
                     <EmoCalendar />
-                </Route>
+                </PrivateRoute>
 
-                <Route exact path='/entry/:username/:date'>
+                <PrivateRoute exact path='/entry/:username/:date'>
                     <Entry  />
-                </Route>
+                </PrivateRoute>
 
                 {/* think about adding a profile route */}
 
                 {/* add admin route */}
 
-                <Route exact path='/admin'>
+                <PrivateRoute exact path='/admin'>
                     <Admin />
-                </Route>
+                </PrivateRoute>
 
 
             </Switch>

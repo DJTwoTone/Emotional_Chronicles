@@ -38,7 +38,6 @@ function Signup ({setToken}) {
             lastName: signupInfo.lastName,
             email: signupInfo.email
         }
-
         try {
             let token = await ECApi.registerUser(data);
             setToken(token);
@@ -60,13 +59,14 @@ function Signup ({setToken}) {
     
     return (
         <Container className='justify-centent-center'>
-            <Card className='m-5'>
+            <Card className='m-5 shadow'>
                 <Card.Header bg='primary' text='white'>SIGNUP</Card.Header>
                 <Card.Body>
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                         <Form.Group controlId='username'>
                             <Form.Label>USERNAME</Form.Label>
                             <Form.Control
+                                className='shadow'
                                 type='text'
                                 name='username'
                                 placeholer='Pick a Username'
@@ -80,6 +80,7 @@ function Signup ({setToken}) {
                         <Form.Group controlId='firstName'>
                             <Form.Label>GIVEN NAME</Form.Label>
                             <Form.Control
+                                className='shadow'
                                 type='text'
                                 name='firstName'
                                 placeholer='What name was given to you?'
@@ -93,6 +94,7 @@ function Signup ({setToken}) {
                         <Form.Group controlId='lastName'>
                             <Form.Label>FAMILY NAME</Form.Label>
                             <Form.Control
+                                className='shadow'
                                 type='text'
                                 name='lastName'
                                 placeholer='What is your family name?'
@@ -106,6 +108,7 @@ function Signup ({setToken}) {
                         <Form.Group controlId='email'>
                             <Form.Label>EMAIL</Form.Label>
                             <Form.Control
+                                className='shadow'
                                 type='email'
                                 name='email'
                                 placeholer='Please share your email address.'
@@ -119,6 +122,7 @@ function Signup ({setToken}) {
                         <Form.Group controlId='password'>
                             <Form.Label>PASSWORD</Form.Label>
                             <Form.Control
+                                className='shadow'
                                 type='password'
                                 name='password'
                                 placeholer='Choose a unique password'

@@ -50,7 +50,7 @@ function Inspiration () {
     const inspList = inspiration.map(inspire => (
         <ListGroup.Item 
             key={inspire.inspiration} 
-            className='display-4'
+            className="border border-dark border-3 rounded padding-3 my-2 shadow"
         >
             {inspire.inspiration}
         </ListGroup.Item>
@@ -65,9 +65,9 @@ function Inspiration () {
         <Container fluid className='justify-content-center m-2'>
             <Card className='m-3'>
                 <Card.Body>
-                <Card.Header className='display-3'>Something to inspire you...</Card.Header>
+                <Card.Header className='display-3 shadow'>Something to inspire you...</Card.Header>
                 
-                <ListGroup>
+                <ListGroup className="my-2">
                 
                 {inspList}
 
@@ -85,7 +85,7 @@ function Inspiration () {
                                         value={insp}
                                         onChange={handleChange}
                                     />
-                                    <Button className='ml-2' variant='secondary' type='submit'>SHARE</Button>
+                                    <Button className='ml-2 shadow' variant='secondary' type='submit'>SHARE</Button>
                                 </Form>
                                 {inspMessage 
                                 ? <Card.Text>{inspMessage}</Card.Text>
