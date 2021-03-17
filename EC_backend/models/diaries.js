@@ -115,14 +115,14 @@ class Diaries {
     static async getEntry(username, date) {
         
         
-        const dateObj = new Date(date);
+        let dateObj = new Date(date);
         console.log('date in the model', dateObj)
-        const year = dateObj.getFullYear();
+        let year = dateObj.getFullYear();
         //Warning Off by 1 error likely here
-        const month = dateObj.getMonth() + 1;
-        const day = dateObj.getDate() + 1;
+        let month = dateObj.getMonth() + 1;
+        let day = dateObj.getDate() + 1;
         
-        const res = await db.query(
+        let res = await db.query(
             `SELECT *
             FROM diary_entries
             WHERE username = $1 AND date_part('month', date) = $2 AND date_part('year', date) = $3 AND date_part('day', date) = $4`, 
@@ -131,7 +131,7 @@ class Diaries {
 
 
         //get the emotions
-        // console.log(res.rows[0])
+        console.log(res.rows[0])
 
         if (!res.rows[0]) return {}
         
@@ -141,7 +141,7 @@ class Diaries {
         
         entry.emotions = [];
 
-        const emoRes = await db.query(
+        let emoRes = await db.query(
             `SELECT emotion
             FROM entries_list_emotions
             WHERE diary_entry_id = $1`, [entry.id]
@@ -154,13 +154,13 @@ class Diaries {
 
         }
 
-        const prompt = await db.query(
+        let prompt = await db.query(
             `SELECT prompt
             FROM prompts_list
             WHERE id = $1`, [entry.prompt_id]
             )
 
-        const inspiration = await db.query(
+        let inspiration = await db.query(
             `SELECT inspiration
             FROM inspirations
             WHERE id = $1`, [entry.inspiration_id]

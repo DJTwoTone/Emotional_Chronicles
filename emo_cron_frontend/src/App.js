@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { BrowserRouter, Redirect, useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, useHistory } from 'react-router-dom';
 import { decode } from 'jsonwebtoken';
 
 import UserContext from './UserContext';
@@ -31,6 +31,7 @@ function App() {
         
         let { username } = decode(token);
         let fetchedUser = await ECApi.getUser(username);
+        
         setLoggedInUser(fetchedUser)
        
       } catch (err) {
@@ -44,9 +45,6 @@ function App() {
   function handleLogout() {
     setLoggedInUser(null);
     setToken(null);
-    // history.push('/');
-
-    return <Redirect to='/' />;
 
   }
 

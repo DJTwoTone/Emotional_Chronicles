@@ -28,7 +28,7 @@ function Login ({ setToken }) {
 
     async function handleSubmit(evt) {
         evt.preventDefault();
-        console.log('submitted')
+        
         let data = {
             username: loginInfo.username,
             password: loginInfo.password
@@ -84,7 +84,7 @@ function Login ({ setToken }) {
                         </Form.Group>
                         <Button 
                             className='shadow'
-                            variant='primary'
+                            variant='dark'
                             type='submit'
                         >
                             SUBMIT

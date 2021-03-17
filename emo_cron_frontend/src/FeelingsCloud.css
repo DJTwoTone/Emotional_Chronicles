@@ -4,7 +4,7 @@
   }
 
   .selectedEmo:after {
-    border: .1em solid rgb(13, 27, 73);
+    border: .1em solid rgb(224, 219, 209);
     border-top: none;
     border-radius: 1.5em 1em 2em 1.5em;
     bottom: -.3em;
@@ -16,7 +16,7 @@
   }
 
   .selectedEmo:before {
-    border-top: .1em solid rgb(13, 27, 73);
+    border-top: .1em solid rgb(224, 219, 209);
     border-radius: .5em;
     content: '';
     height: 1em;

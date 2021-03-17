@@ -4,61 +4,85 @@ import UserContext from './UserContext';
 
 import NavBar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import { LinkContainer } from 'react-router-bootstrap'
 
 function Navigation({ logout }) {
 
     const { loggedInUser } = useContext(UserContext);
+    console.log('in the nav outside of the functions', loggedInUser)
 
 
 
     function loggedOutNav() {
+
+        console.log('in the navigation logged out', loggedInUser)
         return (
             
             <Nav className='ml-auto'>
-            <Nav.Item>
-                <Nav.Link href="/inspiration">Get Some Inspiration</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link href="/login">Login</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link href="/signup">Signup</Nav.Link>
-            </Nav.Item>
+                <LinkContainer to="/inspiration">
+                    
+                        <Nav.Link >Get Some Inspiration</Nav.Link>
+                    
+                </LinkContainer>
+                <LinkContainer to="/login">
+                    
+                        <Nav.Link>Login</Nav.Link>
+                    
+                </LinkContainer>
+            <LinkContainer to="/signup">
+                
+                    <Nav.Link>Signup</Nav.Link>
+                
+                </LinkContainer>
         </Nav>
 
         )
     }
 
     function loggedInNav() {
+
+        console.log('in the navigation logged in', loggedInUser)
         return (
             <Nav className='ml-auto'>
-            <Nav.Item>
-                <Nav.Link href="/inspiration">Get Some Inspiration</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link href="/today">Today</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-                <Nav.Link href="/calendar">Calendar</Nav.Link>
-            </Nav.Item>
+                <LinkContainer to="/inspiration">
+                    
+                        <Nav.Link>Get Some Inspiration</Nav.Link>
+                    
+                </LinkContainer>
+                <LinkContainer to="/today">
+                    
+                        <Nav.Link >Today</Nav.Link>
+                    
+                </LinkContainer>
+                <LinkContainer to="/calendar">
+                    
+                        <Nav.Link>Calendar</Nav.Link>
+                    
+                </LinkContainer>
             {/* think about adding a profile option here */}
             {/* need a link ot the admin page if user is admin */}
             {loggedInUser.is_admin 
-            ?   <Nav.Item>
-                    <Nav.Link href="/admin">Admin</Nav.Link>
-                </Nav.Item>
+            ?   <LinkContainer to="/admin">
+                    
+                        <Nav.Link>Admin</Nav.Link>
+                    
+                </LinkContainer>
             : null}
-            <Nav.Item>
-                <Nav.Link onClick={logout}>Logout</Nav.Link>
-            </Nav.Item>
+                <LinkContainer to="/">
+                    
+                        <Nav.Link onSelect={logout}>Logout</Nav.Link>
+                    
+                </LinkContainer>
         </Nav>
 
         )
     }
 
     return (
-        <NavBar bg='primary' variant='dark'>
-            <NavBar.Brand href='/' >EMOTIONAL CHRONICLES</NavBar.Brand>
+        <NavBar bg='dark' variant='dark'>
+            <LinkContainer to='/'>
+                <NavBar.Brand>EMOTIONAL CHRONICLES</NavBar.Brand>
+            </LinkContainer>
             {loggedInUser ? loggedInNav() : loggedOutNav()}
         </NavBar>
 

@@ -8,6 +8,8 @@ function useLocalStorage(key, value = null) {
     const [storage, setStorage] = useState(valueData);
 
     useEffect(() => {
+
+        
         if (!storage) {
             localStorage.removeItem(key);
         } else {

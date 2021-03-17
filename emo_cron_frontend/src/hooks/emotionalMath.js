@@ -1,3 +1,14 @@
+const emotionObj = {
+    'joy': ['serenity', 'joy', 'ecstasy'],
+    'sadness': ['pensiveness', 'sadness', 'grief'],
+    'fear': ['apprehension', 'fear', 'terror'],
+    'surprise': ['distraction', 'surprise', 'amazement'],
+    'anger': ['distraction', 'surprise', 'amazement'],
+    'anticipation': ['interest', 'anticipation', 'vigilance'],
+    'disgust': ['boredom', 'disgust', 'loathing'],
+    'trust': ['acceptance', 'trust', 'admiration'],
+    'no_emotion': ['emotionlessness']
+} 
 
 
 
@@ -5,32 +16,21 @@ export default function emotionMath(emoData) {
     
     let mathedEmotions = [];
 
-    const emotionObj = {
-        'joy': ['serenity', 'joy', 'ecstasy'],
-        'sadness': ['pensiveness', 'sadness', 'grief'],
-        'fear': ['apprehension', 'fear', 'terror'],
-        'surprise': ['distraction', 'surprise', 'amazement'],
-        'anger': ['distraction', 'surprise', 'amazement'],
-        'anticipation': ['interest', 'anticipation', 'vigilance'],
-        'disgust': ['boredom', 'disgust', 'loathing'],
-        'trust': ['acceptance', 'trust', 'admiration'],
-        'no_emotion': ['emotionlessness']
-    } 
 
     // let { joy, sadness, fear, anger, anticipation, disgust, trust, no_emotion } = emoData;
 
     Object.keys(emotionObj).forEach(val => {
-        if (val === 'no_emotion' && emoData[val] > 0.65) {
+        if (val === 'no_emotion' && emoData[val] >= 0.65) {
             mathedEmotions.push(emotionObj[val][0])
         } else {
-            if (emoData[val] > 0.5 && emoData[val] < .65) {
+            if (emoData[val] > 0.5 && emoData[val] <= .65) {
                 mathedEmotions.push(emotionObj[val][0])
             }
-            if (emoData[val] > 0.65 && emoData[val] < .8) {
+            if (emoData[val] > 0.65 && emoData[val] <= .8) {
                 mathedEmotions.push(emotionObj[val][1])
             }
             if (emoData[val] > 0.8) {
-                mathedEmotions.push(emotionObj[val][0])
+                mathedEmotions.push(emotionObj[val][2])
             }
 
         }

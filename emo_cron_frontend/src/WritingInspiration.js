@@ -40,11 +40,11 @@ function WritingInspiration({ inspiration, setInspiration }) {
 
     return (
 
-        <Card className='m-4'>
+        <Card className='m-4 shadow'>
             <Card.Body>
                 <Card.Header>Something to inspire you...</Card.Header>
                 <Card.Text className='display-4'>{inspiration.inspiration}</Card.Text>
-                <Button className='mb-4' variant='primary' onClick={getInspiration}>GET MORE INSPIRATION</Button>
+                <Button className='mb-4' variant='dark' onClick={getInspiration}>GET MORE INSPIRATION</Button>
                 <Card.Footer>
                     <Card.Text>Share some inspiration...</Card.Text>
                     <Form inline onSubmit={handleSubmit}>
@@ -55,7 +55,7 @@ function WritingInspiration({ inspiration, setInspiration }) {
                             value={insp}
                             onChange={handleChange}
                         />
-                        <Button className='ml-2' variant='secondary' type='submit'>SHARE</Button>
+                        <Button className='ml-2' variant='dark' type='submit'>SHARE</Button>
                     </Form>
                     {inspMessage 
                     ? <Card.Text>{inspMessage}</Card.Text>

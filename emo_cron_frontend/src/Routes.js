@@ -12,7 +12,9 @@ import Entry from './Entry';
 import PrivateRoute from'./PrivateRoutes';
 
 
-function Routes ({setToken}) {
+function Routes ({ setToken }) {
+    
+    
     return (
         <div>
             <Switch>

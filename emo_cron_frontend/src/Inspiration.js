@@ -73,7 +73,7 @@ function Inspiration () {
 
                 </ListGroup>
 
-                <Button className='mb-4' variant='primary' onClick={getInspiration}>GET MORE INSPIRATION</Button>
+                <Button className='mb-4' variant='dark' onClick={getInspiration}>GET MORE INSPIRATION</Button>
                 {loggedInUser 
                     ?   <Card.Footer>
                             <Card.Text>Share some inspiration...</Card.Text>
@@ -85,7 +85,7 @@ function Inspiration () {
                                         value={insp}
                                         onChange={handleChange}
                                     />
-                                    <Button className='ml-2 shadow' variant='secondary' type='submit'>SHARE</Button>
+                                    <Button className='ml-2 shadow' variant='dark' type='submit'>SHARE</Button>
                                 </Form>
                                 {inspMessage 
                                 ? <Card.Text>{inspMessage}</Card.Text>

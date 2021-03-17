@@ -12,6 +12,8 @@ import Button from 'react-bootstrap/Button';
 import ECApi from './ECApi';
 import UserContext from './UserContext';
 
+import './Diary.css';
+
 function Diary () {
 
     const history = useHistory()
@@ -64,10 +66,11 @@ function Diary () {
 
     return (
         <Container className='justify-content-center m-5'>
-            <FeelingsCloud className='m-5' feelings={feelings} setFeelings={setFeelings} />
-            <WritingPrompt className='m-5' prompt={prompt} setPrompt={setPrompt} />
-            <Form className='m-4' onSubmit={handleSubmit}>
+            <FeelingsCloud className='m-4' feelings={feelings} setFeelings={setFeelings} />
+            <WritingPrompt prompt={prompt} setPrompt={setPrompt} />
+            <Form className='m-4 shadow' onSubmit={handleSubmit}>
                 <Form.Group controlId='diaryEntry'>
+                    <div  id='pattern'>
                     <Form.Control 
                           as='textarea'
                           type='text'
@@ -77,9 +80,13 @@ function Diary () {
                           rows={20}
                     />
 
+                    </div>
+
                 </Form.Group>
+                
                 <Button
-                    variant='primary'
+                    className='mb-4'
+                    variant='dark'
                     type='submit'
                     onClick={handleSubmit}
                 >
@@ -87,7 +94,7 @@ function Diary () {
                 </Button>
             </Form>
             <WritingInspiration 
-                className='m5' 
+                className='m-4 shadow' 
                 inspiration={inspiration}
                  setInspiration={setInspiration} />
         </Container>

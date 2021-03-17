@@ -134,7 +134,7 @@ function Signup ({setToken}) {
                             </Form.Text>
                         </Form.Group>
                         <Button
-                            variant='primary'
+                            variant='dark'
                             type='submit'
                             onSubmit={handleSubmit}
                         >
