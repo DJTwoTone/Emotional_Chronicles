@@ -8,13 +8,15 @@ import Button from 'react-bootstrap/Button';
 
 function Admin () {
 
-    const [flaggedInspiration, setFlaggedInspiration] = useState({})
+    const [flaggedInspiration, setFlaggedInspiration] = useState([])
+    const [inspirationMessage, setInspirationMessage] = useState('')
     const [message, setMessage] = useState('');
 
     async function getFlaggedInspiration() {
         const returnedFlagged = await ECApi.getFlaggedInspiration();
         console.log('flagged inspiration', returnedFlagged)
-        setFlaggedInspiration(returnedFlagged)
+        setFlaggedInspiration(returnedFlagged.flagged)
+        setInspirationMessage(returnedFlagged.message)
     }
     
     useEffect(() => {
@@ -48,24 +50,30 @@ function Admin () {
 
     return (
         <Container fluid className=' justify-content-center m-2'> 
-            <h2>{flaggedInspiration.message}</h2>
+            <h2>{inspirationMessage}</h2>
             <p>{message}</p>
             
-            <ListGroup>
+        {flaggedInspiration 
+        
+            ?<ListGroup>
             
-            {flaggedInspiration.flagged.map(inspire => (
+            {flaggedInspiration.map(inspire => (
             <ListGroup.Item
                 key={inspire.id}
                 name={inspire.id}
+                className='m-4 shadow'
             >
                 {inspire.inspiration}
-                <Button variant='success' name={inspire.id} onClick={handleApprove}>Approve</Button>
-                <Button variant='warning' name={inspire.id} onClick={handleDelete}>Delete</Button>
+                <Button variant='success' className='mx-3' name={inspire.id} onClick={handleApprove}>Approve</Button>
+                <Button variant='warning'  name={inspire.id} onClick={handleDelete}>Delete</Button>
     
             </ListGroup.Item>
         ))}
 
         </ListGroup>
+            : null
+        }
+
 
         </Container>
         )

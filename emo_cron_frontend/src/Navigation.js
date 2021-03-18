@@ -9,13 +9,13 @@ import { LinkContainer } from 'react-router-bootstrap'
 function Navigation({ logout }) {
 
     const { loggedInUser } = useContext(UserContext);
-    console.log('in the nav outside of the functions', loggedInUser)
+    // console.log('in the nav outside of the functions', loggedInUser)
 
 
 
     function loggedOutNav() {
 
-        console.log('in the navigation logged out', loggedInUser)
+        // console.log('in the navigation logged out', loggedInUser)
         return (
             
             <Nav className='ml-auto'>
@@ -41,7 +41,7 @@ function Navigation({ logout }) {
 
     function loggedInNav() {
 
-        console.log('in the navigation logged in', loggedInUser)
+        // console.log('in the navigation logged in', loggedInUser)
         return (
             <Nav className='ml-auto'>
                 <LinkContainer to="/inspiration">
