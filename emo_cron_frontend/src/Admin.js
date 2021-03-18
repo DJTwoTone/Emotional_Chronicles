@@ -61,7 +61,7 @@ function Admin () {
             <ListGroup.Item
                 key={inspire.id}
                 name={inspire.id}
-                className='m-4 shadow'
+                className='m-4 shadow border border-dark border-3 rounded'
             >
                 {inspire.inspiration}
                 <Button variant='success' className='mx-3' name={inspire.id} onClick={handleApprove}>Approve</Button>
