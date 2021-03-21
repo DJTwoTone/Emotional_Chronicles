@@ -4,8 +4,7 @@ const ExpressError = require('../helpers/ExpressError');
 
 function authUser(req, res, next) {
     try {
-
-        const token = req.headers.authorization.split(' ')[1];
+        const token = req.body._token;
 
         jwt.verify(token, SECRET_KEY);
         return next();
@@ -17,7 +16,7 @@ function authUser(req, res, next) {
 
 function authAdmin(req, res, next) {
     try {
-        const submittedToken = req.headers.authorization.split(' ')[1];
+        const submittedToken = req.body._token;
 
         const token = jwt.verify(submittedToken, SECRET_KEY);
 
@@ -34,9 +33,7 @@ function authAdmin(req, res, next) {
 function checkCorrectUser(req, res, next) {
     try {
 
-        const submittedToken = req.headers.authorization.split(' ')[1];
-
-        console.log(jwt.verify(submittedToken, SECRET_KEY))
+        const submittedToken = req.body._token;
 
         let token = jwt.verify(submittedToken, SECRET_KEY);
 

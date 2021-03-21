@@ -50,15 +50,19 @@ router.post('/', async function (req, res, next) {
     }
 })
 
+//The PATCH and DELETE routes have not been implimented on the frontend.
+//This is because there functionality has not yet been decided.
+//However, they do work and are tested in a very basic form
+
 router.patch('/:username', checkCorrectUser, async function (req, res, next) {
 
     try {
 
-        if('username' in req.body) {
+        if ('username' in req.body) {
             throw new ExpressError("Sorry, you are not allowed to change your username", 400);
         }
 
-        if('is_admin' in req.body) {
+        if ('is_admin' in req.body) {
             throw new ExpressError("Sorry, you are not allowed to change your adminstrative privledges", 400);
         }
 

@@ -14,9 +14,9 @@ class ECApi {
         let _token = localStorage.getItem(LOCAL_STORAGE_TOKEN_ID)
 
         const url = `${BASE_URL}/${endpoint}`;
-        const headers = { Authorization: `Bearer ${_token}` };
+        // const headers = { Authorization: `Bearer ${_token}` };
         const params = (method === "get") 
-            ? data
+            ? {...data, _token}
             : {};
 
         try {

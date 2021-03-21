@@ -12,9 +12,9 @@ function partialUpdateSQL(table, items, key, id) {
     for (let column in items) {
         let c = '';
         if (column === 'firstName') {
-            c = first_name;
+            c = 'first_name';
         } else if (column === 'lastName') {
-            c = last_name;
+            c = 'last_name';
         } else {
             c = column;
         }
