@@ -70,107 +70,107 @@ afterAll(async function() {
     }
 })
 
-// describe('test GET routes for users', () => {
+describe('test GET routes for users', () => {
     
-//     test('gets a single user', async function() {
+    test('gets a single user', async function() {
         
-//         const responce = await request(app)
-//         .get(`/users/${testData.user.username}`)
-//         .send({_token: testData.user.token});
+        const responce = await request(app)
+        .get(`/users/${testData.user.username}`)
+        .send({_token: testData.user.token});
 
-//         expect(responce.body.user).toHaveProperty('username');
-//         expect(responce.body.user).not.toHaveProperty('password');
-//         expect(responce.body.user.username).toBe('testuser')
-//     })
+        expect(responce.body.user).toHaveProperty('username');
+        expect(responce.body.user).not.toHaveProperty('password');
+        expect(responce.body.user.username).toBe('testuser')
+    })
 
-//     test('gets a single admin', async function() {
+    test('gets a single admin', async function() {
         
-//         const responce = await request(app)
-//         .get(`/users/${testData.admin.username}`)
-//         .send({_token: testData.admin.token});
+        const responce = await request(app)
+        .get(`/users/${testData.admin.username}`)
+        .send({_token: testData.admin.token});
 
-//         expect(responce.body.user).toHaveProperty('username');
-//         expect(responce.body.user).not.toHaveProperty('password');
-//         expect(responce.body.user.username).toBe('testadmin')
-//         expect(responce.body.user.is_admin).toBe(true)
+        expect(responce.body.user).toHaveProperty('username');
+        expect(responce.body.user).not.toHaveProperty('password');
+        expect(responce.body.user.username).toBe('testadmin')
+        expect(responce.body.user.is_admin).toBe(true)
 
-//     })
+    })
 
-//     test('404 error if cannot find user', async function() {
+    test('404 error if cannot find user', async function() {
         
-//         const responce = await request(app)
-//         .get(`/users/notauser`)
-//         .send({_token: testData.admin.token});
+        const responce = await request(app)
+        .get(`/users/notauser`)
+        .send({_token: testData.admin.token});
 
-//         expect(responce.statusCode).toBe(404)
-//     })
+        expect(responce.statusCode).toBe(404)
+    })
 
-//     test('reject get request with a wrong token', async function() {
-//         const responce = await request(app)
-//         .get(`/users/${testData.user.username}`)
-//         .send({_token: 'xxx'})
-//         expect(responce.statusCode).toBe(401)
-//         expect(responce.body.message).toBe("It appears you shouldn't be here. Couldn't be authenticated")
-//     })
-// })
+    test('reject get request with a wrong token', async function() {
+        const responce = await request(app)
+        .get(`/users/${testData.user.username}`)
+        .send({_token: 'xxx'})
+        expect(responce.statusCode).toBe(401)
+        expect(responce.body.message).toBe("It appears you shouldn't be here. Couldn't be authenticated")
+    })
+})
 
-// describe('test POST routes from users', () => {
+describe('test POST routes from users', () => {
 
-//     test('creates a new user', async function() {
-//         const newUser = {
-//             username: 'newtestuser',
-//             firstName: 'Bob',
-//             lastName: 'Testface',
-//             password: 'password',
-//             email: 'newtester@test.test'
-//         }
+    test('creates a new user', async function() {
+        const newUser = {
+            username: 'newtestuser',
+            firstName: 'Bob',
+            lastName: 'Testface',
+            password: 'password',
+            email: 'newtester@test.test'
+        }
 
-//         const responce = await request(app)
-//         .post('/users')
-//         .send(newUser);
+        const responce = await request(app)
+        .post('/users')
+        .send(newUser);
 
-//         expect(responce.statusCode).toBe(201)
-//         expect(responce.body).toHaveProperty('token');
+        expect(responce.statusCode).toBe(201)
+        expect(responce.body).toHaveProperty('token');
 
-//         const bob = await User.getUser('newtestuser');
+        const bob = await User.getUser('newtestuser');
         
-//         expect(newUser['firstName']).toEqual(bob['first_name']);
-//         expect(newUser['lastName']).toEqual(bob['last_name']);
-//         expect(newUser['email']).toEqual(bob['email']);
+        expect(newUser['firstName']).toEqual(bob['first_name']);
+        expect(newUser['lastName']).toEqual(bob['last_name']);
+        expect(newUser['email']).toEqual(bob['email']);
         
         
-//     })
+    })
 
-//     test('cannot create a user with a used user name', async function() {
-//         const response = await request(app)
-//         .post('/users')
-//         .send({
-//             username: 'testuser',
-//             firstName: 'Tim',
-//             lastName: 'Testface',
-//             password: 'password',
-//             email: 'cannotbetester@test.test'
-//         })
+    test('cannot create a user with a used user name', async function() {
+        const response = await request(app)
+        .post('/users')
+        .send({
+            username: 'testuser',
+            firstName: 'Tim',
+            lastName: 'Testface',
+            password: 'password',
+            email: 'cannotbetester@test.test'
+        })
 
-//         expect(response.statusCode).toBe(400)
-//     })
+        expect(response.statusCode).toBe(400)
+    })
 
-//     test('must have a password to create a user', async function() {
-//         const responce = await request(app)
-//         .post('/users')
-//         .send({
-//             username: 'theblackknight',
-//             firstName: 'Monty',
-//             lastName: 'Testface',
-//             email: 'justascratch@test.test'
-//         })
-//     })
+    test('must have a password to create a user', async function() {
+        const responce = await request(app)
+        .post('/users')
+        .send({
+            username: 'theblackknight',
+            firstName: 'Monty',
+            lastName: 'Testface',
+            email: 'justascratch@test.test'
+        })
+    })
   
-// })
+})
 
 
-    //The following routes have not been fully implimented, but may be in the future
-    //They are tested here to speed that implimentation when needed
+    // The following routes have not been fully implimented, but may be in the future
+    // They are tested here to speed that implimentation when needed
 
 describe("test PATCH routes for users", () => {
 
@@ -244,5 +244,78 @@ describe("test PATCH routes for users", () => {
 
         expect(responce.statusCode).toBe(400);
     })
+
+    test("prevents editing other users data", async function() {
+        const responce = await request(app)
+        .patch(`/users/${testData.user.username}`)
+        .send({
+            password: 'qwerty',
+            _token: testData.admin.token
+        })
+
+        expect(responce.statusCode).toBe(401);
+        expect(responce.body.message).toBe("It appears you shouldn't be here. You shouldn't play in other people's accounts");
+    })
+
+    test("404 error if cannot find user", async function() {
+        await request(app)
+        .delete(`/users/${testData.user.username}`)
+        .send({
+            _token: testData.user.token
+        })
+        
+        
+        const responce = await request(app)
+        .patch(`/users/${testData.user.username}`)
+        .send({
+            password: 'qwerty',
+            _token: testData.user.token
+        })
+
+        expect(responce.statusCode).toBe(404);
+    })
+
+})
+
+describe("test PATCH routes for users", () => {
+
+    test('delete a user', async function() {
+        const responce = await request(app)
+        .delete(`/users/${testData.user.username}`)
+        .send({
+            _token: testData.user.token
+        })
+
+        expect(responce.body.message).toBe(`You have successfully deleted your account for "${testData.user.username}"`)
+    })
+
+    test('prevents users from deleting other users', async function() {
+        const responce = await request(app)
+        .delete(`/users/${testData.user.username}`)
+        .send({
+            _token: testData.admin.token
+        })
+
+        expect(responce.statusCode).toBe(401);
+        expect(responce.body.message).toBe("It appears you shouldn't be here. You shouldn't play in other people's accounts");
+    })
+
+        test("404 error if cannot find user", async function() {
+        await request(app)
+        .delete(`/users/${testData.user.username}`)
+        .send({
+            _token: testData.user.token
+        })
+        
+        const responce = await request(app)
+        .delete(`/users/${testData.user.username}`)
+        .send({
+            _token: testData.user.token
+        })
+
+        expect(responce.statusCode).toBe(404);
+    })
+
+
 
 })

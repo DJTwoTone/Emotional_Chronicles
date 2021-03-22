@@ -60,6 +60,7 @@ class User {
         let { query, values } = partialUpdateSQL("users", data, "username", username);
 
         const res = await db.query(query, values);
+        
         const user = res.rows[0];
 
         delete user.password;

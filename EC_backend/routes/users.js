@@ -3,6 +3,8 @@ const ExpressError = require('../helpers/expressError');
 const User = require('../models/user');
 const createToken = require('../helpers/authToken');
 const { authUser, checkCorrectUser } = require('../middleware/auth')
+const jsonschema = require('jsonschema');
+const { newUserSchema, updateUserSchema } = require('../schemas');
 
 const router = express.Router();
 
@@ -40,6 +42,12 @@ router.post('/', async function (req, res, next) {
             throw new ExpressError(`Sorry, but "${username}" is already being used, Please select a different username`, 400);
         } 
 
+        const validation = jsonschema.validate(req.body, newUserSchema);
+
+        if (!validation.valid) {
+            throw new ExpressError(validation.errors.map(e => e.stack), 400)
+        }
+
         const user = await User.register(req.body);
 
         const token = createToken(user);
@@ -72,6 +80,12 @@ router.patch('/:username', checkCorrectUser, async function (req, res, next) {
 
         if (!check) {
             throw new ExpressError(`It seems the username "${username}" does not exist`, 404);
+        }
+
+        const validation = jsonschema.validate(req.body, updateUserSchema);
+        console.log(validation)
+        if (!validation.valid) {
+            throw new ExpressError(validation.errors.map(e => e.stack), 400)
         }
 
         const user = await User.updateUser(username, req.body);

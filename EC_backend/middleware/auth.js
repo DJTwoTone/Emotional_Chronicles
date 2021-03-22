@@ -44,7 +44,7 @@ function checkCorrectUser(req, res, next) {
         throw new Error();
         
     } catch (e) {
-        return next(new ExpressError("It appears you shouldn't be here. Couldn't be authenticated", 401));
+        return next(new ExpressError("It appears you shouldn't be here. You shouldn't play in other people's accounts", 401));
     }
 }
 
