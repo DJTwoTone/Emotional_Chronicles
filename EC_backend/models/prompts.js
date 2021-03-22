@@ -1,6 +1,5 @@
 const db = require('../db');
 
-
 class Prompts {
 
     static async getPrompts(num) {
@@ -28,6 +27,7 @@ class Prompts {
     }
 
     static async addPrompt(prompt, flagged) {
+        
         const res = await db.query(
             `INSERT into prompts_list (prompt, flagged)
             VALUES ($1, $2)

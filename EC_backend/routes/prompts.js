@@ -1,9 +1,12 @@
 //add express custom errors
 
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const ExpressError = require('../helpers/ExpressError');
 const Prompts = require('../models/prompts');
 const { authUser, authAdmin } = require('../middleware/auth');
+const { SECRET_KEY } = require('../config');
+
 
 const router = express.Router();
 
@@ -12,7 +15,7 @@ const router = express.Router();
 router.get('/flagged', authAdmin, async function (req, res, next) {
     try {
 
-        const prompts = await Resources.getFlaggedPrompts();
+        const prompts = await Prompts.getFlaggedPrompts();
 
         return res.json({prompts})
 
@@ -42,11 +45,13 @@ router.post('/', authUser, async function (req, res, next) {
     try {
         const prompt = req.body.prompt;
 
-        const flagged = req.body.is_admin ? false : true;
+        const token = req.body._token;
+
+        const flagged = jwt.verify(token, SECRET_KEY).is_admin ? false : true;
 
         const addedPrompt = await Prompts.addPrompt(prompt, flagged);
         
-        return res.json({addedPrompt})
+        return res.json({ prompt: addedPrompt })
 
     } catch (e) {
         return next(e);
@@ -58,7 +63,9 @@ router.patch('/:id', authUser, async function (req, res, next) {
 
         const id = req.params.id;
 
-        const changeFlagTo = req.body.is_admin ? true : false;
+        const token = req.body._token;
+
+        const changeFlagTo = jwt.verify(token, SECRET_KEY).is_admin ? false : true;;
 
         const prompt = await Prompts.changePromptFlag(id, changeFlagTo);
 
@@ -73,7 +80,6 @@ router.delete('/:id', authAdmin, async function (req, res, next) {
     try {
 
         const id = req.params.id;
-        console.log(id);
 
         await Prompts.deletePrompt(id)
         
