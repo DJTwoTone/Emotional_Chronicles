@@ -1,15 +1,17 @@
 //add express custom errors
 
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const ExpressError = require('../helpers/ExpressError');
 const Inspirations = require('../models/inspirations');
 const { authUser, authAdmin } = require('../middleware/auth');
+const { SECRET_KEY } = require('../config');
 
 const router = express.Router();
 
 
 //inspirations routes
-router.get('/flagged', async function(req, res, next) {
+router.get('/flagged', authAdmin, async function(req, res, next) {
     try {
 
         const inspirations = await Inspirations.getFlaggedInspirations();
@@ -45,7 +47,9 @@ router.post('/', authUser, async function (req, res, next) {
     try {
         const inspiration = req.body.inspiration;
 
-        const flagged = req.body.is_admin ? false : true;
+        const token = req.body._token;
+
+        const flagged = jwt.verify(token, SECRET_KEY).is_admin ? false : true;
 
         const addedInspiration = await Inspirations.addInspiration(inspiration, flagged);
 
@@ -61,7 +65,10 @@ router.patch('/:id', authUser, async function (req, res, next) {
         
         const id = req.params.id;
 
-        const changeFlagTo = req.body.is_admin ? true : false;
+        const token = req.body._token;
+
+        const changeFlagTo = jwt.verify(token, SECRET_KEY).is_admin ? false : true;;
+
 
         const inspiration = await Inspirations.changeInspirationFlag(id, changeFlagTo);
 

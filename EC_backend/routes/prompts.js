@@ -17,7 +17,7 @@ router.get('/flagged', authAdmin, async function (req, res, next) {
 
         const prompts = await Prompts.getFlaggedPrompts();
 
-        return res.json({prompts})
+        return res.json({ prompts })
 
     } catch (e) {
         return next(e);
@@ -31,7 +31,7 @@ router.get('/', async function (req, res, next) {
 
         const prompts = await Prompts.getPrompts(num);
 
-        return res.json({prompts})
+        return res.json({ prompts })
 
     } catch (e) {
         return next(e);
