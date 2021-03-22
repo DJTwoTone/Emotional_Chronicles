@@ -89,7 +89,6 @@ afterEach(async function() {
     try {
         await db.query('DELETE FROM users')
         await db.query('DELETE FROM inspirations')
-        //OMG!!! NEVER EVER FORGET THIS!!!
         await db.query('ALTER SEQUENCE inspirations_id_seq RESTART WITH 1')
 
         testData = {}

@@ -13,10 +13,9 @@ router.get('/', async function (req, res, next) {
     try {
         const num = req.query.num || 1;
 
-        
         const emotions = await Emotions.getEmotions(num);
         
-        return res.json({emotions});
+        return res.json({ emotions });
         
     } catch (e) {
         return next(e)
