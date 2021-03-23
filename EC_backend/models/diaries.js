@@ -11,10 +11,12 @@ class Diaries {
     //check if today's entry exists
     static async checkToday(username, today) {
 
+        const date = DateTime.fromISO(today).toUTC()
+
         const res = await db.query(
             `SELECT *
             FROM diary_entries
-            WHERE username = $1 AND date = $2`, [username, today]
+            WHERE username = $1 AND date = $2`, [username, date]
         )
 
         if (res.rows[0]) {
@@ -113,18 +115,13 @@ class Diaries {
         
         
         let dateObj = DateTime.fromISO(date);
-        let year = dateObj.year;
-        
-        let month = dateObj.month;
-        
-        let day = dateObj.day;
-        console.log('date in the model', dateObj)
+        const utcDate = dateObj.toUTC()
         
         let res = await db.query(
             `SELECT *
             FROM diary_entries
             WHERE username = $1 AND date = $2 `, 
-            [username, `${year}-${month}-${day}`]
+            [username, utcDate]
         );
         // let res = await db.query(
         //     `SELECT *
@@ -182,14 +179,22 @@ class Diaries {
         //Warning Off by 1 error likely here
         const month = dateObj.month
 
-        console.log('date', dateObj, 'year', year, 'month', month, username)
+        const start = dateObj.startOf('month').toUTC()
+        const end = dateObj.endOf('month').toUTC();
+        // console.log('date', dateObj, 'year', year, 'month', month, username)
 
         const res = await db.query(
             `SELECT *
             FROM diary_entries
-            WHERE "username" = $1 AND date_part('month', date) = $2 AND date_part('year', date) = $3`, 
-            [username, month, year]
+            WHERE "username" = $1 AND date BETWEEN $2 AND $3`, 
+            [username, start, end]
         );
+        // const res = await db.query(
+        //     `SELECT *
+        //     FROM diary_entries
+        //     WHERE "username" = $1 AND date_part('month', date) = $2 AND date_part('year', date) = $3`, 
+        //     [username, month, year]
+        // );
 
         // console.log('res in the model',res)
 
