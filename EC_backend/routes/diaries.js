@@ -12,12 +12,8 @@ router.get('/:username/:date/check', checkCorrectUser, async function(req, res, 
     try {
 
         let check = await Diaries.checkToday(username, date)
-
-        if (check) {
-            return true;
-        }
-
-        return false
+        
+        return res.json({date, "entered": check})
         
     } catch (e) {
         return next(e)
@@ -29,7 +25,6 @@ router.get('/:username/:date/check', checkCorrectUser, async function(req, res, 
 router.get('/:username/:date', checkCorrectUser, async function(req, res, next) {
     try {
         const entryDate = req.params.date;
-        // console.log('date in the route', entryDate)
         const username = req.params.username;
         const entry = await Diaries.getEntry(username, entryDate);
 

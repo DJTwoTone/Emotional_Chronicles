@@ -3,22 +3,19 @@
 //one entry
 
 const db = require('../db');
+const { DateTime } = require("luxon");
 
 class Diaries {
 
 
     //check if today's entry exists
     static async checkToday(username, today) {
-        // console.log('username', username);
-        // console.log('today', today);
+
         const res = await db.query(
             `SELECT *
             FROM diary_entries
             WHERE username = $1 AND date = $2`, [username, today]
         )
-
-        // console.log(res.rows)
-
 
         if (res.rows[0]) {
             return true;
@@ -115,23 +112,30 @@ class Diaries {
     static async getEntry(username, date) {
         
         
-        let dateObj = new Date(date);
+        let dateObj = DateTime.fromISO(date);
+        let year = dateObj.year;
+        
+        let month = dateObj.month;
+        
+        let day = dateObj.day;
         console.log('date in the model', dateObj)
-        let year = dateObj.getFullYear();
-        //Warning Off by 1 error likely here
-        let month = dateObj.getMonth() + 1;
-        let day = dateObj.getDate() + 1;
         
         let res = await db.query(
             `SELECT *
             FROM diary_entries
-            WHERE username = $1 AND date_part('month', date) = $2 AND date_part('year', date) = $3 AND date_part('day', date) = $4`, 
-            [username, month, year, day]
+            WHERE username = $1 AND date = $2 `, 
+            [username, `${year}-${month}-${day}`]
         );
+        // let res = await db.query(
+        //     `SELECT *
+        //     FROM diary_entries
+        //     WHERE username = $1 AND date_part('month', date) = $2 AND date_part('year', date) = $3 AND date_part('day', date) = $4`, 
+        //     [username, month, year, day]
+        // );
 
 
         //get the emotions
-        console.log(res.rows[0])
+        // console.log('THE DB SEARCH', res.rows)
 
         if (!res.rows[0]) return {}
         
@@ -173,10 +177,10 @@ class Diaries {
     }
 
     static async getMonth(username, dateInMonth) {
-        const dateObj = new Date(dateInMonth)
-        const year = dateObj.getFullYear()
+        let dateObj = DateTime.fromISO(dateInMonth)
+        const year = dateObj.year
         //Warning Off by 1 error likely here
-        const month = dateObj.getMonth() + 1
+        const month = dateObj.month
 
         console.log('date', dateObj, 'year', year, 'month', month, username)
 
