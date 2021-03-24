@@ -1,5 +1,6 @@
 const express = require('express');
 const ExpressError = require('../helpers/expressError');
+const { DateTime } = require("luxon")
 const symantoCall = require('../helpers/symantoCall');
 const Diaries = require('../models/diaries');
 const { authUser, checkCorrectUser } = require('../middleware/auth');
@@ -60,11 +61,11 @@ router.get('/:username/month/:date', checkCorrectUser, async function(req, res, 
 
 router.get('/:username', checkCorrectUser, async function (req, res, next) {
     try {
-        const username = req.body.username;
+        const username = req.params.username;
 
         const entries = await Diaries.getEntries(username);
         
-        return res.json({ ...entries });
+        return res.json({ entries });
 
     } catch (e) {
         return next(e);
@@ -80,7 +81,7 @@ router.post('/:username', authUser, async function (req, res, next) {
         const username = req.params.username;
 
      
-        const today = new Date().toISOString().split('T')[0];
+        const today = DateTime.now().toISODate();
 
         const check = await Diaries.checkToday(username, today);
 
@@ -98,7 +99,7 @@ router.post('/:username', authUser, async function (req, res, next) {
         }, {});
 
         
-        const data = {username, diaryentry, ...emopredictions, emotions, prompt_id, inspiration_id}
+        const data = {username, diaryentry, ...emopredictions, emotions, prompt_id, inspiration_id, today}
         // console.log(data)
 
         const entry = await Diaries.addEntry(data)

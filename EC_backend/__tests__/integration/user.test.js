@@ -1,3 +1,5 @@
+//You need a database called emo-chron-test
+
 // const request = require('supertest');
 // const jwt = require('jsonwebtoken');
 // const bcrypt = require('bcrypt');

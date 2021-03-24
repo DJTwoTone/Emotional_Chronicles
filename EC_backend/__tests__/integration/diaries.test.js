@@ -1,39 +1,4 @@
-// symantoCall = jest.fn(() => [
-//     {
-//         "id": null,
-//         "predictions": [
-//             {
-//                 "prediction": "joy",
-//                 "probability": 0.123
-//             },
-//             {
-//                 "prediction": "no-emotion",
-//                 "probability": 0.234
-//             },
-//             {
-//                 "prediction": "sadness",
-//                 "probability": 0.345
-//             },
-//             {
-//                 "prediction": "fear",
-//                 "probability": 0.543
-//             },
-//             {
-//                 "prediction": "surprise",
-//                 "probability": 0.963
-//             },
-//             {
-//                 "prediction": "anger",
-//                 "probability": 0.741
-//             },
-//             {
-//                 "prediction": "disgust",
-//                 "probability": 0.753
-//             }
-
-//         ]
-//     }
-// ])
+//You need a database called emo-chron-test
 
 const request = require('supertest');
 const bcrypt = require('bcrypt');
@@ -42,11 +7,22 @@ const app = require('../../app');
 const db = require('../../db');
 const Diaries = require('../../models/diaries');
 
+const nock = require('nock')
+
+// const symantoAPI = nock('https://api.symanto.net/', {
+//     reqheaders: {
+//         'x-api-key': 'API_KEY',
+//         'Content-Type': 'application/json'
+//     }
+//   })
+
+
+const API_KEY = process.env.API_KEY;
+const gettysburg = "Four score and seven years ago our fathers brought forth, upon this continent, a new nation, conceived in liberty, and dedicated to the proposition that all men are created equal. Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived, and so dedicated, can long endure."
 let testData = {}
 
 beforeEach(async function() {
     try {
-        // jest.setTimeout(20000)
         const hashedPassword = await bcrypt.hash('password', 1);
         const testUser = await db.query(
             `INSERT INTO users (username, password, first_name, last_name, email, is_admin)
@@ -159,7 +135,7 @@ beforeEach(async function() {
             `INSERT INTO emotions_list (emotion)
             VALUES ('petrified')`
         )
-
+        
         await db.query(
             `INSERT INTO emotions_list (emotion)
             VALUES ('skeptical')`
@@ -210,133 +186,118 @@ beforeEach(async function() {
             VALUES ('testuser', '777Kiicking ass and taking names', '2021-03-04T15:00:00.000Z', 4, 5, 0.568, 0.6789, 0.789, 0.4567, 0.5678, 0.789, 0.7891, 0.2586, 0.3691)`
         )
 
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('calm', 1)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('centered', 1)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('collected', 1)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('comforted', 1)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('composed', 2)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('mellow', 2)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('content', 2)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('ease', 2)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('mollified', 3)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('open', 3)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('pacified', 3)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('patient', 3)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('phlegmatic', 4)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('receptive', 4)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('relaxed', 4)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('secure', 4)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('settled', 4)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('sure', 5)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('tranquil', 5)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('sadness', 5)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('aching', 5)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('shy', 6)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('woozy', 6)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('introspective', 6)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('absorbed', 6)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('brooding', 6)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('contemplative', 7)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('engrossed', 7)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('enlightened', 7)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('inspired', 7)`
-        //     )
-        // await db.query(
-        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
-        //     VALUES ('interested', 7)`
-        //     )
-
-
-    
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('afraid', 1)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('nervous', 1)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('petrified', 1)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('uptight', 1)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('afraid', 2)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('nervous', 2)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('petrified', 2)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('uptight', 2)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('afraid', 3)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('nervous', 3)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('petrified', 3)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('uptight', 3)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('afraid', 4)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('nervous', 4)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('petrified', 4)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('uptight', 4)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('afraid', 5)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('nervous', 5)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('petrified', 5)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('uptight', 5)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('afraid', 6)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('nervous', 6)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('petrified', 6)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('uptight', 6)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('afraid', 7)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('nervous', 7)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('petrified', 7)`
+            )
+        await db.query(
+            `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+            VALUES ('uptight', 7)`
+            )
 
     } catch (error) {
         console.error('Before Each',error);
@@ -371,7 +332,7 @@ afterAll(async function() {
     }
 })
 
-describe("test GET routes for users", () => {
+describe("test GET routes for diaries", () => {
 
     test("check if a diary entry has been made for a day", async function() {
 
@@ -391,43 +352,43 @@ describe("test GET routes for users", () => {
         expect(responceFalse.body.date).toBe('2019-03-04');
     })
 
-//     test("get a diary entry for a single day", async function() {
+    test("get a diary entry for a single day", async function() {
 
-//         const responce = await request(app)
-//         .get(`/diaries/${testData.user.username}/2021-03-04`)
-//         .send({ _token: testData.user.token})
-//         expect(responce.statusCode).toBe(200);
-//         expect(responce.body.entry).toHaveProperty('entry')
-//         expect(responce.body.entry.entry).toEqual(expect.any(String))
-//         expect(responce.body.entry).toHaveProperty('date')
-//         expect(responce.body.entry.date).toEqual(expect.any(String))
-//         expect(responce.body.entry).toHaveProperty('prompt')
-//         expect(responce.body.entry.prompt).toEqual(expect.any(String))
-//         expect(responce.body.entry).toHaveProperty('inspiration')
-//         expect(responce.body.entry.inspiration).toEqual(expect.any(String))
-//         expect(responce.body.entry).toHaveProperty('emotions')
-//         expect(responce.body.entry.emotions).toEqual(expect.any(Array))
-//         expect(responce.body.entry).toHaveProperty('joy')
-//         expect(responce.body.entry.joy).toEqual(expect.any(Number))
-//         expect(responce.body.entry).toHaveProperty('surprise')
-//         expect(responce.body.entry.surprise).toEqual(expect.any(Number))
-//         expect(responce.body.entry).toHaveProperty('trust')
-//         expect(responce.body.entry.trust).toEqual(expect.any(Number))
-//     })
+        const responce = await request(app)
+        .get(`/diaries/${testData.user.username}/2021-03-04`)
+        .send({ _token: testData.user.token})
+        expect(responce.statusCode).toBe(200);
+        expect(responce.body.entry).toHaveProperty('entry')
+        expect(responce.body.entry.entry).toEqual(expect.any(String))
+        expect(responce.body.entry).toHaveProperty('date')
+        expect(responce.body.entry.date).toEqual(expect.any(String))
+        expect(responce.body.entry).toHaveProperty('prompt')
+        expect(responce.body.entry.prompt).toEqual(expect.any(String))
+        expect(responce.body.entry).toHaveProperty('inspiration')
+        expect(responce.body.entry.inspiration).toEqual(expect.any(String))
+        expect(responce.body.entry).toHaveProperty('emotions')
+        expect(responce.body.entry.emotions).toEqual(expect.any(Array))
+        expect(responce.body.entry).toHaveProperty('joy')
+        expect(responce.body.entry.joy).toEqual(expect.any(Number))
+        expect(responce.body.entry).toHaveProperty('surprise')
+        expect(responce.body.entry.surprise).toEqual(expect.any(Number))
+        expect(responce.body.entry).toHaveProperty('trust')
+        expect(responce.body.entry.trust).toEqual(expect.any(Number))
+    })
 
-//     test("get a month of user entries", async function() {
+    test("get a month of user entries", async function() {
 
-//         const responce = await request(app)
-//         .get(`/diaries/${testData.user.username}/month/2021-03-02`)
-//         .send({ _token: testData.user.token})
+        const responce = await request(app)
+        .get(`/diaries/${testData.user.username}/month/2021-03-02`)
+        .send({ _token: testData.user.token})
 
-//         expect(responce.statusCode).toBe(200);
-//         expect(responce.body.month).toEqual(expect.any(Array));
-//         expect(responce.body.month.length).toBe(4);
-//         expect(responce.body.month[0].username).toBe('testuser')
-//         expect(responce.body.month[2].username).toBe('testuser')
+        expect(responce.statusCode).toBe(200);
+        expect(responce.body.month).toEqual(expect.any(Array));
+        expect(responce.body.month.length).toBe(4);
+        expect(responce.body.month[0].username).toBe('testuser')
+        expect(responce.body.month[2].username).toBe('testuser')
 
-//     })
+    })
 
     test("get all the entries for a single user", async function() {
 
@@ -443,6 +404,75 @@ describe("test GET routes for users", () => {
 
 
     })
+
+
+})
+
+
+describe("test POST routes for diaries", () =>{
+
+    test('adds and entry to the diary', async function() {
+        
+        nock('https://api.symanto.net/ekman-emotion?all=true', {
+            reqheaders: {
+                'x-api-key': API_KEY, 
+                'Content-Type': 'application/json'
+            }
+          })
+        .post('/', JSON.stringify([{
+            "text": gettysburg,
+            "language":"en"
+        }]))        
+        .reply(201, {
+            "id": null,
+            "predictions": [
+                {
+                    "prediction": "joy",
+                    "probability": 0.123
+                },
+                {
+                    "prediction": "no-emotion",
+                    "probability": 0.234
+                },
+                {
+                    "prediction": "sadness",
+                    "probability": 0.345
+                },
+                {
+                    "prediction": "fear",
+                    "probability": 0.543
+                },
+                {
+                    "prediction": "surprise",
+                    "probability": 0.963
+                },
+                {
+                    "prediction": "anger",
+                    "probability": 0.741
+                },
+                {
+                    "prediction": "disgust",
+                    "probability": 0.753
+                }
+
+            ]
+        })
+        
+        const responce = await request(app)
+        .post(`/diaries/${testData.user.username}`)
+        .send({
+            _token: testData.user.token,
+            diaryentry: gettysburg,
+            emotions: ['choleric','uptight','skeptical','petrified'],
+            prompt_id: 1,
+            inspiration_id: 1
+        })
+
+        console.log(responce.body)
+
+    })
+
+
 
 
 })

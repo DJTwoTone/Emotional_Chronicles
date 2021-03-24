@@ -28,14 +28,15 @@ class Diaries {
 
     static async addEntry(data) {
 
-        const { username, diaryentry, joy, sadness, fear, surprise, anger, disgust, emotions, prompt_id, inspiration_id } = data;
+        const { username, diaryentry, joy, sadness, fear, surprise, anger, disgust, emotions, prompt_id, inspiration_id, today } = data;
         const no_emotion = data['no-emotion'];
+        const dateToday = DateTime.fromISO(today).toUTC()
 
         const entryRes = await db.query(
             `INSERT into diary_entries (username, entry, date, joy, no_emotion, sadness, fear, surprise, anger, disgust, prompt_id, inspiration_id)
-            VALUES ($1, $2, CURRENT_DATE, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
             RETURNING id, username, entry, date, joy, no_emotion, sadness, fear, surprise, anger, disgust `,
-            [username, diaryentry, joy, no_emotion, sadness, fear, surprise, anger, disgust, prompt_id, inspiration_id]
+            [username, diaryentry, dateToday, joy, no_emotion, sadness, fear, surprise, anger, disgust, prompt_id, inspiration_id]
         );
         // console.log('in the adding diary modfel', entryRes.rows[0])
         let res = entryRes.rows[0];
@@ -81,32 +82,43 @@ class Diaries {
             FROM diary_entries
             WHERE username = $1`, [username]
         )
-        
-        const emoRes = await db.query(
-            `SELECT de.id, ele.emotion
-            FROM diary_entries AS de
-            LEFT JOIN entries_list_emotions AS ele
-            ON de.id = ele.diary_entry_id
-            WHERE username = $1`, [username]
-        )
+
+        if (!entriesRes.rows[0]) return {}
         
         let entries = entriesRes.rows;
         
-        if (entries[0].emotions) {
-            entries.forEach(entry => {
+        for (let entry of entries) {
                 entry.emotions = [];
-            })
-            
-            let emos = emoRes.rows;
-    
-            emos.forEach(emo => {
-                let idx = entries.findIndex(entry => entry.id === emo.id)
-                entries[idx].emotions.push(emo.emotion)
-                })
-
-        }
-
+                let emoRes = await db.query(
+                    `SELECT emotion
+                    FROM entries_list_emotions
+                    WHERE diary_entry_id = $1`, [entry.id]
+                );
         
+                if (emoRes.rows) {
+                    emoRes.rows.forEach(emo => {
+                        entry.emotions.push(emo.emotion)
+                    });
+        
+                };
+        
+                let prompt = await db.query(
+                    `SELECT prompt
+                    FROM prompts_list
+                    WHERE id = $1`, [entry.prompt_id]
+                    );
+        
+                let inspiration = await db.query(
+                    `SELECT inspiration
+                    FROM inspirations
+                    WHERE id = $1`, [entry.inspiration_id]
+                    );
+        
+
+                entry.prompt = prompt.rows[0].prompt;
+                entry.inspiration = inspiration.rows[0].inspiration;
+            };
+
 
         return entries;
     }
@@ -171,7 +183,7 @@ class Diaries {
 
         const start = dateObj.startOf('month').toUTC()
         const end = dateObj.endOf('month').toUTC();
-        // console.log('date', dateObj, 'year', year, 'month', month, username)
+
 
         const res = await db.query(
             `SELECT *
