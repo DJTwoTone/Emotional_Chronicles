@@ -63,10 +63,6 @@ router.get('/:username', checkCorrectUser, async function (req, res, next) {
         const username = req.body.username;
 
         const entries = await Diaries.getEntries(username);
-
-        // if (entries[0].username !== username) {
-        //     throw new ExpressError("Access to diary denied", 401);
-        // }
         
         return res.json({ ...entries });
 

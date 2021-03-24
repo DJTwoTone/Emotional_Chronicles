@@ -106,7 +106,7 @@ class Diaries {
 
         }
 
-        // console.log('entries in trhe model', entries)
+        
 
         return entries;
     }
@@ -123,16 +123,6 @@ class Diaries {
             WHERE username = $1 AND date = $2 `, 
             [username, utcDate]
         );
-        // let res = await db.query(
-        //     `SELECT *
-        //     FROM diary_entries
-        //     WHERE username = $1 AND date_part('month', date) = $2 AND date_part('year', date) = $3 AND date_part('day', date) = $4`, 
-        //     [username, month, year, day]
-        // );
-
-
-        //get the emotions
-        // console.log('THE DB SEARCH', res.rows)
 
         if (!res.rows[0]) return {}
         
@@ -189,14 +179,6 @@ class Diaries {
             WHERE "username" = $1 AND date BETWEEN $2 AND $3`, 
             [username, start, end]
         );
-        // const res = await db.query(
-        //     `SELECT *
-        //     FROM diary_entries
-        //     WHERE "username" = $1 AND date_part('month', date) = $2 AND date_part('year', date) = $3`, 
-        //     [username, month, year]
-        // );
-
-        // console.log('res in the model',res)
 
         return res.rows;
     }

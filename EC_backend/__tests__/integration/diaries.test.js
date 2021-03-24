@@ -210,6 +210,134 @@ beforeEach(async function() {
             VALUES ('testuser', '777Kiicking ass and taking names', '2021-03-04T15:00:00.000Z', 4, 5, 0.568, 0.6789, 0.789, 0.4567, 0.5678, 0.789, 0.7891, 0.2586, 0.3691)`
         )
 
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('calm', 1)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('centered', 1)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('collected', 1)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('comforted', 1)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('composed', 2)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('mellow', 2)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('content', 2)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('ease', 2)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('mollified', 3)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('open', 3)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('pacified', 3)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('patient', 3)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('phlegmatic', 4)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('receptive', 4)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('relaxed', 4)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('secure', 4)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('settled', 4)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('sure', 5)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('tranquil', 5)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('sadness', 5)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('aching', 5)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('shy', 6)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('woozy', 6)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('introspective', 6)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('absorbed', 6)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('brooding', 6)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('contemplative', 7)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('engrossed', 7)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('enlightened', 7)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('inspired', 7)`
+        //     )
+        // await db.query(
+        //     `INSERT INTO entries_list_emotions (emotion, diary_entry_id)
+        //     VALUES ('interested', 7)`
+        //     )
+
+
+    
+
     } catch (error) {
         console.error('Before Each',error);
     }
@@ -218,8 +346,10 @@ beforeEach(async function() {
 afterEach(async function() {
     try {
         await db.query('DELETE FROM users')
+        await db.query('DELETE FROM entries_list_emotions CASCADE')
         await db.query('DELETE FROM diary_entries CASCADE')
         await db.query('ALTER SEQUENCE diary_entries_id_seq RESTART WITH 1')
+        // await db.query('ALTER SEQUENCE entries_list_emotions_id_seq RESTART WITH 1')
         await db.query('DELETE FROM prompts_list')
         await db.query('ALTER SEQUENCE prompts_list_id_seq RESTART WITH 1')
         await db.query('DELETE FROM inspirations')
@@ -261,30 +391,57 @@ describe("test GET routes for users", () => {
         expect(responceFalse.body.date).toBe('2019-03-04');
     })
 
-    test("get a diary entry for a single day", async function() {
+//     test("get a diary entry for a single day", async function() {
+
+//         const responce = await request(app)
+//         .get(`/diaries/${testData.user.username}/2021-03-04`)
+//         .send({ _token: testData.user.token})
+//         expect(responce.statusCode).toBe(200);
+//         expect(responce.body.entry).toHaveProperty('entry')
+//         expect(responce.body.entry.entry).toEqual(expect.any(String))
+//         expect(responce.body.entry).toHaveProperty('date')
+//         expect(responce.body.entry.date).toEqual(expect.any(String))
+//         expect(responce.body.entry).toHaveProperty('prompt')
+//         expect(responce.body.entry.prompt).toEqual(expect.any(String))
+//         expect(responce.body.entry).toHaveProperty('inspiration')
+//         expect(responce.body.entry.inspiration).toEqual(expect.any(String))
+//         expect(responce.body.entry).toHaveProperty('emotions')
+//         expect(responce.body.entry.emotions).toEqual(expect.any(Array))
+//         expect(responce.body.entry).toHaveProperty('joy')
+//         expect(responce.body.entry.joy).toEqual(expect.any(Number))
+//         expect(responce.body.entry).toHaveProperty('surprise')
+//         expect(responce.body.entry.surprise).toEqual(expect.any(Number))
+//         expect(responce.body.entry).toHaveProperty('trust')
+//         expect(responce.body.entry.trust).toEqual(expect.any(Number))
+//     })
+
+//     test("get a month of user entries", async function() {
+
+//         const responce = await request(app)
+//         .get(`/diaries/${testData.user.username}/month/2021-03-02`)
+//         .send({ _token: testData.user.token})
+
+//         expect(responce.statusCode).toBe(200);
+//         expect(responce.body.month).toEqual(expect.any(Array));
+//         expect(responce.body.month.length).toBe(4);
+//         expect(responce.body.month[0].username).toBe('testuser')
+//         expect(responce.body.month[2].username).toBe('testuser')
+
+//     })
+
+    test("get all the entries for a single user", async function() {
 
         const responce = await request(app)
-        .get(`/diaries/${testData.user.username}/2021-03-04`)
-        .send({ _token: testData.user.token})
-        // console.log('the body----->', responce.body)
+        .get(`/diaries/${testData.user.username}`)
+        .send({_token: testData.user.token})
+
         expect(responce.statusCode).toBe(200);
-        expect(responce.body.entry).toHaveProperty('entry')
-        expect(responce.body.entry).toHaveProperty('date')
-        expect(responce.body.entry).toHaveProperty('prompt')
-        expect(responce.body.entry).toHaveProperty('inspiration')
-        expect(responce.body.entry).toHaveProperty('emotions')
-        expect(responce.body.entry).toHaveProperty('joy')
-        expect(responce.body.entry).toHaveProperty('surprise')
-        expect(responce.body.entry).toHaveProperty('trust')
-    })
+        expect(responce.body.entries).toEqual(expect.any(Array));
+        expect(responce.body.entries.length).toBe(7);
+        expect(responce.body.entries[0].username).toBe('testuser');
+        expect(responce.body.entries[6].username).toBe('testuser');
 
-    test("get a month of user entries", async function() {
 
-        const responce = await request(app)
-        .get(`/diaries/${testData.user.username}/month/2021-03-02`)
-        .send({ _token: testData.user.token})
-
-        // console.log(responce.body)
     })
 
 
