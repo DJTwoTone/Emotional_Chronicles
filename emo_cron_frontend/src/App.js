@@ -33,7 +33,6 @@ function App() {
         let fetchedUser = await ECApi.getUser(username);
         
         setLoggedInUser(fetchedUser)
-       
       } catch (err) {
         setLoggedInUser(null)
       }

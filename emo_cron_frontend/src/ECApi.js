@@ -10,17 +10,19 @@ class ECApi {
 
     static async request(endpoint, data = {}, method = "get") {
         console.debug("API CALL:", endpoint, data, method)
-
-        let _token = localStorage.getItem(LOCAL_STORAGE_TOKEN_ID)
-
+        
+        let token = localStorage.getItem(LOCAL_STORAGE_TOKEN_ID)
+        
         const url = `${BASE_URL}/${endpoint}`;
-        const headers = { Authorization: `Bearer ${_token}` };
+        const headers = { Authorization: `Bearer ${token}` };
         const params = (method === "get") 
-            ? {...data, _token}
+            ? {...data}
             : {};
 
+        // console.log('the url', url)
         try {
             return (await axios({ url, method, data, params, headers })).data;
+
         } catch (err) {
             console.error("API ERROR:", err.responce)
             console.log(err)
@@ -30,7 +32,7 @@ class ECApi {
     }
 
     static async login(data) {
-
+        console.log("in the api call", data)
         let res = await this.request('login', data, 'post');
         return res.token
     }

@@ -34,6 +34,8 @@ function Login ({ setToken }) {
             password: loginInfo.password
         }
 
+        console.log('frontend login', data)
+
         try {
 
             const token = await ECApi.login(data);

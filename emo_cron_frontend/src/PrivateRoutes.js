@@ -9,7 +9,7 @@ function PrivateRoute({exact, path, children}) {
     // console.log('in the private route',  useContext(UserContext))
 
     if(!loggedInUser) {
-        return <Redirect to='/login' />;
+        return <Redirect to='/' />;
     }
 
     return (

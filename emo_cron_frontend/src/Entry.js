@@ -19,7 +19,7 @@ function Entry() {
 
 
     const [displayedEntry, setDisplayedEntry] = useState({})
-    const [entryEmotions, setEntryEmotions] = useState({});
+    const [entryEmotions, setEntryEmotions] = useState([]);
 
     useEffect(() => {
         async function fetchDiaryEntry() {
@@ -49,12 +49,12 @@ function Entry() {
     return (
 
         <Container className='justify-content-center m-5'>
-            {JSON.stringify(displayedEntry)}
-            {JSON.stringify(entryEmotions)}
+            {/* {JSON.stringify(displayedEntry)}
+            {JSON.stringify(entryEmotions)} */}
 
             <Card>
                 <Card.Header>
-                {displayedEntry.date}
+                {DateTime.fromISO(displayedEntry.date).toLocaleString({ weekday: 'long', month: 'long', day: '2-digit' })}
                 </Card.Header>
                 <Card.Body>
                     <Card.Text>You wrote:</Card.Text>

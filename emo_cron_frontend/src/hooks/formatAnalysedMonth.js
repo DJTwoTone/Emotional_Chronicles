@@ -2,51 +2,21 @@ import ECApi from '../ECApi';
 import { DateTime } from 'luxon'
 
 
-//take in the date
-//hgold off on this -- but still reformatt for the range
-//get the entries from that month plus and minus one day
-// ?first day of month - 1 || ?last day of month + 1
-//change the month search to use range
-// create obj for each day -- if in the returned data, add data to the obj if not add zeros
-/**
- * obj {
- *  date:
- *  disgust:
- * fear:
- * joy:
- * sadness:
- * surprise:
- * trust:
- * } 
- */
 
+class MonthFormatter {
 
+    static async getAnalysedMonth(username, date) {
 
-async function formatAnalysedMonth(username, date) {
-
-    async function getAnalysedMonth(username, date) {
-
-        // console.log('in the month before api call', username, date)
-        // console.log('datetime testing', [...Array(date.daysInMonth)]) //
-
-        const res = await ECApi.getMonthOfEntries(username, date);
-        // console.log('in get month', res)
+        let res = await ECApi.getMonthOfEntries(username, date);
+        // console.log('the res in the amalysed month', res)
         return res;
     }
-    
-    // function createMonthObj(date) {
 
-
-
-
-
-    // }
-
-    function formatMonthEmotions(arr, date) {
-
+    static async formatMonthEmotions(username, date) {
         let dataArr = []
-        //daysInMonth
-        //startOf('month')
+
+        let arr = await this.getAnalysedMonth(username, date);
+
         let start = date.startOf('month')
 
         for (let i = 0; i < date.daysInMonth; i++) {
@@ -72,12 +42,61 @@ async function formatAnalysedMonth(username, date) {
         }
 
         return dataArr
+    }
+
+    static async  formatMonthDisabledDates(username, date) {
+
+        let dataArr = [];
+
+        let entryArr = await this.getAnalysedMonth(username, date);
+        // console.log('in the class', entryArr)
+
+        let start = date.startOf('month');
+
+        for (let i = 0; i < date.daysInMonth; i++) {
+            dataArr.push(start.toISODate())
+            start = start.plus({ days: 1})
+        }
+
+        for (let entryDay of entryArr) {
+            
+            dataArr = [...dataArr.filter(day => day !== DateTime.fromISO(entryDay.date).toISODate())]
+            
+        }
+        
+        return dataArr;
 
     }
 
-    const res = await getAnalysedMonth(username, date)
-    const data = formatMonthEmotions(res, date)
-    return data ;
+    static async formatMonthColorClass(username, date) {
+
+        let dataArr = [];
+
+        let entryArr = await this.getAnalysedMonth(username, date);
+
+        for (let entryDay of entryArr) {
+            let emotions = {
+                disgust: entryDay.disgust,
+                fear: entryDay.fear,
+                joy: entryDay.joy,
+                sadness: entryDay.sadness,
+                surprise: entryDay.surprise,
+                trust: entryDay.trust
+
+            }
+            
+            let classObj = {
+                date: DateTime.fromISO(entryDay.date).toISODate(),
+                class: Object.entries(emotions).reduce((a, b) => a[1] > b[1] ? a : b)[0] 
+            }
+            
+            dataArr.push(classObj)
+        }
+
+        
+
+        return dataArr;
+    }
 }
 
-export default formatAnalysedMonth;
+export default MonthFormatter;

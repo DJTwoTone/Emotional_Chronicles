@@ -325,7 +325,7 @@ afterEach(async function() {
 
 afterAll(async function() {
     try {
-        // jest.clearAllTimers()
+        
         await db.end()
     } catch (error) {
         console.error('After All', error)
@@ -413,17 +413,17 @@ describe("test POST routes for diaries", () =>{
 
     test('adds and entry to the diary', async function() {
         
-        nock('https://api.symanto.net/ekman-emotion?all=true', {
+        nock('https://api.symanto.net', {
             reqheaders: {
                 'x-api-key': API_KEY, 
                 'Content-Type': 'application/json'
             }
           })
-        .post('/', JSON.stringify([{
+        .post('/ekman-emotion?all=true', JSON.stringify([{
             "text": gettysburg,
             "language":"en"
         }]))        
-        .reply(201, {
+        .reply(200, [{
             "id": null,
             "predictions": [
                 {
@@ -456,7 +456,7 @@ describe("test POST routes for diaries", () =>{
                 }
 
             ]
-        })
+        }])
         
         const responce = await request(app)
         .post(`/diaries/${testData.user.username}`)
@@ -468,7 +468,23 @@ describe("test POST routes for diaries", () =>{
             inspiration_id: 1
         })
 
-        console.log(responce.body)
+        expect(responce.statusCode).toBe(200);
+        expect(responce.body.entry).toHaveProperty('entry')
+        expect(responce.body.entry.entry).toEqual(expect.any(String))
+        expect(responce.body.entry).toHaveProperty('date')
+        expect(responce.body.entry.date).toEqual(expect.any(String))
+        expect(responce.body.entry).toHaveProperty('prompt')
+        expect(responce.body.entry.prompt).toEqual(expect.any(String))
+        expect(responce.body.entry).toHaveProperty('inspiration')
+        expect(responce.body.entry.inspiration).toEqual(expect.any(String))
+        expect(responce.body.entry).toHaveProperty('emotions')
+        expect(responce.body.entry.emotions).toEqual(expect.any(Array))
+        expect(responce.body.entry).toHaveProperty('joy')
+        expect(responce.body.entry.joy).toEqual(expect.any(Number))
+        expect(responce.body.entry).toHaveProperty('surprise')
+        expect(responce.body.entry.surprise).toEqual(expect.any(Number))
+        expect(responce.body.entry).toHaveProperty('trust')
+        expect(responce.body.entry.trust).toEqual(expect.any(Number))
 
     })
 

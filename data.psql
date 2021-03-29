@@ -51,15 +51,15 @@ CREATE TABLE diary_entries
     date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     prompt_id INTEGER NOT NULL REFERENCES prompts_list,
     inspiration_id INTEGER NOT NULL REFERENCES inspirations,
-    joy FLOAT,
-    no_emotion FLOAT,
-    sadness FLOAT,
-    fear FLOAT,
-    surprise FLOAT,
-    anger FLOAT,
-    disgust FLOAT,
-    anticipation FLOAT,
-    trust FLOAT
+    joy FLOAT DEFAULT 0.0,
+    no_emotion FLOAT DEFAULT 0.0,
+    sadness FLOAT DEFAULT 0.0,
+    fear FLOAT DEFAULT 0.0,
+    surprise FLOAT DEFAULT 0.0,
+    anger FLOAT DEFAULT 0.0,
+    disgust FLOAT DEFAULT 0.0,
+    anticipation FLOAT DEFAULT 0.0,
+    trust FLOAT DEFAULT 0.0
 
 );
 

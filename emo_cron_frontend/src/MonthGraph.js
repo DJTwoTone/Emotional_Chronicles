@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, Legend, ResponsiveContainer, CartesianGrid, Tooltip} from 'recharts';
 import { DateTime } from 'luxon'
 
-import formatAnalysedMonth from './hooks/formatAnalysedMonth'; 
+import MonthFormatter from './hooks/formatAnalysedMonth'; 
 
 import UserContext from './UserContext';
 
@@ -21,7 +21,7 @@ function MonthGraph({ date }) {
         async function fetchData() {
             
             try {
-                let data = await formatAnalysedMonth(loggedInUser.username, date);
+                let data = await MonthFormatter.formatMonthEmotions(loggedInUser.username, date);
                 // console.log('in the effect', data)
                 setFormattedData(data);
 
@@ -46,7 +46,7 @@ function MonthGraph({ date }) {
                 
                 <LineChart
                     width={500}
-                    height={300}
+                    height={250}
                     type='natural'
                     data={formattedData}
                     margin={{

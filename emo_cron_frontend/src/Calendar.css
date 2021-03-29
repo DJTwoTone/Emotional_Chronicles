@@ -117,4 +117,23 @@
   .react-calendar--selectRange .react-calendar__tile--hover {
     background-color: #e6e6e6;
   }
+  .disgust-day-background {
+    background-color: #FFC7FE
+  }
+  .fear-day-background {
+    background-color: #8DC78D
+  }
+  .joy-day-background {
+    background-color: #FFF852
+  }
+  .sadness-day-background {
+    background-color: #8D8DFF
+  }
+  .surprise-day-background {
+    background-color: #A6DCFF
+  }
+  .trust-day-background {
+    background-color: #8EF78D
+  }
+
   

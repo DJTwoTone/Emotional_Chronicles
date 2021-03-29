@@ -29,16 +29,19 @@ class Diaries {
     static async addEntry(data) {
 
         const { username, diaryentry, joy, sadness, fear, surprise, anger, disgust, emotions, prompt_id, inspiration_id, today } = data;
+        //currently unsupported emotions
+        //anticipation, trust
+        //if a better API is found, these will need to be added
         const no_emotion = data['no-emotion'];
         const dateToday = DateTime.fromISO(today).toUTC()
 
         const entryRes = await db.query(
             `INSERT into diary_entries (username, entry, date, joy, no_emotion, sadness, fear, surprise, anger, disgust, prompt_id, inspiration_id)
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
-            RETURNING id, username, entry, date, joy, no_emotion, sadness, fear, surprise, anger, disgust `,
+            RETURNING id, username, entry, date, joy, no_emotion, sadness, fear, surprise, anger, disgust, anticipation, trust `,
             [username, diaryentry, dateToday, joy, no_emotion, sadness, fear, surprise, anger, disgust, prompt_id, inspiration_id]
         );
-        // console.log('in the adding diary modfel', entryRes.rows[0])
+        console.log('in the adding diary modfsel', entryRes.rows[0])
         let res = entryRes.rows[0];
 
 
