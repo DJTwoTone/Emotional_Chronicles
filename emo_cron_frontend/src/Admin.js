@@ -45,7 +45,7 @@ function Admin () {
         setMessage(res.message)
     }
 
-    
+    //add inspiration and prompt forms
 
 
     return (

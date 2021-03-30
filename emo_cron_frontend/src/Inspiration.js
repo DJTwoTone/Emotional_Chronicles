@@ -57,9 +57,7 @@ function Inspiration () {
     ))
     
 
-    //this need deigned
-    //possibly an emotion cloud as the background
-    //let logged in users 
+
     
     return (
         <Container fluid className='justify-content-center m-2'>

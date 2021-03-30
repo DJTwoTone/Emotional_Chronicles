@@ -15,6 +15,8 @@ import PrivateRoute from'./PrivateRoutes';
 function Routes ({ setToken }) {
     
     
+//needs a default route
+
     return (
         <div>
             <Switch>
@@ -35,7 +37,6 @@ function Routes ({ setToken }) {
                     <Signup setToken={setToken} />
                 </Route>
 
-                {/* these need to be made private */}
 
                 <PrivateRoute exact path='/today'>
                     <Today />
@@ -49,14 +50,12 @@ function Routes ({ setToken }) {
                     <Entry  />
                 </PrivateRoute>
 
-                {/* think about adding a profile route */}
-
-                {/* add admin route */}
 
                 <PrivateRoute exact path='/admin'>
                     <Admin />
                 </PrivateRoute>
 
+            
 
             </Switch>
 

@@ -55,8 +55,6 @@ function Signup ({setToken}) {
 
 
     
-    //possibly an emotion cloud as the background
-    
     return (
         <Container className='justify-centent-center'>
             <Card className='m-5 shadow'>

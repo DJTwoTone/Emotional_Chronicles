@@ -15,8 +15,14 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 function Entry() {
 
-    let { username, date } = useParams();
+    let { date } = useParams();
 
+    let { loggedInUser } = useContext(UserContext);
+
+    const username = loggedInUser.username;
+ 
+    //get username from logged in user - redirect if not loggedin
+    //get date from prop or not
 
     const [displayedEntry, setDisplayedEntry] = useState({})
     const [entryEmotions, setEntryEmotions] = useState([]);
@@ -24,9 +30,8 @@ function Entry() {
     useEffect(() => {
         async function fetchDiaryEntry() {
             try {
-                // let convertedDate = DateTime.fromJSDate(date).toSQLDate();
                 let entryData = await ECApi.getEntry(username, date);
-                console.log('entryData', entryData)
+
                 setDisplayedEntry(entryData)
             }  catch (err) {
                 console.log(err)
@@ -39,11 +44,6 @@ function Entry() {
         setEntryEmotions(emotionalMath(displayedEntry))
         
     }, [displayedEntry])
-
-
-    
-
-
 
 
     return (
@@ -97,13 +97,6 @@ function Entry() {
                     <EntryChart data={displayedEntry} />
                 </Card.Body>
             </Card>
-            
-            {/* <p>On {displayedEntry.date}, you wrote:</p>
-            <p>{displayedEntry.entry}</p>
-            <p>On the topic:{displayedEntry.prompt} </p>
-            {/* <p>You said you felt:{displayedEntry.emotions}</p> */}
-            {/* <p>Our analysis says you might be feeling:{entryEmotions}</p> */}
-            {/* <p>you might have been inspired by:{displayedEntry.inspiration}</p> */} 
             
          </Container>
 

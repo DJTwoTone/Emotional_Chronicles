@@ -11,6 +11,7 @@ import './App.css';
 
 import Navigation from './Navigation';
 import Routes from './Routes';
+import { DateTime } from 'luxon';
 
 
 export const LOCAL_STORAGE_TOKEN_ID = 'ec_token'
@@ -20,6 +21,7 @@ function App() {
   const history = useHistory();
 
   const [loggedInUser, setLoggedInUser] = useState(null);
+  const [todaysEntry, setTodaysEntry] = useState(false);
 
   const [token, setToken] = useLocalStorage(LOCAL_STORAGE_TOKEN_ID)
 
@@ -31,17 +33,24 @@ function App() {
         
         let { username } = decode(token);
         let fetchedUser = await ECApi.getUser(username);
-        
         setLoggedInUser(fetchedUser)
+        if (username) {
+          let todayCheck = await ECApi.checkToday(username, DateTime.now().toISODate())
+          setTodaysEntry(todayCheck.entered)
+        }
       } catch (err) {
-        setLoggedInUser(null)
+        setLoggedInUser(null);
+        setTodaysEntry(false);
       }
     }
     getLoggedInUser();
     
   }, [token]);
 
+
+
   function handleLogout() {
+    //todaysentry => false
     setLoggedInUser(null);
     setToken(null);
 
@@ -50,7 +59,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <UserContext.Provider value={{ loggedInUser, setLoggedInUser }}>
+      <UserContext.Provider value={{ loggedInUser, setLoggedInUser, todaysEntry, setTodaysEntry }}>
         <div className="App">
           <Navigation logout={handleLogout} />
           <Routes setToken={setToken}/>

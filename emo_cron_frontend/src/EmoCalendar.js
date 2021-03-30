@@ -3,7 +3,6 @@ import { DateTime } from 'luxon'
 
 import MonthFormatter from './hooks/formatAnalysedMonth'; 
 
-// import 'react-calendar/dist/Calendar.css';
 import './Calendar.css';
 
 import Calendar from 'react-calendar';
@@ -22,8 +21,8 @@ function EmoCalendar () {
 
     const [calDate, setCalDate] = useState(new Date());
     const [firstOfTheMonth, setFirstOfTheMonth] = useState(calDate);
-    const [clickedDay, setClickedDay] = useState('')
-    const [dateInMonth, setDatesInMonth] = useState()
+    // const [clickedDay, setClickedDay] = useState('')
+    // const [dateInMonth, setDatesInMonth] = useState()
     const [disabledDates, setDisabledDates] = useState([]);
     const [dateClasses, setDateClasses] = useState([]);
 
@@ -33,33 +32,22 @@ function EmoCalendar () {
     }
 
     function onActiveStartDateChange({activeStartDate}) {
-        
         setFirstOfTheMonth(activeStartDate)
     }
 
     
 
     function onClickDay(value) {
-
-        
         let date = DateTime.fromJSDate(value).toISODate()
-        // let date = DateTime.fromJSDate(value).toSQLDate()
-
         let username = loggedInUser.username;
-
         history.push(`/entry/${username}/${date}`)
-
     }
 
     useEffect(() => {
         async function fetchDisabled() {
-
             try {
-
                 let disabledDays = await MonthFormatter.formatMonthDisabledDates(loggedInUser.username, DateTime.fromJSDate(firstOfTheMonth))
-                // console.log('in the useeefffect', disabledDays)
                 setDisabledDates(disabledDays);
-
             } catch (err) {
                 console.error(err)
             }
@@ -68,7 +56,6 @@ function EmoCalendar () {
     }, [loggedInUser, firstOfTheMonth])
 
     function tileDisabled({date, view}) {
-
         if (view === 'month') {
             return disabledDates.find(dDate => DateTime.fromISO(dDate).hasSame(date, 'day'))
         }
@@ -76,15 +63,12 @@ function EmoCalendar () {
 
     useEffect(() => {
         async function fetchDayClasses() {
-
-            try {
-                
+            try { 
                 let dayClasses = await MonthFormatter.formatMonthColorClass(loggedInUser.username, DateTime.fromJSDate(firstOfTheMonth))
                 setDateClasses(dayClasses)
             } catch (err) {
                 console.error(err)
             }
-
         }
         fetchDayClasses()
     }, [loggedInUser, firstOfTheMonth])
@@ -92,21 +76,19 @@ function EmoCalendar () {
 
 
     function tileClassName({date, view}) {
-
         if (view === 'month') {
-            
             if (dateClasses.find(dDate => DateTime.fromISO(dDate.date).hasSame(date, 'day'))) {
                 let emotion = dateClasses.find(dDate => DateTime.fromISO(dDate.date).hasSame(date, 'day'))
                 return `${emotion.class}-day-background`
-
             }
         }
-
     }
+
+    //redirect to list of entries button
 
 
     return (
-        <Container className='justify-content-center m-5'>
+        <Container className='justify-content-center my-5'>
         <Calendar 
             onChange={onChange}
             onActiveStartDateChange={onActiveStartDateChange}

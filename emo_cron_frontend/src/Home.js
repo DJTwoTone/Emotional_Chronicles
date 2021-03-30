@@ -1,20 +1,58 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+
+
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
 
 import Image from 'react-bootstrap/Image'
 
 import diaryhero from'./img/diaryhero.png'
 
+import UserContext from './UserContext';
+
 
 function Home () {
 
+    const { loggedInUser } = useContext(UserContext);
+    //if loggedin => calendar / diary
+    //not logged in => signup / login
 
-    //this need deigned
-    //possibly an emotion cloud as the background
+    function loggedOut() {
+        
+        
+        return (
+            <Container fluid className='justify-content-center m-2'>
+                <Link to='/login'>
+                <Button className='m-4' variant='dark'>LOGIN</Button>
+                </Link>
+                <Link to='/signup'>
+                <Button className='m-4' variant='dark'>SIGNUP</Button>
+                </Link>
+            </Container>
+            ) 
+    }
+
+    function loggedIn() {
+
+        return (
+            <Container fluid className='justify-content-center m-2'>
+                <Link to='/today'>
+                <Button className='m-4' variant='dark'>TODAY</Button>
+                </Link>
+                <Link to='/calendar'>
+                <Button className='m-4' variant='dark'>YOUR CALENDAR</Button>
+                </Link>
+            </Container>
+        )
+    }
+
     
     return (
         <div>
         <h1>Welcome to your Emotional Chronicles</h1>
         <Image src={diaryhero} fluid/>
+        {loggedInUser ? loggedIn() : loggedOut()}
         
         </div>
             )

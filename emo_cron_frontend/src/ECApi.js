@@ -75,6 +75,11 @@ class ECApi {
 
     static async getEntry(username, date) {
         let res = await this.request(`diaries/${username}/${date}`)
+        console.log('____________')
+        console.log('____________')
+        console.log('ther resd in the ecapi', res)
+        console.log('____________')
+        console.log('____________')
         return res.entry
     }
 
@@ -100,20 +105,14 @@ class ECApi {
     }
 
     static async addEntry(username, data) {
-        
-
         let res = await this.request(`diaries/${username}`, data, 'post')
-        
         return res;
     }
 
-
-
-
-
-
-
-
+    static async checkToday(username, date) {
+        let res = await this.request(`diaries/${username}/${date}/check`)
+        return res;
+    }
 
 }
 

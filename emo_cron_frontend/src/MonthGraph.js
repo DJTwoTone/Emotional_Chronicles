@@ -13,10 +13,6 @@ function MonthGraph({ date }) {
     const [formattedData, setFormattedData] = useState([])
     
 
-    // console.log(loggedInUser)
-    
-    // console.log('loggedinuser in the monthgraph', loggedInUser)
-
     useEffect(() => {
         async function fetchData() {
             

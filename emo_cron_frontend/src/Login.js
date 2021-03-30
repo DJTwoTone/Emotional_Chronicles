@@ -34,12 +34,12 @@ function Login ({ setToken }) {
             password: loginInfo.password
         }
 
-        console.log('frontend login', data)
 
         try {
 
             const token = await ECApi.login(data);
             setToken(token);
+            //check todaysentry - settodays entry 
             history.push('/')
             
         } catch (err) {
@@ -50,8 +50,7 @@ function Login ({ setToken }) {
         }
     }
     
-    //possibly an emotion cloud as the background
-    //add error handling
+    //if logged in => loggout button
     
     return (
         <Container className='justify-content-center'>

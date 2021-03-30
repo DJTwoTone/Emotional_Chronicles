@@ -27,13 +27,9 @@ function Diary () {
 
 
 
-    //word cloud
-    //set feelings in feelings
-    //prompt changing
-    //inspitation change
-    //change prompt
-    //handle change
-    //handle submit
+    //change feelings button
+    //todaysentry - set todaysentry
+    //if todays entry => redirect to today
 
     function handleChange(evt) {
         setEntry(evt.target.value);
@@ -65,7 +61,7 @@ function Diary () {
 
 
     return (
-        <Container className='justify-content-center m-5'>
+        <Container fluid className='justify-content-center my-5'>
             <FeelingsCloud className='m-4' feelings={feelings} setFeelings={setFeelings} />
             <WritingPrompt prompt={prompt} setPrompt={setPrompt} />
             <Form className='m-4 shadow' onSubmit={handleSubmit}>

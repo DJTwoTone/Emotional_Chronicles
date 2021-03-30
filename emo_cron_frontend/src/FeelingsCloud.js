@@ -56,7 +56,7 @@ function FeelingsCloud ({ feelings, setFeelings }) {
         <div className="shadow m-4 p-4 bg-dark">
             <p className='text-light m-3'>click any of these emoptions you are feeling today:</p>
             <TagCloud tags={emotions} maxSize={20} minSize={10} renderer={customRender} onClick={handleClick} />
-            {/* <p>the clous should go here</p> */}
+            
         </div>
     )
 }

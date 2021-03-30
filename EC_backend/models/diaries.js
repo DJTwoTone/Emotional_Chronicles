@@ -130,8 +130,8 @@ class Diaries {
         
         
         let dateObj = DateTime.fromISO(date);
-        const utcDate = dateObj.toUTC()
-        
+        const utcDate = dateObj.toUTC().toISO()
+        console.log('in the model',username, utcDate)
         let res = await db.query(
             `SELECT *
             FROM diary_entries
@@ -139,10 +139,10 @@ class Diaries {
             [username, utcDate]
         );
 
+        console.log('res in the model', res.rows)
         if (!res.rows[0]) return {}
         
         let entry = res.rows[0];
-        // console.log('entry', entry)
        
         
         entry.emotions = [];

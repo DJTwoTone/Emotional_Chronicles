@@ -4,8 +4,8 @@ import Diary from './Diary';
 
 function Today () {
 
-    const [writtenToday, setWrittenToday] = useState(false);
-
+    //const [writtenToday, setWrittenToday] = useState(false);
+//get from the context
     
     return (
         <Diary />
