@@ -28,18 +28,18 @@ class Diaries {
 
     static async addEntry(data) {
 
-        const { username, diaryentry, joy, sadness, fear, surprise, anger, disgust, emotions, prompt_id, inspiration_id, today } = data;
+        const { username, diaryentry, joy, sadness, fear, surprise, anger, disgust, emotions, prompt_id, inspiration_id } = data;
         //currently unsupported emotions
         //anticipation, trust
         //if a better API is found, these will need to be added
         const no_emotion = data['no-emotion'];
-        const dateToday = DateTime.fromISO(today).toUTC()
+        // const dateToday = DateTime.fromISO(today).toUTC()
 
         const entryRes = await db.query(
-            `INSERT into diary_entries (username, entry, date, joy, no_emotion, sadness, fear, surprise, anger, disgust, prompt_id, inspiration_id)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+            `INSERT into diary_entries (username, entry, joy, no_emotion, sadness, fear, surprise, anger, disgust, prompt_id, inspiration_id)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
             RETURNING id, username, entry, date, joy, no_emotion, sadness, fear, surprise, anger, disgust, anticipation, trust `,
-            [username, diaryentry, dateToday, joy, no_emotion, sadness, fear, surprise, anger, disgust, prompt_id, inspiration_id]
+            [username, diaryentry, joy, no_emotion, sadness, fear, surprise, anger, disgust, prompt_id, inspiration_id]
         );
         console.log('in the adding diary modfsel', entryRes.rows[0])
         let res = entryRes.rows[0];
@@ -130,16 +130,18 @@ class Diaries {
         
         
         let dateObj = DateTime.fromISO(date);
-        const utcDate = dateObj.toUTC().toISO()
-        console.log('in the model',username, utcDate)
+
+
+        const utcDate = dateObj.toISO()
+ 
         let res = await db.query(
             `SELECT *
             FROM diary_entries
-            WHERE username = $1 AND date = $2 `, 
+            WHERE username = $1 AND date(date) = $2`, 
             [username, utcDate]
         );
 
-        console.log('res in the model', res.rows)
+
         if (!res.rows[0]) return {}
         
         let entry = res.rows[0];
