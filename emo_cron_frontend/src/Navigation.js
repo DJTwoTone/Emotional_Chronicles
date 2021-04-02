@@ -43,6 +43,11 @@ function Navigation({ logout }) {
         // console.log('in the navigation logged in', loggedInUser)
         return (
             <Nav className='ml-auto'>
+                <LinkContainer to="/howitworks">
+                    
+                        <Nav.Link>How It Works</Nav.Link>
+                    
+                </LinkContainer>
                 <LinkContainer to="/inspiration">
                     
                         <Nav.Link>Get Some Inspiration</Nav.Link>

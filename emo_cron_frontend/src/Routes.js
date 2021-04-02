@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Home from './Home';
 import Inspiration from './Inspiration';
+import HowItWorks from './HowItWorks';
 import Today from './Today';
 import EmoCalendar from './EmoCalendar';
 import Login from './Login';
@@ -28,6 +29,10 @@ function Routes ({ setToken }) {
 
                 <Route exact path='/inspiration'>
                     <Inspiration />
+                </Route>
+
+                <Route exact path='/howitworks'>>
+                    <HowItWorks />
                 </Route>
 
                 <Route exact path='/login'>
