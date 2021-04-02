@@ -32,10 +32,14 @@ app.use(function(req, res, next) {
 })
 
 app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    console.error(err.stack);
+    
+    const status = err.status || 500;
+    if (process.env.NODE_ENV !== "test") {
+        console.error(err.stack);
+    }
+    const message = res.message;
 
-    return res.json({
+    return res.status(status).json({
         status: err.status,
         message: err.message
     });

@@ -1,4 +1,5 @@
 //You need a database called emo-chron-test
+// Seed it with the testing-data.psql file
 
 const request = require('supertest');
 const bcrypt = require('bcrypt');
@@ -8,13 +9,6 @@ const db = require('../../db');
 const Diaries = require('../../models/diaries');
 
 const nock = require('nock')
-
-// const symantoAPI = nock('https://api.symanto.net/', {
-//     reqheaders: {
-//         'x-api-key': 'API_KEY',
-//         'Content-Type': 'application/json'
-//     }
-//   })
 
 
 const API_KEY = process.env.API_KEY;
@@ -310,7 +304,6 @@ afterEach(async function() {
         await db.query('DELETE FROM entries_list_emotions CASCADE')
         await db.query('DELETE FROM diary_entries CASCADE')
         await db.query('ALTER SEQUENCE diary_entries_id_seq RESTART WITH 1')
-        // await db.query('ALTER SEQUENCE entries_list_emotions_id_seq RESTART WITH 1')
         await db.query('DELETE FROM prompts_list')
         await db.query('ALTER SEQUENCE prompts_list_id_seq RESTART WITH 1')
         await db.query('DELETE FROM inspirations')
@@ -325,6 +318,15 @@ afterEach(async function() {
 
 afterAll(async function() {
     try {
+        await db.query('DELETE FROM users')
+        await db.query('DELETE FROM entries_list_emotions CASCADE')
+        await db.query('DELETE FROM diary_entries CASCADE')
+        await db.query('ALTER SEQUENCE diary_entries_id_seq RESTART WITH 1')
+        await db.query('DELETE FROM prompts_list')
+        await db.query('ALTER SEQUENCE prompts_list_id_seq RESTART WITH 1')
+        await db.query('DELETE FROM inspirations')
+        await db.query('ALTER SEQUENCE inspirations_id_seq RESTART WITH 1')
+        await db.query('DELETE FROM emotions_list')
         
         await db.end()
     } catch (error) {
@@ -338,15 +340,15 @@ describe("test GET routes for diaries", () => {
 
         const responceTrue = await request(app)
         .get(`/diaries/${testData.user.username}/2021-03-04/check`)
-        .send({
-            _token: testData.user.token
-        })
+        .set({ Authorization: `Bearer ${testData.user.token}` });
+
         expect(responceTrue.body.entered).toBe(true);
         expect(responceTrue.body.date).toBe('2021-03-04');
         
         const responceFalse = await request(app)
         .get(`/diaries/${testData.user.username}/2019-03-04/check`)
         .send({_token: testData.user.token})
+        .set({ Authorization: `Bearer ${testData.user.token}` })
 
         expect(responceFalse.body.entered).toBe(false);
         expect(responceFalse.body.date).toBe('2019-03-04');
@@ -356,7 +358,8 @@ describe("test GET routes for diaries", () => {
 
         const responce = await request(app)
         .get(`/diaries/${testData.user.username}/2021-03-04`)
-        .send({ _token: testData.user.token})
+        .set({ Authorization: `Bearer ${testData.user.token}` });
+
         expect(responce.statusCode).toBe(200);
         expect(responce.body.entry).toHaveProperty('entry')
         expect(responce.body.entry.entry).toEqual(expect.any(String))
@@ -380,7 +383,7 @@ describe("test GET routes for diaries", () => {
 
         const responce = await request(app)
         .get(`/diaries/${testData.user.username}/month/2021-03-02`)
-        .send({ _token: testData.user.token})
+        .set({ Authorization: `Bearer ${testData.user.token}` });
 
         expect(responce.statusCode).toBe(200);
         expect(responce.body.month).toEqual(expect.any(Array));
@@ -394,7 +397,7 @@ describe("test GET routes for diaries", () => {
 
         const responce = await request(app)
         .get(`/diaries/${testData.user.username}`)
-        .send({_token: testData.user.token})
+        .set({ Authorization: `Bearer ${testData.user.token}` });
 
         expect(responce.statusCode).toBe(200);
         expect(responce.body.entries).toEqual(expect.any(Array));
@@ -467,6 +470,7 @@ describe("test POST routes for diaries", () =>{
             prompt_id: 1,
             inspiration_id: 1
         })
+        .set({ Authorization: `Bearer ${testData.user.token}` })
 
         expect(responce.statusCode).toBe(200);
         expect(responce.body.entry).toHaveProperty('entry')

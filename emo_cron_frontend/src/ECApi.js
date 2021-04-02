@@ -24,15 +24,15 @@ class ECApi {
             return (await axios({ url, method, data, params, headers })).data;
 
         } catch (err) {
-            console.error("API ERROR:", err.responce)
-            console.log(err)
-            let message = err.response.data.error.message;
+            console.error("API ERROR:", err)
+            console.log("err debugging", err.response.data)
+            let message = err.response.data.message;
             throw Array.isArray(message) ? message : [message];
         }
     }
 
     static async login(data) {
-        console.log("in the api call", data)
+        // console.log("in the api call", data)
         let res = await this.request('login', data, 'post');
         return res.token
     }
@@ -75,11 +75,6 @@ class ECApi {
 
     static async getEntry(username, date) {
         let res = await this.request(`diaries/${username}/${date}`)
-        console.log('____________')
-        console.log('____________')
-        console.log('ther resd in the ecapi', res)
-        console.log('____________')
-        console.log('____________')
         return res.entry
     }
 
@@ -111,6 +106,11 @@ class ECApi {
 
     static async checkToday(username, date) {
         let res = await this.request(`diaries/${username}/${date}/check`)
+        return res;
+    }
+
+    static async getFullDiary(username) {
+        let res = await this.request(`diaries/${username}`);
         return res;
     }
 

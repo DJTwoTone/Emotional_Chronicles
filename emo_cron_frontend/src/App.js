@@ -53,6 +53,7 @@ function App() {
     //todaysentry => false
     setLoggedInUser(null);
     setToken(null);
+    setTodaysEntry(false);
 
   }
 

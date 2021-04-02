@@ -43,6 +43,7 @@ function Login ({ setToken }) {
             history.push('/')
             
         } catch (err) {
+            // console.log('login in the error', err)
             return setLoginInfo(info => ({
                 ...info,
                 errors: err
@@ -50,7 +51,6 @@ function Login ({ setToken }) {
         }
     }
     
-    //if logged in => loggout button
     
     return (
         <Container className='justify-content-center'>
@@ -90,6 +90,14 @@ function Login ({ setToken }) {
                         >
                             SUBMIT
                         </Button>
+
+                        {loginInfo.errors 
+                        ? loginInfo.errors.map((error) => {
+                            return (<Form.Text className="text-danger">
+                                {error}
+                            </Form.Text>)
+                        })
+                        : null}
                     </Form>
                 </Card.Body>
 

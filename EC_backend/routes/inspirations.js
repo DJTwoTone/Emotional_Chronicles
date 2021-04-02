@@ -47,7 +47,7 @@ router.post('/', authUser, async function (req, res, next) {
     try {
         const inspiration = req.body.inspiration;
 
-        const token = req.body._token;
+        const token = req.headers.authorization.split(' ')[1] || req.body._token;
 
         const flagged = jwt.verify(token, SECRET_KEY).is_admin ? false : true;
 

@@ -27,10 +27,10 @@ router.get('/:username/:date', checkCorrectUser, async function(req, res, next) 
     try {
         const entryDate = req.params.date;
         const username = req.params.username;
-        console.log(entryDate, username)
+        // console.log(entryDate, username)
         const entry = await Diaries.getEntry(username, entryDate);
 
-        console.log('the entry in the route', entry)
+        // console.log('the entry in the route', entry)
 
         return  res.json({ entry })
         

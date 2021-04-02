@@ -9,6 +9,7 @@ import Login from './Login';
 import Signup from './Signup';
 import Admin from './Admin';
 import Entry from './Entry';
+import FullDiary from './FullDiary';
 import PrivateRoute from'./PrivateRoutes';
 
 
@@ -48,6 +49,10 @@ function Routes ({ setToken }) {
 
                 <PrivateRoute exact path='/entry/:username/:date'>
                     <Entry  />
+                </PrivateRoute>
+
+                <PrivateRoute exact path='/fulldiary/:username'>
+                    <FullDiary />
                 </PrivateRoute>
 
 

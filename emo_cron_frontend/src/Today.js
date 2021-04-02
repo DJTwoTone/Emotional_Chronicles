@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 
 import Diary from './Diary';
 
+import UserContext from './UserContext'
+
 function Today () {
 
-    //const [writtenToday, setWrittenToday] = useState(false);
-//get from the context
+    let { todaysEntry } = useContext(UserContext);
+
+    if (todaysEntry) {
+        
+    }
     
     return (
         <Diary />

@@ -8,10 +8,12 @@ import './Calendar.css';
 import Calendar from 'react-calendar';
 
 import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
 
 import MonthGraph from './MonthGraph';
 import UserContext from './UserContext';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 function EmoCalendar () {
 
@@ -103,6 +105,11 @@ function EmoCalendar () {
 
         />
         <MonthGraph date={DateTime.fromJSDate(firstOfTheMonth)}/>
+        <Link to={`/fullDiary/${loggedInUser.username}`}>
+        <Button variant='dark' size='lg' block>
+            Show Me All My Diary Entries
+        </Button>
+        </Link>
         </Container>
             )
 }

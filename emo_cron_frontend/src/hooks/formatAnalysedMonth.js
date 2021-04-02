@@ -53,7 +53,7 @@ class MonthFormatter {
 
         let start = date.startOf('month');
 
-        for (let i = 0; i < date.daysInMonth; i++) {
+        for (let i = 1; i < date.daysInMonth; i++) {
             dataArr.push(start.toISODate())
             start = start.plus({ days: 1})
         }

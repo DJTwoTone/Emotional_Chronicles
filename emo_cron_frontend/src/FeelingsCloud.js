@@ -40,7 +40,7 @@ function FeelingsCloud ({ feelings, setFeelings }) {
 
 
     function handleClick(tag) {
-        console.log(tag)
+        // console.log(tag)
         const feeling = tag.value;
         if (feelings.indexOf(feeling) === -1) {
             setFeelings(feelings => [...feelings, feeling])
@@ -48,7 +48,7 @@ function FeelingsCloud ({ feelings, setFeelings }) {
             setFeelings(feelings.filter(f => f !== feeling));
         }
         emotions[tag.id].isSelected = !emotions[tag.id].isSelected; 
-        console.log(feelings)
+        // console.log(feelings)
     }
 
 

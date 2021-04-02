@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
+import { DateTime } from 'luxon'
 
 import FeelingsCloud from './FeelingsCloud';
 import WritingPrompt from './WritingPrompt';
@@ -21,7 +22,7 @@ function Diary () {
     const [prompt, setPrompt] = useState({});
     const [inspiration, setInspiration] = useState("");
 
-    const { loggedInUser } = useContext(UserContext);
+    const { loggedInUser, todaysEntry, setTodaysEntry } = useContext(UserContext);
 
     const [feelings, setFeelings] = useState([]);
 
@@ -48,53 +49,60 @@ function Diary () {
         const username = loggedInUser.username
 
         try {
-            console.log('before the api help call', username, data)
+            
             let entry = await ECApi.addEntry(username, data);
-            console.log('returned entry', entry);
+            let entryDate = DateTime.fromISO(entry.entry.date).toISODate()
+
+            setTodaysEntry(true);
+            history.push(`/entry/${username}/${entryDate}`)
+            
 
         } catch (err) {
             console.error(err);
         }
     }
 
-    console.log('in the diary', loggedInUser);
+    if (todaysEntry) {
+        history.push('/calendar')
+    }
 
 
     return (
+
         <Container fluid className='justify-content-center my-5'>
-            <FeelingsCloud className='m-4' feelings={feelings} setFeelings={setFeelings} />
-            <WritingPrompt prompt={prompt} setPrompt={setPrompt} />
-            <Form className='m-4 shadow' onSubmit={handleSubmit}>
-                <Form.Group controlId='diaryEntry'>
-                    <div  id='pattern'>
-                    <Form.Control 
-                          as='textarea'
-                          type='text'
-                          name='diaryEntry'
-                          value={entry}
-                          onChange={handleChange}
-                          rows={20}
-                    />
+        <FeelingsCloud className='m-4' feelings={feelings} setFeelings={setFeelings} />
+        <WritingPrompt prompt={prompt} setPrompt={setPrompt} />
+        <Form className='m-4 shadow' onSubmit={handleSubmit}>
+            <Form.Group controlId='diaryEntry'>
+                <div  id='pattern'>
+                <Form.Control 
+                      as='textarea'
+                      type='text'
+                      name='diaryEntry'
+                      value={entry}
+                      onChange={handleChange}
+                      rows={20}
+                />
 
-                    </div>
+                </div>
 
-                </Form.Group>
-                
-                <Button
-                    className='mb-4'
-                    variant='dark'
-                    type='submit'
-                    onClick={handleSubmit}
-                >
-                    RECORD
-                </Button>
-            </Form>
-            <WritingInspiration 
-                className='m-4 shadow' 
-                inspiration={inspiration}
-                 setInspiration={setInspiration} />
-        </Container>
-
+            </Form.Group>
+            
+            <Button
+                className='mb-4'
+                variant='dark'
+                type='submit'
+                onClick={handleSubmit}
+            >
+                RECORD
+            </Button>
+        </Form>
+        <WritingInspiration 
+            className='m-4 shadow' 
+            inspiration={inspiration}
+             setInspiration={setInspiration} />
+    </Container>
+        
     )
 
 
