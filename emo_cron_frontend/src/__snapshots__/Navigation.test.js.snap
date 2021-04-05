@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match the snapshot 1`] = `
+<DocumentFragment>
+  <nav
+    class="navbar navbar-expand navbar-dark bg-dark"
+  >
+    <a
+      class="active navbar-brand"
+      href="/"
+    >
+      EMOTIONAL CHRONICLES
+    </a>
+    <div
+      class="ml-auto navbar-nav"
+    >
+      <a
+        class="nav-link"
+        data-rb-event-key="/howitworks"
+        href="/howitworks"
+      >
+        How It Works
+      </a>
+      <a
+        class="nav-link"
+        data-rb-event-key="/inspiration"
+        href="/inspiration"
+      >
+        Get Some Inspiration
+      </a>
+      <a
+        class="nav-link"
+        data-rb-event-key="/today"
+        href="/today"
+      >
+        Today
+      </a>
+      <a
+        class="nav-link"
+        data-rb-event-key="/calendar"
+        href="/calendar"
+      >
+        Calendar
+      </a>
+      <a
+        class="active nav-link"
+        data-rb-event-key="/"
+        href="/"
+      >
+        Logout
+      </a>
+    </div>
+  </nav>
+</DocumentFragment>
+`;

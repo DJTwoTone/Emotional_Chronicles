@@ -42,6 +42,7 @@ function Entry() {
     
     useEffect(() => {
         setEntryEmotions(emotionalMath(displayedEntry))
+        console.log(displayedEntry)
         
     }, [displayedEntry])
 

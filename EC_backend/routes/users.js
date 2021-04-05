@@ -11,7 +11,7 @@ const router = express.Router();
 
 //add an authuser check  
 
-router.get('/:username', authUser, async function (req, res, next) {
+router.get('/:username', async function (req, res, next) {
     
     try {
         const username = req.params.username;

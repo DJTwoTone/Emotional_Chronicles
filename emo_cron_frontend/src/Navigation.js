@@ -10,7 +10,7 @@ function Navigation({ logout }) {
 
     const { loggedInUser } = useContext(UserContext);
 
-    //Needs a how it works
+
 
     function loggedOutNav() {
 
@@ -18,6 +18,11 @@ function Navigation({ logout }) {
         return (
             
             <Nav className='ml-auto'>
+                <LinkContainer to="/howitworks">
+                    
+                    <Nav.Link>How It Works</Nav.Link>
+                
+                </LinkContainer>
                 <LinkContainer to="/inspiration">
                     
                         <Nav.Link >Get Some Inspiration</Nav.Link>

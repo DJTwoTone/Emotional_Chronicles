@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="shadow m-4 p-4 bg-dark"
+  >
+    <p
+      class="text-light m-3"
+    >
+      click any of these emoptions you are feeling today:
+    </p>
+    <div
+      class="tag-cloud"
+    />
+  </div>
+</DocumentFragment>
+`;

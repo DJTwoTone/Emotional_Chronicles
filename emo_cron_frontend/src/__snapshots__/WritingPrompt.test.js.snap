@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="m-4 shadow card"
+  >
+    <div
+      class="card-body"
+    >
+      <p
+        class="display-5 lead card-text"
+      >
+        Something to write about...
+      </p>
+      <p
+        class="display-4 card-text"
+      >
+        test prompt
+      </p>
+      <button
+        class="btn btn-dark"
+        type="button"
+      >
+        GET A NEW PROMPT
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

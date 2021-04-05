@@ -6,35 +6,35 @@ function EntryChart({data}) {
     let formattedData = [
         {
             'emotion': 'joy',
-            'score': Math.round(data.joy * 100)
+            'score': Math.round((data.joy || 0) * 100)
         },
         {
             'emotion': 'sadness',
-            'score': Math.round(data.sadness * 100)
+            'score': Math.round((data.sadness || 0) * 100)
         },
         {
             'emotion': 'fear',
-            'score': Math.round(data.fear * 100)
+            'score': Math.round((data.fear || 0) * 100)
         },
         {
             'emotion': 'anger',
-            'score': Math.round(data.anger * 100)
+            'score': Math.round((data.anger || 0) * 100)
         },
         {
             'emotion': 'anticipation',
-            'score': Math.round(data.anticipation * 100)
+            'score': Math.round((data.anticipation || 0) * 100)
         },
         {
             'emotion': 'disgust',
-            'score': Math.round(data.disgust * 100)
+            'score': Math.round((data.disgust || 0) * 100)
         },
         {
             'emotion': 'trust',
-            'score': Math.round(data.trust * 100)
+            'score': Math.round((data.trust || 0) * 100)
         },
         {
             'emotion': 'emotionlessness',
-            'score': Math.round(data.no_emotion * 100)
+            'score': Math.round((data.no_emotion || 0) * 100)
         }
     ]
 

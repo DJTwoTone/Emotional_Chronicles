@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="justify-content-center container"
+  >
+    <div
+      class="m-5 shadow card"
+    >
+      <div
+        bg="primary"
+        class="card-header"
+        text="white"
+      >
+        LOGIN
+      </div>
+      <div
+        class="card-body"
+      >
+        <form
+          class=""
+        >
+          <div
+            class="form-group"
+          >
+            <label
+              class="form-label"
+              for="username"
+            >
+              USERNAME
+            </label>
+            <input
+              class="shadow form-control"
+              id="username"
+              name="username"
+              placeholder="Your Username"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class="form-label"
+              for="password"
+            >
+              PASSWORD
+            </label>
+            <input
+              class="shadow form-control"
+              id="password"
+              name="password"
+              placeholder="Your Password"
+              type="password"
+              value=""
+            />
+          </div>
+          <button
+            class="shadow btn btn-dark"
+            type="submit"
+          >
+            SUBMIT
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

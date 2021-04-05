@@ -14,7 +14,7 @@ class User {
             WHERE username = $1`, [username]
         )
 
-        if (res.rows.length) {
+        if (res.rows[0]) {
             return true;
         };
 

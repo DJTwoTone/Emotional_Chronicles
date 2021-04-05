@@ -38,6 +38,7 @@ function App() {
           let todayCheck = await ECApi.checkToday(username, DateTime.now().toISODate())
           setTodaysEntry(todayCheck.entered)
         }
+        console.log(loggedInUser)
       } catch (err) {
         setLoggedInUser(null);
         setTodaysEntry(false);

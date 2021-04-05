@@ -1,0 +1,150 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="justify-centent-center container"
+  >
+    <div
+      class="m-5 shadow card"
+    >
+      <div
+        bg="primary"
+        class="card-header"
+        text="white"
+      >
+        SIGNUP
+      </div>
+      <div
+        class="card-body"
+      >
+        <form
+          class=""
+        >
+          <div
+            class="form-group"
+          >
+            <label
+              class="form-label"
+              for="username"
+            >
+              USERNAME
+            </label>
+            <input
+              class="shadow form-control"
+              id="username"
+              name="username"
+              placeholer="Pick a Username"
+              type="text"
+              value=""
+            />
+            <small
+              class="text-muted form-text"
+            >
+              Pick a Username
+            </small>
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class="form-label"
+              for="firstName"
+            >
+              GIVEN NAME
+            </label>
+            <input
+              class="shadow form-control"
+              id="firstName"
+              name="firstName"
+              placeholer="What name was given to you?"
+              type="text"
+              value=""
+            />
+            <small
+              class="text-muted form-text"
+            >
+              What name was given to you?
+            </small>
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class="form-label"
+              for="lastName"
+            >
+              FAMILY NAME
+            </label>
+            <input
+              class="shadow form-control"
+              id="lastName"
+              name="lastName"
+              placeholer="What is your family name?"
+              type="text"
+              value=""
+            />
+            <small
+              class="text-muted form-text"
+            >
+              What is your family name?
+            </small>
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class="form-label"
+              for="email"
+            >
+              EMAIL
+            </label>
+            <input
+              class="shadow form-control"
+              id="email"
+              name="email"
+              placeholer="Please share your email address."
+              type="email"
+              value=""
+            />
+            <small
+              class="text-muted form-text"
+            >
+              Please share your email address.
+            </small>
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class="form-label"
+              for="password"
+            >
+              PASSWORD
+            </label>
+            <input
+              class="shadow form-control"
+              id="password"
+              name="password"
+              placeholer="Choose a unique password"
+              type="password"
+              value=""
+            />
+            <small
+              class="text-muted form-text"
+            >
+              Choose a unique password
+            </small>
+          </div>
+          <button
+            class="btn btn-dark"
+            type="submit"
+          >
+            SUBMIT
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

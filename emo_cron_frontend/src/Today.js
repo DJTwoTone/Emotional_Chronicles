@@ -1,4 +1,6 @@
 import React, { useContext } from 'react';
+// import Calendar from 'react-calendar';
+import EmoCalendar from './EmoCalendar'
 
 import Diary from './Diary';
 
@@ -9,7 +11,11 @@ function Today () {
     let { todaysEntry } = useContext(UserContext);
 
     if (todaysEntry) {
+        //put a merssage in here
         
+        return (
+            <EmoCalendar />
+        )
     }
     
     return (
