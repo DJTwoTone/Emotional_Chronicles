@@ -57,7 +57,7 @@ exports[`should match the snapshot 1`] = `
           src="diaryhero.png"
         />
         <div
-          class="justify-content-center m-2 container-fluid"
+          class="justify-content-around m-2 container-fluid"
         >
           <a
             href="/login"

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, useHistory } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { decode } from 'jsonwebtoken';
 
 import UserContext from './UserContext';
@@ -18,7 +18,7 @@ export const LOCAL_STORAGE_TOKEN_ID = 'ec_token'
 
 function App() {
 
-  const history = useHistory();
+  
 
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [todaysEntry, setTodaysEntry] = useState(false);

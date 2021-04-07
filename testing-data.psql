@@ -1,11 +1,11 @@
--- DROP DATABASE IF EXISTS "emo-chron"
+-- DROP DATABASE IF EXISTS "emo-chron-test"
 -- WITH
 -- (FORCE);
 
--- CREATE DATABASE "emo-chron";
+-- CREATE DATABASE "emo-chron-test";
 
 -- \c
--- "emo-chron"
+-- "emo-chron-test"
 
 DROP TABLE entries_list_emotions;
 DROP TABLE diary_entries;

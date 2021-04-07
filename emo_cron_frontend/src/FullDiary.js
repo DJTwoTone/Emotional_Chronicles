@@ -32,6 +32,7 @@ function FullDiary () {
     function fullDiary(arr) {
 
         return (
+            
             arr.map((entry) => (
                 <Link to={`/entry/${loggedInUser.username}/${DateTime.fromJSDate(entry.date).toISODate()}`}>
                 <Card className='my-5 shadow'>
@@ -69,7 +70,7 @@ function FullDiary () {
     return (
         <Container className='justify-content-center m-5'>
             {/* {JSON.stringify(entries)} */}
-            {entries 
+            {entries[0] 
             ? fullDiary(entries)
             : noDiary()
             

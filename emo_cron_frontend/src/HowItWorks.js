@@ -1,8 +1,11 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
+import Button from 'react-bootstrap/Button';
 
 import PlutchikWheel from './img/PlutchikWheel.svg.png';
 
@@ -52,6 +55,14 @@ function HowItWorks() {
                     <Card.Text>
                         That's it. Go forward and feel better.
                     </Card.Text>
+                    <Container fluid className='justify-content-evenly m-2'>
+                <Link to='/login'>
+                <Button className='m-4' variant='dark'>LOGIN</Button>
+                </Link>
+                <Link to='/signup'>
+                <Button className='m-4' variant='dark'>SIGNUP</Button>
+                </Link>
+            </Container>
                     <Image src={PlutchikWheel} fluid/>
 
                 </Card.Body>

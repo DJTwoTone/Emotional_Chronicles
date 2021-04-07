@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, Legend, ResponsiveContainer, CartesianGrid, Tooltip} from 'recharts';
-import { DateTime } from 'luxon'
+// import { DateTime } from 'luxon'
 
 import MonthFormatter from './hooks/formatAnalysedMonth'; 
 
@@ -39,35 +39,34 @@ function MonthGraph({ date }) {
         <div>
             <p>Month graph</p>
             <ResponsiveContainer width="100%" height={400}>
-                
-                <LineChart
-                    width={500}
-                    height={250}
-                    type='natural'
-                    data={formattedData}
-                    margin={{
-                        top: 5,
-                        right: 30,
-                        left: 20,
-                        bottom: 5
-                      }}
-                >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey='date' />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Line type='monotone' dataKey='disgust' stroke='#DF4ADF' />
-                    <Line type='monotone' dataKey='fear' stroke='#008108'/>
-                    <Line type='monotone' dataKey='joy' stroke='#FFE953'/>
-                    <Line type='monotone' dataKey='sadness' stroke='#5050FF'/>
-                    <Line type='monotone' dataKey='surprise' stroke='#018AE1'/>
-                    <Line type='monotone' dataKey='trust' stroke='#00B510'/>
+                <div>
 
-                </LineChart>
-    
-                
-    
+                    <LineChart
+                        width={500}
+                        height={250}
+                        type='natural'
+                        data={formattedData}
+                        margin={{
+                            top: 5,
+                            right: 30,
+                            left: 20,
+                            bottom: 5
+                        }}
+                    >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey='date' />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Line type='monotone' dataKey='disgust' stroke='#DF4ADF' />
+                        <Line type='monotone' dataKey='fear' stroke='#008108'/>
+                        <Line type='monotone' dataKey='joy' stroke='#FFE953'/>
+                        <Line type='monotone' dataKey='sadness' stroke='#5050FF'/>
+                        <Line type='monotone' dataKey='surprise' stroke='#018AE1'/>
+                        <Line type='monotone' dataKey='trust' stroke='#00B510'/>
+
+                    </LineChart>
+                </div>
             </ResponsiveContainer>
 
         </div>

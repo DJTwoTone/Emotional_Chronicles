@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="m-4 shadow card"
+  >
+    <div
+      class="card-body"
+    >
+      <div
+        class="card-header"
+      >
+        Something to inspire you...
+      </div>
+      <p
+        class="display-4 card-text"
+      >
+        test inspiration
+      </p>
+      <button
+        class="mb-4 btn btn-dark"
+        type="button"
+      >
+        GET MORE INSPIRATION
+      </button>
+      <div
+        class="card-footer"
+      >
+        <p
+          class="card-text"
+        >
+          Share some inspiration...
+        </p>
+        <form
+          class="form-inline"
+        >
+          <input
+            class="col-10 form-control"
+            name="inspText"
+            type="text"
+            value=""
+          />
+          <button
+            class="ml-2 btn btn-dark"
+            type="submit"
+          >
+            SHARE
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

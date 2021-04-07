@@ -105,6 +105,7 @@ function EmoCalendar () {
 
         />
         <MonthGraph date={DateTime.fromJSDate(firstOfTheMonth)}/>
+        
         <Link to={`/fullDiary/${loggedInUser.username}`}>
         <Button variant='dark' size='lg' block>
             Show Me All My Diary Entries

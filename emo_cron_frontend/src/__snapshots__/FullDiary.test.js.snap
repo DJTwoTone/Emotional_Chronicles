@@ -4,6 +4,32 @@ exports[`should match the snapshot 1`] = `
 <DocumentFragment>
   <div
     class="justify-content-center m-5 container"
-  />
+  >
+    <div
+      class="card"
+    >
+      <div
+        class="card-body"
+      >
+        <blockquote
+          class="blockquote"
+        >
+          <p>
+            Sorry, You haven't written anything. Click on the button and write something.
+          </p>
+        </blockquote>
+        <a
+          href="/today"
+        >
+          <button
+            class="m-4 btn btn-dark"
+            type="button"
+          >
+            TODAY
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
 </DocumentFragment>
 `;

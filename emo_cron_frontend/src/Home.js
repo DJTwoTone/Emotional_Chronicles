@@ -22,7 +22,7 @@ function Home () {
         
         
         return (
-            <Container fluid className='justify-content-center m-2'>
+            <Container fluid className='justify-content-around m-2'>
                 <Link to='/login'>
                 <Button className='m-4' variant='dark'>LOGIN</Button>
                 </Link>

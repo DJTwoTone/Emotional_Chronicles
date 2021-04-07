@@ -56,6 +56,30 @@ exports[`should match the snapshot 1`] = `
         >
           That's it. Go forward and feel better.
         </p>
+        <div
+          class="justify-content-evenly m-2 container-fluid"
+        >
+          <a
+            href="/login"
+          >
+            <button
+              class="m-4 btn btn-dark"
+              type="button"
+            >
+              LOGIN
+            </button>
+          </a>
+          <a
+            href="/signup"
+          >
+            <button
+              class="m-4 btn btn-dark"
+              type="button"
+            >
+              SIGNUP
+            </button>
+          </a>
+        </div>
         <img
           class="img-fluid"
           src="PlutchikWheel.svg.png"
