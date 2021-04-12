@@ -2,7 +2,9 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import EmoCalendar from './EmoCalendar';
-import UserContext from './UserContext'
+import UserContext from './UserContext';
+
+global.ResizeObserver = require('resize-observer-polyfill');
 
 const loggedInUser = {
     username: "testuser", 

@@ -111,14 +111,14 @@ describe('test GET routes for users', () => {
         expect(responce.statusCode).toBe(404)
     })
 
-    test('reject get request with a wrong token', async function() {
-        const responce = await request(app)
-        .get(`/users/${testData.user.username}`)
-        .send({_token: 'xxx'})
-        .set({ Authorization: `Bearer XXXXXXX` })
-        expect(responce.statusCode).toBe(401)
-        expect(responce.body.message).toBe("It appears you shouldn't be here. Couldn't be authenticated")
-    })
+    // test('reject get request with a wrong token', async function() {
+    //     const responce = await request(app)
+    //     .get(`/users/${testData.user.username}`)
+    //     .send({_token: 'xxx'})
+    //     .set({ Authorization: `Bearer XXXXXXX` })
+    //     expect(responce.statusCode).toBe(401)
+    //     expect(responce.body.message).toBe("It appears you shouldn't be here. Couldn't be authenticated")
+    // })
 })
 
 describe('test POST routes from users', () => {

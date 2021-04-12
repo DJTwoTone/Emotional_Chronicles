@@ -63,7 +63,7 @@ function HowItWorks() {
                 <Button className='m-4' variant='dark'>SIGNUP</Button>
                 </Link>
             </Container>
-                    <Image src={PlutchikWheel} fluid/>
+                    <Image src={PlutchikWheel} fluid />
 
                 </Card.Body>
             </Card>

@@ -5,6 +5,9 @@ import MonthGraph from './MonthGraph';
 import UserContext from './UserContext'
 import { DateTime } from 'luxon'
 
+global.ResizeObserver = require('resize-observer-polyfill');
+
+
 
 const loggedInUser = {
     username: "testuser", 

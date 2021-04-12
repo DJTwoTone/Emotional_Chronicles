@@ -3,6 +3,10 @@ import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import EntryChart from './EntryChart';
 
+
+global.ResizeObserver = require('resize-observer-polyfill');
+
+
 const data = {
 anger: 0.1,
 anticipation: 0.1,

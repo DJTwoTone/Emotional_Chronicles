@@ -4,6 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import Entry from './Entry';
 import UserContext from './UserContext';
 
+global.ResizeObserver = require('resize-observer-polyfill');
 
 const loggedInUser = {
     username: "testuser", 
