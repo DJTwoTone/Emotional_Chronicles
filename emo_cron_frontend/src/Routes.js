@@ -31,7 +31,7 @@ function Routes ({ setToken }) {
                     <Inspiration />
                 </Route>
 
-                <Route exact path='/howitworks'>>
+                <Route exact path='/howitworks'>
                     <HowItWorks />
                 </Route>
 

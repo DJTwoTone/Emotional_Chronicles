@@ -1,2 +1,6 @@
 /EC_backend/node_modules
 /EC_backend/.env
+
+/emo_cron_frontend/src/__snapshots__
+
+/.vscode
