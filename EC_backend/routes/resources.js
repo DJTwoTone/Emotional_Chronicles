@@ -1,4 +1,3 @@
-//add express custom errors
 
 const express = require('express');
 const ExpressError = require('../helpers/ExpressError');
@@ -28,8 +27,6 @@ router.get('/prompt', async function (req, res, next){
     try {
         
         const prompt = await Resources.getPrompt();
-
-        console.log(prompt)
 
         return res.json({ prompt })
 
@@ -101,7 +98,6 @@ router.delete('/prompts/:id', authAdmin, async function (req, res, next) {
     try {
 
         const id = req.params.id;
-        console.log(id);
 
         await Resources.deletePrompt(id)
         

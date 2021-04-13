@@ -83,7 +83,6 @@ router.patch('/:username', checkCorrectUser, async function (req, res, next) {
         }
 
         const validation = jsonschema.validate(req.body, updateUserSchema);
-        // console.log(validation)
         if (!validation.valid) {
             throw new ExpressError(validation.errors.map(e => e.stack), 400)
         }

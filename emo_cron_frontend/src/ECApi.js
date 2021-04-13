@@ -19,20 +19,20 @@ class ECApi {
             ? {...data}
             : {};
 
-        // console.log('the url', url)
+
         try {
             return (await axios({ url, method, data, params, headers })).data;
 
         } catch (err) {
             console.error("API ERROR:", err)
-            console.log("err debugging", err.response.data)
+
             let message = err.response.data.message;
             throw Array.isArray(message) ? message : [message];
         }
     }
 
     static async login(data) {
-        // console.log("in the api call", data)
+
         let res = await this.request('login', data, 'post');
         return res.token
     }

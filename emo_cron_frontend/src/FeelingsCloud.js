@@ -4,7 +4,6 @@ import { TagCloud } from 'react-tagcloud'
 import './FeelingsCloud.css';
 
 import getFormattedEmotions from './hooks/getFormattedEmotions'
-// import ECApi from './ECApi';
 
 function FeelingsCloud ({ feelings, setFeelings }) {
 
@@ -19,7 +18,7 @@ function FeelingsCloud ({ feelings, setFeelings }) {
     }, []);
 
 
-    // console.log(emotions)
+
 
     const customRender = (tag, size, color) => (
         <span
@@ -40,7 +39,7 @@ function FeelingsCloud ({ feelings, setFeelings }) {
 
 
     function handleClick(tag) {
-        // console.log(tag)
+
         const feeling = tag.value;
         if (feelings.indexOf(feeling) === -1) {
             setFeelings(feelings => [...feelings, feeling])
@@ -48,7 +47,7 @@ function FeelingsCloud ({ feelings, setFeelings }) {
             setFeelings(feelings.filter(f => f !== feeling));
         }
         emotions[tag.id].isSelected = !emotions[tag.id].isSelected; 
-        // console.log(feelings)
+
     }
 
 

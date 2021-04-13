@@ -21,8 +21,6 @@ function Entry() {
 
     const username = loggedInUser.username;
  
-    //get username from logged in user - redirect if not loggedin
-    //get date from prop or not
 
     const [displayedEntry, setDisplayedEntry] = useState({})
     const [entryEmotions, setEntryEmotions] = useState([]);
@@ -34,7 +32,7 @@ function Entry() {
 
                 setDisplayedEntry(entryData)
             }  catch (err) {
-                console.log(err)
+                console.error(err)
             }
         }
         fetchDiaryEntry();
@@ -42,7 +40,7 @@ function Entry() {
     
     useEffect(() => {
         setEntryEmotions(emotionalMath(displayedEntry))
-        console.log(displayedEntry)
+
         
     }, [displayedEntry])
 
@@ -50,8 +48,7 @@ function Entry() {
     return (
 
         <Container className='justify-content-center m-5'>
-            {/* {JSON.stringify(displayedEntry)}
-            {JSON.stringify(entryEmotions)} */}
+
 
             <Card>
                 <Card.Header>
@@ -100,20 +97,6 @@ function Entry() {
             </Card>
             
          </Container>
-
-
-
-
-
-
-
-
-        // <div>
-        //     {JSON.stringify(displayedEntry)}
-        //     {JSON.stringify(entryEmotions)}
-            
-        //     <EntryChart data={displayedEntry} />
-        // </div>
 
 
 

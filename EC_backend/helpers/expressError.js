@@ -3,9 +3,7 @@ class ExpressError extends Error {
         super();
         this.message = message;
         this.status = status;
-        // if (process.env.NODE_ENV !== "test") {
-        //     console.error(err.stack);
-        // }
+
     }
 }
 

@@ -8,7 +8,7 @@ class MonthFormatter {
     static async getAnalysedMonth(username, date) {
 
         let res = await ECApi.getMonthOfEntries(username, date);
-        // console.log('the res in the amalysed month', res)
+
         return res;
     }
 
@@ -49,7 +49,7 @@ class MonthFormatter {
         let dataArr = [];
 
         let entryArr = await this.getAnalysedMonth(username, date);
-        // console.log('in the class', entryArr)
+
 
         let start = date.startOf('month');
 

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, Legend, ResponsiveContainer, CartesianGrid, Tooltip} from 'recharts';
-// import { DateTime } from 'luxon'
+
 
 import MonthFormatter from './hooks/formatAnalysedMonth'; 
 
@@ -18,7 +18,7 @@ function MonthGraph({ date }) {
             
             try {
                 let data = await MonthFormatter.formatMonthEmotions(loggedInUser.username, date);
-                // console.log('in the effect', data)
+
                 setFormattedData(data);
 
             } catch (err) {

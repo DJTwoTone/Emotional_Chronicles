@@ -1,9 +1,9 @@
 //add express custom errors
 
 const express = require('express');
-// const ExpressError = require('../helpers/ExpressError');
+
 const Emotions = require('../models/emotions');
-// const { authUser, authAdmin } = require('../middleware/auth');
+
 
 const router = express.Router();
 

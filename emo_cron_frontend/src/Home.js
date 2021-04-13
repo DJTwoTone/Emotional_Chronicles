@@ -15,8 +15,6 @@ import UserContext from './UserContext';
 function Home () {
 
     const { loggedInUser } = useContext(UserContext);
-    //if loggedin => calendar / diary
-    //not logged in => signup / login
 
     function loggedOut() {
         

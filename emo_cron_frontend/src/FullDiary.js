@@ -23,7 +23,7 @@ function FullDiary () {
                 let fulldiary = await ECApi.getFullDiary(loggedInUser.username);
                 setEntries(fulldiary.entries)
             } catch (err) {
-                console.log(err)
+                console.error(err)
             }
         }
         getFullDiary();
@@ -69,7 +69,7 @@ function FullDiary () {
 
     return (
         <Container className='justify-content-center m-5'>
-            {/* {JSON.stringify(entries)} */}
+
             {entries[0] 
             ? fullDiary(entries)
             : noDiary()

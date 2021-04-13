@@ -1,4 +1,3 @@
-//add express custom errors
 
 const express = require('express');
 const jwt = require('jsonwebtoken');

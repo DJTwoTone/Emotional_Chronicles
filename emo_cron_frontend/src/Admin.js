@@ -14,7 +14,7 @@ function Admin () {
 
     async function getFlaggedInspiration() {
         const returnedFlagged = await ECApi.getFlaggedInspiration();
-        console.log('flagged inspiration', returnedFlagged)
+
         setFlaggedInspiration(returnedFlagged.flagged)
         setInspirationMessage(returnedFlagged.message)
     }
@@ -28,7 +28,7 @@ function Admin () {
     }, [])
 
     async function handleApprove(evt) {
-        console.log('in handle approve', evt.target.name);
+
         const res = await ECApi.approveFlaggedInspiration(+evt.target.name)
         getFlaggedInspiration();
         setMessage(res.message)
@@ -37,8 +37,6 @@ function Admin () {
     }
     
     async function handleDelete(evt) {
-        
-        console.log('in handle delete', evt.target.name);
 
         const res = await ECApi.deleteFlaggedInspiration(+evt.target.name);
         getFlaggedInspiration();

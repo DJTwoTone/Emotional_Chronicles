@@ -27,11 +27,6 @@ function Diary () {
     const [feelings, setFeelings] = useState([]);
 
 
-
-    //change feelings button
-    //todaysentry - set todaysentry
-    //if todays entry => redirect to today
-
     function handleChange(evt) {
         setEntry(evt.target.value);
     }

@@ -17,8 +17,6 @@ export default function emotionMath(emoData) {
     let mathedEmotions = [];
 
 
-    // let { joy, sadness, fear, anger, anticipation, disgust, trust, no_emotion } = emoData;
-
     Object.keys(emotionObj).forEach(val => {
         if (val === 'no_emotion' && emoData[val] >= 0.65) {
             mathedEmotions.push(emotionObj[val][0])
@@ -168,73 +166,3 @@ export default function emotionMath(emoData) {
 
 }
 
-
-/**
- * serenity
- * joy
- * ecstasy
- * 
- * 
- * 
- * pensiveness
- * sadness
- * grief
- * 
- * apprehension
- * fear
- * terror
- * 
- * distraction
- * surprise
- * amazement
- * 
- * annoyance
- * anger
- * rage
- * 
- * interest
- * anticipation
- * vigilance
- * 
- * boredom
- * disgust
- * loathing
- * 
- * acceptance
- * trust
- * admiration
- * 
- * no_emotion
- * 
- * 
-// Optimism, Courage	Anticipation + Joy	
-// Disapproval, Disappointment	Surprise + Sadness
-// Hope, Fatalism	Anticipation + Trust	
-// Unbelief, Shock	Surprise + Disgust
-// Anxiety, Dread	Anticipation + Fear	
-// Outrage, Hate	Surprise + Anger
-// Love, Friendliness	Joy + Trust	
-// Remorse, Misery	Sadness + Disgust
-// Guilt, Excitement	Joy + Fear	
-// Envy, Sullenness	Sadness + Anger
-// Delight, Doom	Joy + Surprise	
-// Pessimism	Sadness + Anticipation
-// Submission, Modesty	Trust + Fear	
-// Contempt, Scorn	Disgust + Anger
-// Curiosity	Trust + Surprise	
-// Cynicism	Disgust + Anticipation
-// Sentimentality, Resignation	Trust + Sadness	
-// Morbidness, Derisiveness	Disgust + Joy
-// Awe, Alarm	Fear + Surprise	
-// Aggressiveness, Vengeance	Anger + Anticipation
-// Despair	Fear + Sadness	
-// Pride, Victory	Anger + Joy
-// Shame, Prudishness	Fear + Disgust	
-// Dominance	Anger + Trust
-
-// Bittersweetness	Joy + Sadness
-// Ambivalence	Trust + Disgust
-Frozenness	Fear + Anger
-// Confusion	Surprise + Anticipation
-
- */

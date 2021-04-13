@@ -6,7 +6,6 @@ function PrivateRoute({exact, path, children}) {
 
     const { loggedInUser } = useContext(UserContext);
 
-    // console.log('in the private route',  useContext(UserContext))
 
     if(!loggedInUser) {
         return <Redirect to='/' />;

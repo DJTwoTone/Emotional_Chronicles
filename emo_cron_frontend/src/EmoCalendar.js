@@ -23,8 +23,6 @@ function EmoCalendar () {
 
     const [calDate, setCalDate] = useState(new Date());
     const [firstOfTheMonth, setFirstOfTheMonth] = useState(calDate);
-    // const [clickedDay, setClickedDay] = useState('')
-    // const [dateInMonth, setDatesInMonth] = useState()
     const [disabledDates, setDisabledDates] = useState([]);
     const [dateClasses, setDateClasses] = useState([]);
 
@@ -86,7 +84,6 @@ function EmoCalendar () {
         }
     }
 
-    //redirect to list of entries button
 
 
     return (

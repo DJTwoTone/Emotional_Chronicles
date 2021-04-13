@@ -43,7 +43,7 @@ function Login ({ setToken }) {
             history.push('/')
             
         } catch (err) {
-            // console.log('login in the error', err)
+
             return setLoginInfo(info => ({
                 ...info,
                 errors: err

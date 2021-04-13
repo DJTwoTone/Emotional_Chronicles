@@ -6,7 +6,6 @@ const app = express();
 
 const userRoutes = require('./routes/users');
 const diariesRoutes = require('./routes/diaries');
-// const resourcesRoutes = require('./routes/resources')
 const emotionsRoutes = require('./routes/emotions')
 const adminRoutes = require('./routes/admin')
 const promptsRoutes = require('./routes/prompts')
@@ -18,7 +17,6 @@ app.use(express.json());
 
 app.use("/users", userRoutes);
 app.use("/diaries", diariesRoutes);
-// app.use("/resources", resourcesRoutes);
 app.use("/emotions", emotionsRoutes);
 app.use("/admin", adminRoutes);
 app.use("/prompts", promptsRoutes);

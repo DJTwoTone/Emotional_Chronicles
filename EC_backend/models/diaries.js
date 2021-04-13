@@ -1,6 +1,3 @@
-//resources for entry
-//new entry
-//one entry
 
 const db = require('../db');
 const { DateTime } = require("luxon");
@@ -41,7 +38,7 @@ class Diaries {
             RETURNING id, username, entry, date, joy, no_emotion, sadness, fear, surprise, anger, disgust, anticipation, trust `,
             [username, diaryentry, joy, no_emotion, sadness, fear, surprise, anger, disgust, prompt_id, inspiration_id]
         );
-        // console.log('in the adding diary modfsel', entryRes.rows[0])
+
         let res = entryRes.rows[0];
 
 
