@@ -150,8 +150,7 @@ npm test
 
 Here's is the working sketch of the database
 
-![Emotional Chronicles Database](EmotionalChroniclesDB.svg)
-
+<img src='EmotionalChroniclesDB.svg' alt='Emotional Chronicles Database' width=1000 height=1000>
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
