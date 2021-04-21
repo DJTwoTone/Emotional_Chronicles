@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import ECApi from './ECApi';
 
@@ -6,19 +6,11 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-function WritingInspiration({ inspiration, setInspiration }) {
+function WritingInspiration({ inspiration, getInspiration }) {
 
     const [insp, setInsp] = useState('')
     const [inspMessage, setInspMessage] = useState('')
 
-    async function getInspiration() {
-        const gottenInspiration = await ECApi.getInspiration();
-        setInspiration(gottenInspiration[0])
-    }
-
-    useEffect(() => {
-        getInspiration();
-    }, [])
 
     function handleChange(evt) {
         setInsp(evt.target.value);

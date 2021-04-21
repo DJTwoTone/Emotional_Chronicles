@@ -12,7 +12,13 @@
 
 ### Current Deployment
 
-A live version of this project can be found at [NO WHERE](www.itisntdeployedyet.placeholder)
+A live version of this project can be found at [EMOTIONAL CHRONICLES](https://infallible-mahavira-dffe57.netlify.app/)
+
+The mono-repo can be found at [MONOREPO](https://github.com/DJTwoTone/Emotional_Chronicles)
+
+The backend-repo can be found at [BACKEND](https://github.com/DJTwoTone/emotional_chronicles_backend)
+
+The frontend-repo can be found at [FRONTEND](https://github.com/DJTwoTone/emotional_chronicles_frontend)
 
 ### Current Features
 
