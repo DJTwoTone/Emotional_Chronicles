@@ -14,6 +14,9 @@
 
 A live version of this project can be found at [EMOTIONAL CHRONICLES](https://infallible-mahavira-dffe57.netlify.app/)
 
+A live version of the API can be found at [EMOTIONAL CHRONICLES API](https://emotional-chronicles-backend.herokuapp.com)
+
+
 The mono-repo can be found at [MONOREPO](https://github.com/DJTwoTone/Emotional_Chronicles)
 
 The backend-repo can be found at [BACKEND](https://github.com/DJTwoTone/emotional_chronicles_backend)
