@@ -1,4 +1,12 @@
-const emotionObj = {
+/**
+ * This hook is taking the returned values from the emotional analysis API and extending them using Robert Plutchik's wheel of emotion.
+ * 
+ * Admittedly, the values are arbitrary at present. Discussions would need to be had with actual reserachers in the field to better lock in what values and ranges are most appropriate.
+ * 
+ * Additionally, this is ugly! It has a lot of nested if statements. If you have any ideas for better implimentation, please share them with me.
+ */
+
+ const emotionObj = {
     'joy': ['serenity', 'joy', 'ecstasy'],
     'sadness': ['pensiveness', 'sadness', 'grief'],
     'fear': ['apprehension', 'fear', 'terror'],

@@ -1,7 +1,12 @@
-import React from 'react';
+/**
+ * Just setting up some context here.
+ * 
+ */
+
+ import React from 'react';
 
 
-const UserContext = React.createContext();
-
-
-export default UserContext;
+ const UserContext = React.createContext();
+ 
+ 
+ export default UserContext;
